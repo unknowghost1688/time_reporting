@@ -52,6 +52,7 @@ var myActivityFunctions =
                             alert('success');
                             $("#li_" + uniqueID).remove();
                             $("#ul_myactivity_list").listview("refresh");
+                            
                             //$("ul[data-id=" + ul_myactivity_list + "] > li[data-li-id=li_" + uniqueID + "]").remove();
                             //$('#' + checkboxID).remove();
                         },

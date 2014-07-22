@@ -64,8 +64,8 @@ var myProfile_ShowDetailsFunctions = {
                 NewPassword: newPassword_txt,
                 ConfirmPassword: confirmPassword_txt
             },
-            success: function () {
-                alert('success');
+            success: function (result) {
+                $('#reportTo').val(result[0]['LastName'] + " " + result[0]['FirstName']);
             },
             error: function (jqXHR, status, error) {
                 if (jqXHR.status === 0) {
