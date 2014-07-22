@@ -1,0 +1,7 @@
+﻿#master-accountcode div[data-role="listview"] {
+
+}
+
+.padded { /* to add a 5px padding to buttons*/
+    padding: 5px !important;
+}
