@@ -2,6 +2,12 @@
     myActivityFunctions.addSelectAllCheckbox();
     myActivityFunctions.setDateToToday();
     myActivityFunctions.generateListView();
+    $(document).off('click', '#btn_failDeleteMyActivity').on('click', '#btn_failDeleteMyActivity', function (e) {
+        $("#popup_failDeleteMyActivity").popup("close");
+    });
+    $(document).off('click', '#btn_sucessfullyDeleteMyActivity').on('click', '#btn_sucessfullyDeleteMyActivity', function (e) {
+        $("#popup_sucessfullyDeleteMyActivity").popup("close");
+    });
 });
 
 var myActivityFunctions =
