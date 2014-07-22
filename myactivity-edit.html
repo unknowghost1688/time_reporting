@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>IFCA Time Reporting App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1" />
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/jquery.mobile-1.4.2.js"></script>
+
+    <link href="css/themes/jquery.mobile-1.4.2.min.css" rel="stylesheet" />
+    <link href="css/themes/hr360.css" rel="stylesheet" />
+    <link href="css/themes/TimeReporting.css" rel="stylesheet" />
+
+    <script src="phonegap.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <div data-role="page" id="myActivity" data-theme="a">
+   
+        <script src="js/myactivity-edit.js"></script>
+
+        <div data-role="header">
+            <a id="btnBack" href="myactivity.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
+            <h1>My Activity</h1>
+            <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
+        </div>
+       <!-- <div class="ui-content" role="main">
+            <div class="ui-field-contain">
+                <label for="activityCode">Activity Code</label>
+             
+                <select id="activityCode"></select>
+            </div>
+            <div class="ui-field-contain">
+                <label for="accountCode">Account Code</label>
+                 <select id="accountCode"></select>
+             
+            </div>
+            <div class="ui-field-contain">
+                <label for="hours">Hours</label>
+                <input type="text" id="hours" />
+            </div>
+            <div class="ui-field-contain">
+                <label for="approvedHours">Approved Hours</label>
+                <input type="text" id="approvedHours" disabled />
+            </div>
+            <div class="ui-field-contain">
+                <label for="remark">Remark</label>
+                <textarea id="remark"></textarea>
+            </div>
+        </div>-->
+ <div data-role="main" class="ui-content">
+    <div class="ui-grid-a">
+        <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable" >
+      <tbody>
+      
+        <tr>      
+             <th><label for="activityCode">Activity Code</label></th>
+          <td> <select data-native-menu="true"  data-mini="true" data-theme="a" id="activityCode"></select>
+            
+          </td>
+        </tr>
+        <tr>       
+               <th> <label for="accountCode">Account Code</label></th>
+          <td>   <select data-native-menu="true"  data-mini="true" data-theme="a" id="accountCode"></select>
+
+          </td>
+        </tr>
+           <tr>       
+               <th>  <label for="hours">Hours</label></th>
+          <td>  <input type="text" id="hours" />
+
+          </td>
+        </tr>
+               <tr>       
+               <th><label for="approvedHours">Approved Hours</label></th>
+          <td>  <input type="text" id="approvedHours" disabled /></td>
+        </tr>
+           <tr>       
+               <th> <label for="remark">Remark</label></th>
+          <td>  <textarea id="remark"></textarea>
+
+          </td>
+        </tr>                 
+              
+      </tbody>
+    </table> 
+         </div>   
+
+     
+  </div>  
+            <div data-role="popup" id="popup_sucessfullyEditMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+            <div role="main" class="ui-content">
+                <h3>Success</h3>
+                <p class="ui-title" id="P1">Activity Successfully Saved</p>
+                <a id="MyActivitySuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+            </div>
+        </div>  
+          <div data-role="popup" id="popup_ErrMsg" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+            <div role="main" class="ui-content">
+                <h3>Error</h3>
+                <p class="ui-title" id="ErroMessage"></p>
+                <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+            </div>
+        </div>  
+        <div data-role="footer"  data-position="fixed">
+
+            <div data-role="navbar">
+                <ul>
+                    <li><a onclick="masterActivityEditFunctions.updateActivity()" class="ui-btn-active ui-state-persist">Save</a></li>
+                    <li><a href="myactivity.html">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
