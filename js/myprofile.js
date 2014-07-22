@@ -4,6 +4,12 @@ $(document).one('pagecontainerbeforeshow', function (event, data) {
     $("#btn_myProfile_save").click(function () {
         myProfile_ShowDetailsFunctions.myProfile_Change_password();
     });
+    $(document).off('click', '#btn_FailChangePassword').on('click', '#btn_FailChangePassword', function (e) {
+        $("#popup_FailChangePassword").popup("close");
+    });
+    $(document).off('click', '#btn_sucessfullyChangePassword').on('click', '#btn_sucessfullyChangePassword', function (e) {
+        $("#popup_sucessfullyChangePassword").popup("close");
+    });
 });
 
 
@@ -24,8 +30,25 @@ var myProfile_ShowDetailsFunctions = {
                 $('#phone').val(result[0]['Phone']);
                 myProfile_ShowDetailsFunctions.myProfile_Show_ReporToDetails(result[0]['ReportTo']);
             },
-            error: function (xhr, status, error) {
-                alert('error');
+            error: function (jqXHR, status, error) {
+                setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
+                if (jqXHR.status === 0) {
+                    $('#ErroMessage_FailChangePassword').val('Not connect.\n Verify Network.');
+                } else if (jqXHR.status == 404) {
+                    $('#ErroMessage_FailChangePassword').val('Requested page not found. [404]');
+                } else if (jqXHR.status == 401) {
+                    $('#ErroMessage_FailChangePassword').val('401 Unauthorized');
+                } else if (jqXHR.status == 500) {
+                    $('#ErroMessage_FailChangePassword').val('Internal Server Error [500].');
+                } else if (exception === 'parsererror') {
+                    $('#ErroMessage_FailChangePassword').val('Requested JSON parse failed.');
+                } else if (exception === 'timeout') {
+                    $('#ErroMessage_FailChangePassword').val('Time out error.');
+                } else if (exception === 'abort') {
+                    $('#ErroMessage_FailChangePassword').val('Ajax request aborted.');
+                } else {
+                    $('#ErroMessage_FailChangePassword').val('Error Occur.');
+                }
             }
         });
     },
@@ -41,8 +64,25 @@ var myProfile_ShowDetailsFunctions = {
             success: function (result) {
                 $('#reportTo').val(result[0]['LastName'] + " " + result[0]['FirstName']);
             },
-            error: function (xhr, status, error) {
-                alert('error');
+            error: function (jqXHR, status, error) {
+                setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
+                if (jqXHR.status === 0) {
+                    $('#ErroMessage_FailChangePassword').val('Not connect.\n Verify Network.');
+                } else if (jqXHR.status == 404) {
+                    $('#ErroMessage_FailChangePassword').val('Requested page not found. [404]');
+                } else if (jqXHR.status == 401) {
+                    $('#ErroMessage_FailChangePassword').val('401 Unauthorized');
+                } else if (jqXHR.status == 500) {
+                    $('#ErroMessage_FailChangePassword').val('Internal Server Error [500].');
+                } else if (exception === 'parsererror') {
+                    $('#ErroMessage_FailChangePassword').val('Requested JSON parse failed.');
+                } else if (exception === 'timeout') {
+                    $('#ErroMessage_FailChangePassword').val('Time out error.');
+                } else if (exception === 'abort') {
+                    $('#ErroMessage_FailChangePassword').val('Ajax request aborted.');
+                } else {
+                    $('#ErroMessage_FailChangePassword').val('Error Occur.');
+                }
             }
         });
     },
@@ -64,27 +104,27 @@ var myProfile_ShowDetailsFunctions = {
                 NewPassword: newPassword_txt,
                 ConfirmPassword: confirmPassword_txt
             },
-            success: function (result) {
-                $('#reportTo').val(result[0]['LastName'] + " " + result[0]['FirstName']);
+            success: function () {
+                setTimeout(function () { $("#popup_sucessfullyChangePassword").popup("open"); }, 1000);
             },
             error: function (jqXHR, status, error) {
+                setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
                 if (jqXHR.status === 0) {
-                    alert('Not connect.\n Verify Network.');
+                    $('#ErroMessage_FailChangePassword').val('Not connect.\n Verify Network.');
                 } else if (jqXHR.status == 404) {
-                    alert('Requested page not found. [404]');
+                    $('#ErroMessage_FailChangePassword').val('Requested page not found. [404]');
                 } else if (jqXHR.status == 401) {
-                    alert('401 Unauthorized');
+                    $('#ErroMessage_FailChangePassword').val('401 Unauthorized');
                 } else if (jqXHR.status == 500) {
-                    alert('Internal Server Error [500].');
+                    $('#ErroMessage_FailChangePassword').val('Internal Server Error [500].');
                 } else if (exception === 'parsererror') {
-                    alert('Requested JSON parse failed.');
+                    $('#ErroMessage_FailChangePassword').val('Requested JSON parse failed.');
                 } else if (exception === 'timeout') {
-                    alert('Time out error.');
+                    $('#ErroMessage_FailChangePassword').val('Time out error.');
                 } else if (exception === 'abort') {
-                    alert('Ajax request aborted.');
+                    $('#ErroMessage_FailChangePassword').val('Ajax request aborted.');
                 } else {
-                    alert(jqXHR.responseText);
-
+                    $('#ErroMessage_FailChangePassword').val('Error Occur.');
                 }
             }
         });

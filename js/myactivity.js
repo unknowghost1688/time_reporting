@@ -49,30 +49,29 @@ var myActivityFunctions =
                             "AccountCode": accountCode
                         }),
                         success: function () {
-                            alert('success');
+                            setTimeout(function () { $("#popup_sucessfullyDeleteMyActivity").popup("open"); }, 1000);
                             $("#li_" + uniqueID).remove();
                             $("#ul_myactivity_list").listview("refresh");
-                            
                             //$("ul[data-id=" + ul_myactivity_list + "] > li[data-li-id=li_" + uniqueID + "]").remove();
                             //$('#' + checkboxID).remove();
                         },
                         error: function (jqXHR, status, error) {
                             if (jqXHR.status === 0) {
-                                alert('Not connect.\n Verify Network.');
+                                $('#ErroMessage_failDeleteMyActivity').val('Not connect.\n Verify Network.');
                             } else if (jqXHR.status == 404) {
-                                alert('Requested page not found. [404]');
+                                $('#ErroMessage_failDeleteMyActivity').val('Requested page not found. [404]');
                             } else if (jqXHR.status == 401) {
-                                alert('401 Unauthorized');
+                                $('#ErroMessage_failDeleteMyActivity').val('401 Unauthorized');
                             } else if (jqXHR.status == 500) {
-                                alert('Internal Server Error [500].');
+                                $('#ErroMessage_failDeleteMyActivity').val('Internal Server Error [500].');
                             } else if (exception === 'parsererror') {
-                                alert('Requested JSON parse failed.');
+                                $('#ErroMessage_failDeleteMyActivity').val('Requested JSON parse failed.');
                             } else if (exception === 'timeout') {
-                                alert('Time out error.');
+                                $('#ErroMessage_failDeleteMyActivity').val('Time out error.');
                             } else if (exception === 'abort') {
-                                alert('Ajax request aborted.');
+                                $('#ErroMessage_failDeleteMyActivity').val('Ajax request aborted.');
                             } else {
-                                alert(jqXHR.responseText);
+                                $('#ErroMessage_failDeleteMyActivity').val('Error Occur.');
 
                             }
                         }
