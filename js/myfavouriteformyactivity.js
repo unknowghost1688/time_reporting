@@ -139,7 +139,7 @@ var myFavouritesFunctions =
 
                     // Check to see if the flipswitch is in the right position when the async is done
                     if ($("#flipswitch1").val() == "all") {
-                        $("#myFavouritesList").empty().hide(); // hide it first, we will wait until the 2nd async is done before .show()-ing it again. This way, users will not feel like the app is jittery.
+                        $("#myFavouritesList").empty(); // hide it first, we will wait until the 2nd async is done before .show()-ing it again. This way, users will not feel like the app is jittery.
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
                         $("#myFavouritesList").css("height", "20em");
                         $("#myFavouritesList").css("overflow", "scroll");
