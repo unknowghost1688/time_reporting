@@ -24,7 +24,7 @@ $(document).one('pagecreate', function () {
                     }
                 }
     });
-  //localStorage.clear();
+ // localStorage.clear();
     if (localStorage.getItem("UserName") != undefined && localStorage.getItem("Token") != undefined) {
 
         $.ajaxSetup({
@@ -77,12 +77,16 @@ Authentication.prototype.initialize = function initialize() {
             })
            .done(function (data) {
 
-              // alert("sucess");
+               //alert("sucess");
                result = data;
                localStorage.setItem("Token", data.access_token);
                localStorage.setItem("UserName", data.userName);
                localStorage.setItem("role", data.roles);
                localStorage.setItem("UserID", data.UserID);
+              // alert(data.access_token);
+              // alert(data.userName);
+              // alert(data.roles);
+              // alert(data.UserID);
                navigateToMenu();
 
 

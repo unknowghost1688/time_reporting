@@ -84,7 +84,6 @@ var myActivityFunctions =
                     });
                 }
             });
-
         },
         generateListView: function () {
             var apiURL = SERVER_END_POINT_API + "/api/activity/myactivity";

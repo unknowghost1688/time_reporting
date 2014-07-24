@@ -49,14 +49,17 @@ var myActivityAddFunctions = {
         });
 
         //ajax GET accountCode
-        var getAccountCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/accountcode";
-
+        var getAccountCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/accountcode/MyFavouriteCode";
+        var userID = localStorage.getItem("UserID");
         $.ajax({
-            url: getAccountCodesAPI,
-            type: "GET",
+            url: getAccountCodesAPI ,
+            type: "POST",
             crossDomain: true,
             async: true,
-    
+            contentType: "application/json",
+            data:JSON.stringify({
+                "UserDetailID":userID
+            }),
             success: function (data) {
                 // Confirmational response from server
                 for (var i = 0; i < data.length; i++) {
@@ -88,16 +91,17 @@ var myActivityAddFunctions = {
         });
     },
     addActivity: function () {
+       
         var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity/savemyactivity";
 
         var activityCode = $("#activityCode").val();
-        var accountCode = $("#accountCode").val();
+        var accountCode = $("#hrefAccountCode").text();
         var hours = $("#hours").val();
         var remark = $("#remark").val();
         var userDetailID = localStorage.getItem("UserID");
         var activityDate = $("#activityDate").val();
         var statusID = 1;
-
+      
         $.ajax({
             url: apiURL,
             type: "POST",

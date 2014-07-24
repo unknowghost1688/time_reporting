@@ -24,7 +24,8 @@ function GenerateManagerDropDownList() {
 var masterUserAddFunctions = {
     addUser: function () {
     var userName = $("#userName").val();
-    var lastName = $("#name").val();
+    var firstName = $("#firstName").val();
+    var lastName = $("#lastName").val();
     var phone = $("#phone").val();
     var email = $("#email").val();
     var reportTo = $('#ReportTo').find(":selected").val();
@@ -48,12 +49,13 @@ var masterUserAddFunctions = {
                    "ConfirmPassword": password,
                    "Role": role,
                    "CreateUserDetail": {
-                       "FirstName": userName,
+                       "FirstName": firstName,
                        "LastName": lastName,
                        "Phone": phone,
                        "Email": email,
                        "ReportTo": reportTo,
-                       "CreatedBy": createdBy
+                       "CreatedBy": createdBy,
+                       "UserName": userName
                    }
                }
             ),

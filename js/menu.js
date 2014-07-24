@@ -6,7 +6,7 @@
 var indexFunctions = {
     populateModules: function () {
         var role = localStorage.getItem("role");
-
+      
         var modules = {
             accountCode: "<a href='master-accountcode.html' class='ui-btn ui-corner-all ui-shadow'> <img src='images/icon/overtime.png'></a><p>Account Code</p> ",
             user: "<a href='master-user.html' class='ui-btn ui-corner-all ui-shadow'><img src='images/icon/ac.png'></a><p>User</p>",

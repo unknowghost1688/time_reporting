@@ -29,6 +29,9 @@ var myFavouritesFunctions =
             $("ul.ui-listview").addClass("clearboth");
             $("select#flipswitch1").flipswitch();
         },
+        selectFavourites: function (id) {
+            $("#hrefAccountCode").text(id);
+        },
         addOrRemoveFavourites: function (event) {
             //alert(event.target.id);
             var id = event.target.id;
@@ -137,6 +140,9 @@ var myFavouritesFunctions =
                     if ($("#flipswitch1").val() == "all") {
                         $("#myFavouritesList").empty().hide(); // hide it first, we will wait until the 2nd async is done before .show()-ing it again. This way, users will not feel like the app is jittery.
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
+                        $("#myFavouritesList").css("height", "20em");
+                        $("#myFavouritesList").css("overflow", "scroll");
+                        $("#myFavouritesList").css("overflow-x", "hidden");
                         mainFunctions.toggleShowAllInactive();
                         // Do another AJAX call to get the favourite codes to highlight those that are already favourited
                         var getFavAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode/myfavouritecode";
@@ -188,34 +194,56 @@ var myFavouritesFunctions =
                     "UserDetailID": userID
                 }),
                 success: function (data) {
-                    var appendHTML = "";
-                    for (var i = 0; i < data.length; i++) {
-                        var activeOrInactive = function () {
-                            var string = "";
-                            if (data[i].ActiveFlag == 0) {
-                                string = "Inactive";
-                            }
-                            return string;
-                        }();
+                    if (data.length == 0) {
+                        var appendHTML = "";
                         var li =
-                            "<li data-icon='star'>" +
-                                "<a id='" + data[i].AccountCode + "' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'>" +
-                                    "<div class='floatleft'>" +
-                                        "<span>" + data[i].AccountCode + "</span><br />" +
-                                        "<span>" + data[i].Description + "</span>" +
-                                    "</div>" +
-                                    "<div class='floatright'>" +
-                                        //"<a class='ui-btn ui-shadow ui-corner-all ui-icon ui-icon-star ui-btn-icon-notext' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'></a>" +
-                                    "</div>" +
-                                "</a>" +
-                            "</li>";
+                           "</br><li data-icon='false'>" +
+                               "<a id='" + 'noAccountCode' + "'  style='border: none; background: none;'>" +
+                                   "<div class='floatleft'>" +
+                                       "<span>" + "You have no favourite account codes." + "</span></br>" +
+                                   "</div>" +
+                                   "<div class='floatright'>" +
+
+                                   "</div>" +
+                               "</a>" +
+                           "</li></br>";
                         appendHTML += li;
-                    };
+                    }
+                    else {
+                        var appendHTML = "";
+                        for (var i = 0; i < data.length; i++) {
+                            var activeOrInactive = function () {
+                                var string = "";
+                                if (data[i].ActiveFlag == 0) {
+                                    string = "Inactive";
+                                }
+                                return string;
+                            }();
+                            var li =
+                                "<li data-icon='star'>" +
+                                    "<a id='" + data[i].AccountCode + "' onclick='myFavouritesFunctions.selectFavourites(this.id)'>" +
+                                        "<div class='floatleft'>" +
+                                            "<span>" + data[i].AccountCode + "</span><br />" +
+                                            "<span>" + data[i].Description + "</span>" +
+                                        "</div>" +
+                                        "<div class='floatright'>" +
+                                            //"<a class='ui-btn ui-shadow ui-corner-all ui-icon ui-icon-star ui-btn-icon-notext' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'></a>" +
+                                        "</div>" +
+                                    "</a>" +
+                                "</li>";
+                            appendHTML += li;
+                        };
+                    }
                     if ($("#flipswitch1").val() == "favourite") {
                         $("#myFavouritesList").empty();
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
                         mainFunctions.toggleShowAllInactive();
-                        $("#myFavouritesList li a").addClass("ui-btn-active");
+                        if (data.length != 0) {
+                            $("#myFavouritesList").css("height", "20em");
+                            $("#myFavouritesList").css("overflow", "scroll");
+                            $("#myFavouritesList").css("overflow-x", "hidden");
+                            $("#myFavouritesList li a").addClass("ui-btn-active");
+                        }
                     }
                     //$("ul").listview("refresh");
                     //$("#myFavouritesAddList").listview("refresh");

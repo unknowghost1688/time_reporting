@@ -85,7 +85,7 @@ var masterUserFunctions =
                             "<li data-icon='false'>" +
                                 "<a href='master-user-edit.html?userdetailid=" + data[i].UserDetailID + "' id='" + data[i].UserDetailID + "'>" +
                                     "<div class='floatleft'>" +
-                                         "<h5>" + data[i].FirstName + " " + data[i].LastName + "</h5>" +
+                                         "<h5>" + data[i].UserName +  "</h5>" +
                                          "<p>" + data[i].Role + "</p>" + 
                                     "</div>" +
                                     "<div class='floatright'>" +

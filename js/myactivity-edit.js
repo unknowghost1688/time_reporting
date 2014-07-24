@@ -17,8 +17,7 @@ var masterActivityEditFunctions = {
         var date = url.split("=")[1].split("-")[3];
         var formattedDate = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);
         var userID = localStorage.getItem("UserID");
-        alert(formattedDate);
-        alert(userID);
+
         var apiURL = "http://175.139.183.94:76/TimeReportingAPI/api/activity/myactivity";
 
         $.ajax({
@@ -35,13 +34,15 @@ var masterActivityEditFunctions = {
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].ActivityMainID == activityMainID && data[i].ActivityCode == activityCode && data[i].AccountCode == accountCode) {
-                        $("#activityCode").val(data[i].ActivityCode);
-                        $("#accountCode").val(data[i].AccountCode);
+                        $("#activityCode").val(data[i].ActivityCode).selectmenu("refresh", true);
+                        $("#accountCode").val(data[i].AccountCode).selectmenu("refresh",true);
+                        //alert(data[i].ActivityCode);
+                        //alert(data[i].AccountCode);
                         $("#hours").val(data[i].Hours);
                         $("#approvedHours").val(data[i].ApprovedHours);
                         $("#remark").val(data[i].Remark);
-                        $("#activityCode").selectmenu("refresh");
-                        $("#accountCode").selectmenu("refresh");
+                       
+                        
                         oldactivityCode = data[i].ActivityCode;
                         oldaccountCode = data[i].AccountCode;
                         break;
@@ -109,13 +110,17 @@ var masterActivityEditFunctions = {
         });
 
         //ajax GET accountCode
-        var getAccountCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/accountcode";
-
+        var getAccountCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/accountcode/MyFavouriteCode";
+        var userID = localStorage.getItem("UserID");
         $.ajax({
             url: getAccountCodesAPI,
-            type: "GET",
+            type: "POST",
             crossDomain: true,
-            async: true,  
+            async: true,
+            contentType: "application/json",
+            data: JSON.stringify({
+                "UserDetailID": userID
+            }),
             success: function (data) {
                 // Confirmational response from server
                 for (var i = 0; i < data.length; i++) {
