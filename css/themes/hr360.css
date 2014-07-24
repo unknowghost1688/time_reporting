@@ -30,10 +30,10 @@
 /*=============================================Content=================================================*/
 .ui-grid-c {text-align:center; text-shadow:none; color:#ffffff;}
 .ui-grid-c p{padding:0; margin:0;}
-/*.ui-grid-c .ui-block-a .ui-btn{padding:0; border:none; line-height:0;}
+.ui-grid-c .ui-block-a .ui-btn{padding:0; border:none; line-height:0;}
 .ui-grid-c .ui-block-b .ui-btn{padding:0; border:none; line-height:0;}
-.ui-grid-c .ui-block-c .ui-btn{padding:0; border:none; line-height:0;}*/
-/*.ui-grid-c .ui-block-d .ui-btn{padding:0; border:none; line-height:0;}*/
+.ui-grid-c .ui-block-c .ui-btn{padding:0; border:none; line-height:0;}
+.ui-grid-c .ui-block-d .ui-btn{padding:0; border:none; line-height:0;}
 .ui-grid-c img{width:100%;}
 
 #homepage{background:#039 url(../../images/bg.jpg); background-size:cover;}
@@ -265,18 +265,18 @@ float:right;
 
 .footerwrap{padding:20px; background-color:#0F0 !important;}
 
-
-
-
 div.ui-input-search {
     float: left !important;
+        width:30%;
 }
-div.floatleft
+.floatleft
 {
     float:left !important;
+    width:30%;
 }
-div.floatright{
+.floatright{
     float: right !important;  
+       
 }
 
 ul.ui-listview.clearboth {
@@ -294,3 +294,11 @@ input[type="checkbox"].TimeReportingHideCheckbox {
 .center {
     text-align: center;
 }
+.resize
+{
+  max-width: 50%;
+}
+
+
+
+

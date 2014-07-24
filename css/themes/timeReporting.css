@@ -1,0 +1,33 @@
+div.ui-input-search {
+    float: left !important;
+        width:30%;
+}
+.floatleft
+{
+    float:left !important;
+    width:30%;
+}
+.floatright{
+    float: right !important;  
+       
+}
+
+ul.ui-listview.clearboth {
+    clear: both !important;
+}
+
+label.ui-btn {
+ border:none !important;
+}
+
+input[type="checkbox"].TimeReportingHideCheckbox {
+    visibility:hidden;
+     
+}
+.center {
+    text-align: center;
+}
+.resize
+{
+  max-width: 50%;
+}
