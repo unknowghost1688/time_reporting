@@ -85,9 +85,6 @@ var myActivityFunctions =
                 }
             });
 
-            if (regenerate_list == 1) {    // re-generate the listview
-                //myActivityFunctions.generateListView();
-            }
         },
         generateListView: function () {
             var apiURL = SERVER_END_POINT_API + "/api/activity/myactivity";

@@ -18,6 +18,7 @@
     <div data-role="page" id="myActivity" data-theme="a">
    
         <script src="js/myactivity-edit.js"></script>
+        <script src="js/myfavouriteformyactivity.js"></script>
 
         <div data-role="header">
             <a id="btnBack" href="myactivity.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
@@ -61,7 +62,8 @@
         </tr>
         <tr>       
                <th> <label for="accountCode">Account Code</label></th>
-          <td>   <select data-native-menu="true"  data-mini="true" data-theme="a" id="accountCode"></select>
+          <td><a href="#accCodePopup" data-rel="popup" id="hrefAccountCode" class="ui-btn ui-btn-inline ui-corner-all" data-position-to="window"></a>   
+               <!-- <select data-native-menu="true"  data-mini="true" data-theme="a" id="accountCode"></select>-->
 
           </td>
         </tr>
@@ -101,7 +103,16 @@
                 <p class="ui-title" id="ErroMessage"></p>
                 <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
             </div>
-        </div>  
+        </div> 
+          <div data-role="popup" id="accCodePopup">
+        <a href="#" data-rel="back" data-role="button" data-icon="delete"
+           data-iconpos="notext" class="ui-btn-right">Close</a>
+        <div data-role="content">
+            <!--<ul data-role="listview" data-inset="true" data-filter="true" id="ActivityMainList"></ul>-->
+             <ul id="myFavouritesList" data-role="listview" data-filter="true" data-inset="true">
+        </ul>
+        </div>
+    </div> 
         <div data-role="footer"  data-position="fixed">
 
             <div data-role="navbar">
