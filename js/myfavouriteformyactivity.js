@@ -31,6 +31,7 @@ var myFavouritesFunctions =
         },
         selectFavourites: function (id) {
             $("#hrefAccountCode").text(id);
+            $("#accCodePopup").popup("close");
         },
         addOrRemoveFavourites: function (event) {
             //alert(event.target.id);
