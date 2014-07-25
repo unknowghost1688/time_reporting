@@ -34,25 +34,26 @@ var masterAccountCodeAddFunctions = {
             }),
             success: function () {
                 // Confirmational response from server
-                setTimeout(function () { $("#popup_sucessfullyAddAccountCode").popup("open"); }, 1000);
+               // setTimeout(function () { $("#popup_sucessfullyAddAccountCode").popup("open"); }, 1000);
+                alert("Successfully added.");
             },
             error: function (jqXHR, exception) {
                 if (jqXHR.status === 0) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Not connect.\n Verify Network.');
+                    setTimeout(function () { alert('Not connect.\n Please Verify Network.');};//$("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Not connect.\n Verify Network.');
                 } else if (jqXHR.status == 404) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested page not found. [404]');
+                    setTimeout(function (){ alert('Invalid Request');});//$("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested page not found. [404]');
                 } else if (jqXHR.status == 401) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('401 Unauthorized');
+                    setTimeout(function () { alert('Invalid Request');});//{ $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('401 Unauthorized');
                 } else if (jqXHR.status == 500) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Internal Server Error [500].');
+                    setTimeout(function () { alert('Invalid Request');});//{ $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Internal Server Error [500].');
                 } else if (exception === 'parsererror') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested JSON parse failed.');
+                    setTimeout(function () { alert('Invalid Request');});//{ $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested JSON parse failed.');
                 } else if (exception === 'timeout') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Time out error.');
+                    setTimeout(function (){ alert('Invalid Request');});// { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Time out error.');
                 } else if (exception === 'abort') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Ajax request aborted.');
+                    setTimeout(function () { alert('Invalid Request');});//{ $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Ajax request aborted.');
                 } else {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
+                    setTimeout(function () { alert('Invalid Request');});//{ $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
                 }
             }
         });

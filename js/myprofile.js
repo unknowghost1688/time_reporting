@@ -109,7 +109,7 @@ var myProfile_ShowDetailsFunctions = {
             setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
             $('#ErroMessage_FailChangePassword').html('Password must contains two special characters.\nMust containts two out of this few special characters: !,%,&,@,#,$,^,*,?,_,~');
             error_val = 1;
-        } else if (newPassword_txt != confirmPassword_txt) {
+        } else if (encodeURIComponent(newPassword_txt) != encodeURIComponent(confirmPassword_txt)) {
             setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
             $('#ErroMessage_FailChangePassword').html('New password and confirm password do not match.');
             error_val = 1;
@@ -127,7 +127,7 @@ var myProfile_ShowDetailsFunctions = {
                     NewPassword: newPassword_txt,
                     ConfirmPassword: confirmPassword_txt
                 },
-                success: function (result) {
+            success: function () {
                     setTimeout(function () { $("#popup_sucessfullyChangePassword").popup("open"); }, 1000);
                 },
                 error: function (jqXHR, status, error) {

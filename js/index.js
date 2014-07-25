@@ -45,7 +45,7 @@ $(document).one('pagecreate', function () {
     $("#btnsubmit").click(function () {
               
         
-        var login = new Authentication($("#username").val(), $("#password").val(), SERVER_END_POINT_API);
+        var login = new Authentication($("#username").val(), encodeURIComponent($("#password").val()), SERVER_END_POINT_API);
         //$.mobile.navigate("menu.html");
    
     

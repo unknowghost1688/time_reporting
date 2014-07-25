@@ -80,12 +80,13 @@ var myFavouritesFunctions =
                         }
                     },
                     contentType: "application/json",
-                    dataType: "json",
                     data: JSON.stringify({
                         "AccountCode": id,
                         "UserDetailID": userID
                     }),
                     success: function () {
+                        $("#li_" + id).remove();
+                        $("#myFavouritesList").listview("refresh");
                     },
                     error: function (jqXHR, status, error) {
                         //alert(status + " " + error);
@@ -198,7 +199,7 @@ var myFavouritesFunctions =
                             return string;
                         }();
                         var li =
-                            "<li data-icon='star'>" +
+                            "<li id='li_" + data[i].AccountCode + "' data-icon='star'>" +
                                 "<a id='" + data[i].AccountCode + "' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'>" +
                                     "<div class='floatleft'>" +
                                         "<span>" + data[i].AccountCode + "</span><br />" +
