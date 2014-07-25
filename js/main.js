@@ -64,7 +64,10 @@ if (localStorage.getItem("Token") != "") {
 $(document).one('pagecreate', function () {
 
     $("#btnBack").click(function () {
-        alert("back to previous page");
+        //alert("back to previous page");
+        $(document).bind("mobileinit", function () {
+            $.mobile.defaultTransition = 'none';
+        });
         navigator.app.backHistory();
     });
     $("#btnPower").click(function () {
