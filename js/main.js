@@ -59,9 +59,7 @@ if (localStorage.getItem("Token") != "") {
     });
 }
 
-$(document).bind("mobileinit", function () {
-    $.mobile.defaultPageTransition = 'none';
-});
+
 
 $(document).one('pagecreate', function () {
 
