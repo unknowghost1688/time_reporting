@@ -59,15 +59,14 @@ if (localStorage.getItem("Token") != "") {
     });
 }
 
-
+$(document).bind("mobileinit", function () {
+    $.mobile.defaultPageTransition = 'none';
+});
 
 $(document).one('pagecreate', function () {
 
     $("#btnBack").click(function () {
-        //alert("back to previous page");
-        $(document).bind("mobileinit", function () {
-            $.mobile.defaultTransition = 'none';
-        });
+        alert("back to previous page");
         navigator.app.backHistory();
     });
     $("#btnPower").click(function () {
