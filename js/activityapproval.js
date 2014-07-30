@@ -7,10 +7,23 @@
         myFormatDate = myDate.getDate() + " " + MONTHS[myDate.getMonth()] + " " + myDate.getFullYear();
     } else {
         myDate = new Date(new Date().getFullYear(), t[0] - 1, t[1]);
+
         myFormatDate = MONTHS[myDate.getMonth()] + "," + mydate.getDate();
     }
-    $(".subaction").text(myFormatDate);
+    $("#subaction").text(myFormatDate);
     //date shown beside datepicker
+
+    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
+    //var realurl = "http://localhost:8080/api/activity/SubordinateWithDetail";
+    var manID = localStorage.getItem("UserID");
+    var datePick = localStorage.ApvrDate.split("/").reverse().join("-");
+
+    var cred = {
+        "managerID": manID,
+        "date": datePick
+    };
+    
+    callAjax(realurl, cred, "POST");
 }
 
 function dispTodayDate() {
@@ -32,7 +45,7 @@ function dispTodayDate() {
         myDate = new Date(new Date().getFullYear(), t[0] - 1, t[1]);
         myFormatDate = MONTHS[myDate.getMonth()] + "," + mydate.getDate();
     }
-    $(".subaction").text(myFormatDate);
+    $("#subaction").text(myFormatDate);
 }
 
 $(document).on("pageinit", function () {
@@ -49,16 +62,7 @@ $(document).on("pageinit", function () {
 $(document).on('click', '.dwb ,.dwb0, .dwb-e', function () { // when click on set button on datepicker
 
     dispSetDate();
-    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
-    var manID = localStorage.getItem("UserID");
-    var datePick = localStorage.ApvrDate.split("/").reverse().join("-");
-   
-    var cred = {
-        "managerID": manID,
-        "date": datePick
-    };
-
-    callAjax(realurl, cred, "POST");
+    
 
 });
 
@@ -95,10 +99,10 @@ function approveList() {
             };
 
             approveList.push(cred);
-
+            
         }
         //var strApproveList=JSON.stringify(approveList);
-        //alert(strApproveList);
+        
 
         callAjaxApprove(realurl, approveList, "POST");
     }
@@ -205,7 +209,7 @@ function callAjax(someurl, somedata, sometype) {
 
 
 function renderListtemp(data) {
-
+    
     var headlii = "";
     /*first person header*/
     var lii = "";
@@ -234,7 +238,7 @@ function renderListtemp(data) {
         //return 0;
     });
 
-
+    
 
     //store total hours
     for (var i = 0; i < data.length; i++) {
@@ -278,23 +282,24 @@ function renderListtemp(data) {
     for (var i = 0; i < data.length; i++) {
 
         if (data[i].ApprovedHours == null)
-            dPlaceHolder = 0;
+            dPlaceHolder = data[i].Hours;
         else
             dPlaceHolder = data[i].ApprovedHours + "' disabled";
         // approved hour textbox is disabled once approved.
 
         if (changed == 1) {
             lii += lit + "</tbody></table>" + "</div>" +
-       "<div data-role='collapsible' data-collapsed='true'>" +
-                   "<h3><span class='collaptitle' id='MainID" + i + "'>" + data[i].FirstName + ' ' + data[i].LastName + "<br><i class='headcounts'>" + data[i].AccountCode + "</i></span><span class='collapfigure'>" + totalhr[tcount + 1] + " hour(s)</span></h3>" +
+      "<div data-role='collapsible' data-collapsed='true' id='MainID'>" +
+                   "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[0].FirstName + ' ' + data[0].LastName + "<br><i class='headcounts'>" + ''/*data[0].AccountCode*/ + "</i></div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "'></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " hour(s)" +
+                   "</div></h3>" +
                        "<table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
-                        "<thead><tr>" +
-                                "<th>Activity</th>" +
-                                "<th>Acc. Code</th>" +
-                                "<th >Hour</th>" +
-                                "<th >Apvr. Hours</th>" +
-                                "<th><label data-iconpos='right' ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "'></label></th>" +
-            "</tr></thead>" +
+                        //"<thead><tr>" +
+                        //        "<th>Activity</th>" +
+                        //         "<th>Acc. Code</th>" +
+                        //        "<th>Hour</th>" +
+                        //        "<th >Apvr. Hours</th>" +
+                        //        "<th ><label data-iconpos='right'><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "'></label></th>" +
+                        //    "</tr></thead>" +
                             "<tbody>";
             changed = 0;
             lit = "";
@@ -306,15 +311,15 @@ function renderListtemp(data) {
             if (data[i].UserdetailID == data[k].UserdetailID) {
                 lit += "<tr><td>" + data[i].ActivityCode + "</td>" +
                         "<td>" + data[i].AccountCode + "</td>" +
-                           "<td >" + data[i].Hours + "</td>" +
-                           "<td class='toright' style='width:20%;padding:0%;margin:0%!important'><input id='apphr"+i+"' data-mini='true' type='text' placeholder='"+dPlaceHolder+" /></td>" + "<td></td>" +
+                           //"<td >" + data[i].Hours + "</td>" +
+                           "<td class='toright' style='width:20%;padding:0 5% 0 0;margin:0%!important'><input id='apphr"+i+"' data-mini='true' type='text' placeholder='"+dPlaceHolder+" /></td>" + 
                        "</tr>";
             }
             else {
                 lit += "<tr><td>" + data[i].ActivityCode + "</td>" +
                          "<td>" + data[i].AccountCode + "</td>" +
-                            "<td  >" + data[i].Hours + "</td>" +
-                            "<td class='toright' style='width:20%;padding:0%;margin:0%!important'><input id='apphr" + i + "' data-mini='true' type='text' placeholder='" + dPlaceHolder + " /></td>" + "<td></td>" +
+                            //"<td  >" + data[i].Hours + "</td>" +
+                            "<td class='toright' style='width:20%;padding:0 5% 0 0;margin:0%!important'><input id='apphr" + i + "' data-mini='true' type='text' placeholder='" + dPlaceHolder + " /></td>" +
                         "</tr>";
                 changed = 1;
             }
@@ -322,8 +327,8 @@ function renderListtemp(data) {
         else {
             lit += "<tr><td>" + data[i].ActivityCode + "</td>" +
                         "<td>" + data[i].AccountCode + "</td>" +
-                           "<td >" + data[i].Hours + "</td>" +
-                           "<td class='toright' style='width:20%;padding:0%;margin:0%!important'><input id='apphr" + i + "'  data-mini='true' type='text' placeholder='" + dPlaceHolder + " /></td>" + "<td></td>" +
+                           //"<td >" + data[i].Hours + "</td>" +
+                           "<td class='toright' style='width:20%;padding:0 5% 0 0;margin:0%!important'><input id='apphr" + i + "'  data-mini='true' type='text' placeholder='" + dPlaceHolder + " /></td>" +
                        "</tr>";
         }
     }
@@ -331,23 +336,24 @@ function renderListtemp(data) {
 
     headlii +=
        "<div data-role='collapsible' data-collapsed='true' id='MainID'>" +
-                   "<h3><span class='collaptitle' id='MainID"+i+"'>" + data[0].FirstName + ' ' + data[0].LastName + "<br><i class='headcounts'>" + ''/*data[0].AccountCode*/ + "</i></span><span class='collapfigure'>" + totalhr[0] + " hour(s)" +
-                   "</span></h3>" + 
+                   "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[0].FirstName + ' ' + data[0].LastName + "<br><i class='headcounts'>" + ''/*data[0].AccountCode*/ + "</i></div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "'></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " hour(s)" +
+                   "</div></h3>" +
                        "<table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
-                        "<thead><tr>" +
-                                "<th>Activity</th>" +
-                                 "<th>Acc. Code</th>" +
-                                "<th>Hour</th>" +
-                                "<th >Apvr. Hours</th>" +
-                                "<th ><label data-iconpos='right'><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "'></label></th>" +
-                            "</tr></thead>" +
+                        //"<thead><tr>" +
+                        //        "<th>Activity</th>" +
+                        //         "<th>Acc. Code</th>" +
+                        //        "<th>Hour</th>" +
+                        //        "<th >Apvr. Hours</th>" +
+                        //        "<th ><label data-iconpos='right'><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "'></label></th>" +
+                        //    "</tr></thead>" +
                             "<tbody>";
     headlii += lii;
 
     $("input[disabled]").prop('disabled', true);
     //set the approval hour to disabled if the approval hour is not null
-
+    $("#contentDetail").empty();
     $("#contentDetail").html(headlii).trigger("create").collapsibleset('refresh');
+ 
 
 }
 
