@@ -8,13 +8,13 @@ var indexFunctions = {
         var role = localStorage.getItem("role");
       
         var modules = {
-            accountCode: "<a href='master-accountcode.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'> <img src='images/icon/overtime.png'></a><p>Account Code</p> ",
-            user: "<a href='master-user.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'><img src='images/icon/ac.png'></a><p>User</p>",
-            activity: "<a href='master-activity.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'><img src='images/icon/travel.png'></a><p>Activity</p>",
-            managerApproval: "<a href='managerapproval.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'> <img src='images/icon/todo.png'></a> <p>Activity Approval</p>",
-            myActivity: "<a href='myactivity.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'> <img src='images/icon/roster.png'></a><p>My Activity</p>",
-            myProfile: "<a href='myprofile.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'><img src='images/icon/profile.png'></a><p>My Profile</p>",
-            myFavorite: "<a href='myfavourites.html' class='ui-btn ui-corner-all ui-shadow' data-transition='none'><img src='images/icon/leave.png'></a><p>My Favourite Code</p>",
+            accountCode: "<a href='master-accountcode.html' class='ui-btn ui-corner-all ui-shadow'> <img src='images/icon/overtime.png'></a><p>Account Code</p> ",
+            user: "<a href='master-user.html' class='ui-btn ui-corner-all ui-shadow'><img src='images/icon/ac.png'></a><p>User</p>",
+            activity: "<a href='master-activity.html' class='ui-btn ui-corner-all ui-shadow'><img src='images/icon/travel.png'></a><p>Activity</p>",
+            managerApproval: "<a href='managerapproval.html' class='ui-btn ui-corner-all ui-shadow'> <img src='images/icon/todo.png'></a> <p>Activity Approval</p>",
+            myActivity: "<a href='myactivity.html' class='ui-btn ui-corner-all ui-shadow'> <img src='images/icon/roster.png'></a><p>My Activity</p>",
+            myProfile: "<a href='myprofile.html' class='ui-btn ui-corner-all ui-shadow'><img src='images/icon/profile.png'></a><p>My Profile</p>",
+            myFavorite: "<a href='myfavourites.html' class='ui-btn ui-corner-all ui-shadow'><img src='images/icon/leave.png'></a><p>My Favourite Code</p>",
         };
 
         var appendHTML;
