@@ -1,12 +1,37 @@
-﻿
-    <div id="overheadpage" data-role="page" data-theme="a">
-         
+﻿<div id="approval" data-role="page">
+
 
 
     <style type="text/css">
         .demo {
             display: none;
         }
+
+        /*.ui-btn-corner-all, .ui-btn.ui-corner-all, .ui-slider-track.ui-corner-all, .ui-flipswitch.ui-corner-all, .ui-li-count {
+            background-color: white;
+            float:right;
+        }
+
+        .ui-btn-corner-all:hover, .ui-btn.ui-corner-all:hover, .ui-slider-track:hover.ui-corner-all:hover, .ui-flipswitch.ui-corner-all:hover, .ui-li-count:hover {
+            background-color: white;
+        }*/
+        #datebtn {
+            float:right;
+        }
+   
+
+.custom-button .ui-btn-inner {
+    padding: 0 !important;    
+    float: right!important;
+}
+
+.custom-button .ui-btn-inner .ui-btn-text {
+   
+    width: 100% !important;
+    background-image: url('images/icon/arrow-pointdown.png') !important;
+    background-repeat: no-repeat  !important;
+    background-position: center  !important; 
+}
     </style>
     <!--    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>-->
@@ -21,7 +46,7 @@
     <link href="css/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="js/activityapproval.js"></script>
+    <script type="text/javascript" src="js/newactivityapproval.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -90,45 +115,62 @@
 
 
 
-        <div data-role="header" data-position="fixed">
-            <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
-            <h1>Approval</h1>
-            <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
+    <div data-role="header" data-position="fixed">
+        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
+        <h1>Approval</h1>
+        <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
 
-            <div class="subtitle">
-                <span class="subaction">May 2014</span><span class="dropdownbtn">
-                    <div class="settings">
-                        <div data-role="fieldcontain" style="display:none;">
-                            <label for="demo" style="display:none;">Demo</label>
-                            <select name="demo" id="demo" style="display:none;">
-                                <option value="date">Date</option>
-                            </select>
+        <div class="subtitle">
+            <!--<span class="subaction">May 2014</span><span class="dropdownbtn">
+                <div class="settings">
+                    <div data-role="fieldcontain" style="display: none;">
+                        <label for="demo" style="display: none;">Demo</label>
+                        <select name="demo" id="demo" style="display: none;">
+                            <option value="date">Date</option>
+                        </select>
+                    </div>
+            </span>-->
+            
+                   <div class="clearfix">
+                       
+<!--                      <div style="float:left"> <span id="subaction">May 2014</span></div>-->
+                      <div style="float:right;padding: 0% 5% 0 0">
+                          <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit"  style="display: none;" id="datebtn">
+
+                                            <select name="demo" id="demo" style="display: none;">
+                                                <option value="date">Date</option>
+                                            </select>
+                  
+                           </div>
+                           
+                                <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
+                            
                         </div>
-                </span>
-            </div>
-
-            <div data-role="fieldcontain" class="demo demo-date demo-datetime demo-time demo-credit">
-                <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
-            </div>
+                       <div style="float:right;padding: 1% 10% 0 0" id="subaction">May 2014</div>
+                    </div>
         </div>
-    </div>
 
-    
-    <div data-role="collapsible-set" id="contentDetail" data-theme="c" class="collapstop">
-
-
-
-    </div>
-
-     <div data-role="footer"  data-position="fixed">
-         <div data-role="navbar">
-	<ul>
-		<li><a  class="ui-btn-active ui-state-persist" onclick="approveList()">Approve</a></li>		
-	</ul>
-</div><!-- /navbar -->
+       
     </div>
 
 
-   
 
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a class="ui-btn-active ui-state-persist" onclick="approveList()">Approve</a></li>
+            </ul>
+        </div>
+        <!-- /navbar -->
+    </div>
+
+</div>
+
+<div data-role="content">
+    <br />
+
+    <div data-role="collapsible-set" id="contentDetail" data-theme="c" class="collapstop"></div>
+
+    <br />
+</div>
 
