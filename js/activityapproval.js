@@ -430,7 +430,7 @@ function renderListtemp(data) {
            
             //firstdPlaceHolder = data[0].Hours;apphr" + i
             var appval = "#apphr" + 0;
-            firstdPlaceHolder = $(appval).val();
+            firstdPlaceHolder = $(appval).val() + "'";
         }
 
         headlii +=
