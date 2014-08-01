@@ -18,6 +18,16 @@
         #datebtn {
             float:right;
         }
+       
+        /*remove the active state of collapsible*/
+        a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-minus.ui-btn-active {
+            background:none!important;
+            border-color:#ddd!important;
+        }
+         a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-plus.ui-btn-active {
+            background:none!important;
+            border-color:#ddd!important;
+        }
     
    
 
@@ -48,7 +58,11 @@
     <link href="css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="js/activityapproval.js"></script>
-
+    <script>
+        $(document).bind('mobileinit', function () {
+            $.mobile.activeBtnClass = 'unused';
+        });
+    </script>
     <script type="text/javascript">
         $(function () {
             var curr = new Date().getFullYear();
@@ -136,17 +150,18 @@
                        
 <!--                      <div style="float:left"> <span id="subaction">May 2014</span></div>-->
                       <div style="float:right;padding: 0% 5% 0 0">
-                          <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit"  style="display: none;" id="datebtn">
-                              <div style="display: none;">
-                                    <select name="demo" id="demo" style="display: none;">
-                                        <option value="date">Date</option>
-                                    </select>
-                                </div>
-                           </div>
-                          <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
-                            
+                            <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit"  style="display: none;" id="datebtn">
+                                <select name="demo" id="demo" style="display: none;">
+                                    <option value="date">Date</option>
+                                </select>
+                            </div>
                         </div>
-                       <div style="float:right;padding: 1% 10% 0 0" id="subaction">May 2014</div>
+                           
+                        <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
+                            
+                    </div>
+                    
+                    <div style="float:right;padding: 1% 10% 0 0" id="subaction">May 2014</div>
                     </div>
         </div>
 
@@ -156,7 +171,7 @@
     <div data-role="content">
     <br />
 
-    <div data-role="collapsible-set" id="contentDetail" data-theme="c" class="collapstop"></div>
+    <div data-role="collapsibleset" id="contentDetail" data-theme="c" class="collapstop"></div>
 
     <br />
 </div>
