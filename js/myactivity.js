@@ -1,7 +1,64 @@
-﻿$(document).one("pagecontainerbeforeshow", function () {
+﻿function dispSetDate() {
+    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var myDate, myFormatDate;
+    var t = localStorage.ApvrDate.split("/");
+    if (t[1]) {
+        myDate = new Date(t[2], t[1] - 1, t[0]);
+        myFormatDate = myDate.getDate() + " " + MONTHS[myDate.getMonth()] + " " + myDate.getFullYear();
+    } else {
+        myDate = new Date(new Date().getFullYear(), t[0] - 1, t[1]);
+
+        myFormatDate = MONTHS[myDate.getMonth()] + "," + mydate.getDate();
+    }
+    $("#subaction").text(myFormatDate);
+    //date shown beside datepicker
+
+    myActivityFunctions.generateListView();
+
+
+}
+
+function dispTodayDate() {
+    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var myDate, myFormatDate;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) { dd = '0' + dd } if (mm < 10) { mm = '0' + mm } var today = dd + '/' + mm + '/' + yyyy;
+
+    var t = today.split("/");
+    if (t[1]) {
+        myDate = new Date(t[2], t[1] - 1, t[0]);
+        myFormatDate = myDate.getDate() + " " + MONTHS[myDate.getMonth()] + " " + myDate.getFullYear();
+    } else {
+        myDate = new Date(new Date().getFullYear(), t[0] - 1, t[1]);
+        myFormatDate = MONTHS[myDate.getMonth()] + "," + mydate.getDate();
+    }
+    $("#subaction").text(myFormatDate);
+}
+
+$(document).on("pageinit", function () {
+   
+
+    dispTodayDate();
+   
+
+});
+
+$(document).on('click', '.dwb ,.dwb0, .dwb-e', function () { // when click on set button on datepicker
+
+    dispSetDate();
+
+
+});
+
+$(document).one("pagecontainerbeforeshow", function () {
     myActivityFunctions.addSelectAllCheckbox();
     myActivityFunctions.setDateToToday();
-    myActivityFunctions.generateListView();
+  //  myActivityFunctions.generateListView();
     $(document).off('click', '#btn_failDeleteMyActivity').on('click', '#btn_failDeleteMyActivity', function (e) {
         $("#popup_failDeleteMyActivity").popup("close");
     });
@@ -24,7 +81,7 @@ var myActivityFunctions =
         setDateToToday: function () {
             //var date = new Date();//"06/08/2014"; //moment().format('L');
             //date = date.split("/").reverse().join("-");
-            $("#date")[0].valueAsDate = new Date();
+           // $("#date")[0].valueAsDate = new Date();
         },
         deleteActivities: function () {
             var DELETEAPIURL = SERVER_END_POINT_API + "/api/Activity/DeleteMyActivity/"; // needs to be changed after Carso allows for DELETE on the server
@@ -87,7 +144,8 @@ var myActivityFunctions =
         },
         generateListView: function () {
             var apiURL = SERVER_END_POINT_API + "/api/activity/myactivity";
-            var date = $("#date").val();
+            //var date = $("#date").val();
+            var date = localStorage.ApvrDate.split("/").reverse().join("-");
             var userID = localStorage.getItem("UserID");
 
             $.ajax({
