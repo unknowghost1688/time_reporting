@@ -4,34 +4,33 @@
         .demo {
             display: none;
         }
+
         #datebtn {
-            float:right;
+            float: right;
         }
-       
+
         /*remove the active state of collapsible*/
         a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-minus.ui-btn-active {
-            background:none!important;
-            border-color:#ddd!important;
+            background: none!important;
+            border-color: #ddd!important;
         }
-         a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-plus.ui-btn-active {
-            background:none!important;
-            border-color:#ddd!important;
+
+        a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-plus.ui-btn-active {
+            background: none!important;
+            border-color: #ddd!important;
         }
-    
-   
 
-.custom-button .ui-btn-inner {
-    padding: 0 !important;    
-    float: right!important;
-}
+        .custom-button .ui-btn-inner {
+            padding: 0 !important;
+            float: right!important;
+        }
 
-.custom-button .ui-btn-inner .ui-btn-text {
-   
-    width: 100% !important;
-    background-image: url('images/icon/arrow-pointdown.png') !important;
-    background-repeat: no-repeat  !important;
-    background-position: center  !important; 
-}
+            .custom-button .ui-btn-inner .ui-btn-text {
+                width: 100% !important;
+                background-image: url('images/icon/arrow-pointdown.png') !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+            }
     </style>
     <!--    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>-->
@@ -46,8 +45,6 @@
     <link href="css/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
 
-    
-   
     <script type="text/javascript">
         $(function () {
             var curr = new Date().getFullYear();
@@ -114,11 +111,11 @@
     </script>
 
     <div data-role="header" data-position="fixed">
-        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
+        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>My Activity</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
 
-          <div class="subtitle">
+        <div class="subtitle">
             <!--<span class="subaction">May 2014</span><span class="dropdownbtn">
                 <div class="settings">
                     <div data-role="fieldcontain" style="display: none;">
@@ -128,24 +125,24 @@
                         </select>
                     </div>
             </span>-->
-            
-                   <div class="clearfix">
-                       
-<!--                      <div style="float:left"> <span id="subaction">May 2014</span></div>-->
-                      <div style="float:right;padding: 0% 5% 0 0">
-                          <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit"  style="display: none;" id="datebtn">
-                              <div style="display: none;">
-                                    <select name="demo" id="demo" style="display: none;">
-                                        <option value="date">Date</option>
-                                    </select>
-                                </div>
-                           </div>
-                           
-                                <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
-                            
+
+            <div class="clearfix">
+
+                <!--                      <div style="float:left"> <span id="subaction">May 2014</span></div>-->
+                <div style="float: right; padding: 0% 5% 0 0">
+                    <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit" style="display: none;" id="datebtn">
+                        <div style="display: none;">
+                            <select name="demo" id="demo" style="display: none;">
+                                <option value="date">Date</option>
+                            </select>
                         </div>
-                       <div style="float:right;padding: 1% 10% 0 0" id="subaction">May 2014</div>
                     </div>
+
+                    <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
+
+                </div>
+                <div style="float: right; padding: 1% 10% 0 0" id="subaction">May 2014</div>
+            </div>
         </div>
     </div>
     <div class="contenttab" data-role="main">
@@ -159,21 +156,22 @@
             <p class="ui-title" id="P2">Activity Successfully deleted</p>
             <a id="btn_sucessfullyDeleteMyActivity" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
-    </div>  
+    </div>
     <div data-role="popup" id="popup_failDeleteMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
             <h3>Error</h3>
             <p class="ui-title" id="ErroMessage_failDeleteMyActivity"></p>
             <a id="btn_failDeleteMyActivity" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
-    </div> 
-    <div data-role="footer"  data-position="fixed">
-
-        <div data-role="navbar">
-            <ul>
-                <li><a href="myactivity-add.html" class="ui-btn-active ui-state-persist">Add</a></li>
-                <li><a onclick="myActivityFunctions.deleteActivities()">Delete</a></li>
-            </ul>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div class="ui-grid-a">
+            <div class="ui-block-a center">
+                <a class="greenbtn" data-role="button" href="myactivity-add.html">Add</a>
+            </div>
+            <div class="ui-block-b center">
+                <a class="redbtn" data-role="button" onclick="myActivityFunctions.deleteActivities()">Delete</a>
+            </div>
         </div>
     </div>
 </div>

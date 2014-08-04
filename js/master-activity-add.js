@@ -11,58 +11,67 @@ var masterActivityAddFunctions = {
         var description = $("#description").val();
         var userID = localStorage.getItem("userID");
 
-        $.ajax({
-            url: apiURL,
-            type: "POST",
-            crossDomain: true,
-            async: false, // false for now
-            statusCode: {
-                400: function () {
-                    alert("Something went wrong.")
+        if (activityCode == "") {
+            setTimeout(function () { $("#popup_ErrMsg_MasterActivityAdd").popup("open"); }, 1000);
+            $('#ErroMessage_MasterActivityAdd').html('Please insert activity code, activity code cannot be null.');
+        } else if (description == "") {
+            setTimeout(function () { $("#popup_ErrMsg_MasterActivityAdd").popup("open"); }, 1000);
+            $('#ErroMessage_MasterActivityAdd').html('Please insert description, description cannot be null.');
+        } else {
+            $.ajax({
+                url: apiURL,
+                type: "POST",
+                crossDomain: true,
+                async: false, // false for now
+                statusCode: {
+                    400: function () {
+                        alert("Something went wrong.")
+                    },
+                    404: function () {
+                        alert("Server not found.");
+                    }
                 },
-                404: function () {
-                    alert("Server not found.");
+                contentType: "application/json",
+
+                data: JSON.stringify({
+                    "ActivityCode": activityCode,
+                    "Description": description,
+                    "ActiveFlag": 1,
+                    "CreatedBy": userID
+                }),
+                success: function () {
+                    // Confirmational response from server
+                    setTimeout(function () { $("#popup_sucessfullyAddActivity").popup("open"); }, 1000);
+                },
+                error: function (jqXHR, exception) {
+                    setTimeout(function () { $("#popup_ErrMsg_MasterActivityAdd").popup("open"); }, 1000);
+                    if (jqXHR.status === 0) {
+                        $('#ErroMessage_MasterActivityAdd').html('Not connect.\n Verify Network.');
+                    } else if (jqXHR.status == 404) {
+                        $('#ErroMessage_MasterActivityAdd').html('Requested page not found. [404]');
+                    } else if (jqXHR.status == 401) {
+                        $('#ErroMessage_MasterActivityAdd').html('401 Unauthorized');
+                    } else if (jqXHR.status == 500) {
+                        $('#ErroMessage_MasterActivityAdd').html('Internal Server Error [500].');
+                    } else if (exception === 'parsererror') {
+                        $('#ErroMessage_MasterActivityAdd').html('Requested JSON parse failed.');
+                    } else if (exception === 'timeout') {
+                        $('#ErroMessage_MasterActivityAdd').html('Time out error.');
+                    } else if (exception === 'abort') {
+                        $('#ErroMessage_MasterActivityAdd').html('Ajax request aborted.');
+                    } else {
+                        $('#ErroMessage_MasterActivityAdd').html('Error Occur.');
+                    }
                 }
-            },
-            contentType: "application/json",
-          
-            data: JSON.stringify({
-                "ActivityCode": activityCode,
-                "Description": description,
-                "ActiveFlag": 1,
-                "CreatedBy": userID
-            }),
-            success: function () {
-                // Confirmational response from server
-                setTimeout(function () { $("#popup_sucessfullyAddActivity").popup("open"); }, 1000);
-            },
-            error: function (jqXHR, exception) {
-                if (jqXHR.status === 0) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Not connect.\n Verify Network.');
-                } else if (jqXHR.status == 404) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested page not found. [404]');
-                } else if (jqXHR.status == 401) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('401 Unauthorized');
-                } else if (jqXHR.status == 500) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Internal Server Error [500].');
-                } else if (exception === 'parsererror') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested JSON parse failed.');
-                } else if (exception === 'timeout') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Time out error.');
-                } else if (exception === 'abort') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Ajax request aborted.');
-                } else {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
-                }
-            }
-        });
+            });
+        }
     }
 
 }
 
 $(document).one('pagecreate', '#master-activity-add', function () {
-    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-        $("#popup_ErrMsg").popup("close");
+    $(document).off('click', '#btn_closeErrMsg_MasterActivityAdd').on('click', '#btn_closeErrMsg_MasterActivityAdd', function (e) {
+        $("#popup_ErrMsg_MasterActivityAdd").popup("close");
     });
     $(document).off('click', '#ActivitySuccessOK').on('click', '#ActivitySuccessOK', function (e) {
         

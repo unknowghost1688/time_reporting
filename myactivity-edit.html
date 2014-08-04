@@ -16,16 +16,16 @@
 </head>
 <body>
     <div data-role="page" id="myActivity" data-theme="a">
-   
+
         <script src="js/myactivity-edit.js"></script>
         <script src="js/myfavouriteformyactivity.js"></script>
 
         <div data-role="header">
-            <a id="btnBack" href="myactivity.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
+            <a id="btnBack" href="myactivity.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
             <h1>My Activity</h1>
             <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
         </div>
-       <!-- <div class="ui-content" role="main">
+        <!-- <div class="ui-content" role="main">
             <div class="ui-field-contain">
                 <label for="activityCode">Activity Code</label>
              
@@ -49,77 +49,87 @@
                 <textarea id="remark"></textarea>
             </div>
         </div>-->
- <div data-role="main" class="ui-content">
-    <div class="ui-grid-a">
-        <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable" >
-      <tbody>
-      
-        <tr>      
-             <th><label for="activityCode">Activity Code</label></th>
-          <td> <select data-native-menu="true"  data-mini="true" data-theme="a" id="activityCode"></select>
-            
-          </td>
-        </tr>
-        <tr>       
-               <th> <label for="accountCode">Account Code</label></th>
-          <td><a href="#accCodePopup" data-rel="popup" id="hrefAccountCode" class="ui-btn ui-btn-inline ui-corner-all" data-position-to="window"></a>   
-               <!-- <select data-native-menu="true"  data-mini="true" data-theme="a" id="accountCode"></select>-->
+        <div data-role="main" class="ui-content">
+            <div class="ui-grid-a">
+                <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable">
+                    <tbody>
 
-          </td>
-        </tr>
-           <tr>       
-               <th>  <label for="hours">Hours</label></th>
-          <td>  <input type="text" id="hours" />
+                        <tr>
+                            <th>
+                                <label for="activityCode">Activity Code</label></th>
+                            <td>
+                                <select data-native-menu="true" data-mini="true" data-theme="a" id="activityCode"></select>
 
-          </td>
-        </tr>
-               <tr>       
-               <th><label for="approvedHours">Approved Hours</label></th>
-          <td>  <input type="text" id="approvedHours" disabled /></td>
-        </tr>
-           <tr>       
-               <th> <label for="remark">Remark</label></th>
-          <td>  <textarea id="remark"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="accountCode">Account Code</label></th>
+                            <td><a href="#accCodePopup" data-rel="popup" id="hrefAccountCode" class="ui-btn ui-btn-inline ui-corner-all" data-position-to="window"></a>
+                                <!-- <select data-native-menu="true"  data-mini="true" data-theme="a" id="accountCode"></select>-->
 
-          </td>
-        </tr>                 
-              
-      </tbody>
-    </table> 
-         </div>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="hours">Hours</label></th>
+                            <td>
+                                <input type="text" id="hours" />
 
-     
-  </div>  
-            <div data-role="popup" id="popup_sucessfullyEditMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="approvedHours">Approved Hours</label></th>
+                            <td>
+                                <input type="text" id="approvedHours" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="remark">Remark</label></th>
+                            <td>
+                                <textarea id="remark"></textarea>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div data-role="popup" id="popup_sucessfullyEditMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
             <div role="main" class="ui-content">
                 <h3>Success</h3>
                 <p class="ui-title" id="P1">Activity Successfully Saved</p>
                 <a id="MyActivitySuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
             </div>
-        </div>  
-          <div data-role="popup" id="popup_ErrMsg" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        </div>
+        <div data-role="popup" id="popup_ErrMsg" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
             <div role="main" class="ui-content">
                 <h3>Error</h3>
                 <p class="ui-title" id="ErroMessage"></p>
                 <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
             </div>
-        </div> 
-          <div data-role="popup" id="accCodePopup">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete"
-           data-iconpos="notext" class="ui-btn-right">Close</a>
-        <div data-role="content">
-            <!--<ul data-role="listview" data-inset="true" data-filter="true" id="ActivityMainList"></ul>-->
-             <ul id="myFavouritesList" data-role="listview" data-filter="true" data-inset="true">
-        </ul>
         </div>
-    </div> 
-        <div data-role="footer"  data-position="fixed">
-
-            <div data-role="navbar">
-                <ul>
-                    <li><a onclick="masterActivityEditFunctions.updateActivity()" class="ui-btn-active ui-state-persist">Save</a></li>
-                    <li><a href="myactivity.html">Cancel</a></li>
+        <div data-role="popup" id="accCodePopup">
+            <a href="#" data-rel="back" data-role="button" data-icon="delete"
+                data-iconpos="notext" class="ui-btn-right">Close</a>
+            <div data-role="content">
+                <!--<ul data-role="listview" data-inset="true" data-filter="true" id="ActivityMainList"></ul>-->
+                <ul id="myFavouritesList" data-role="listview" data-filter="true" data-inset="true">
                 </ul>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div class="ui-grid-a">
+                <div class="ui-block-a center">
+                    <a class="greenbtn" data-role="button" onclick="masterActivityEditFunctions.updateActivity()">Save</a>
+                </div>
+                <div class="ui-block-b center">
+                    <a class="redbtn" data-role="button" href="myactivity.html">Cancel</a>
+                </div>
             </div>
         </div>
     </div>

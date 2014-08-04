@@ -1,3 +1,3 @@
-﻿$("#btnsubmit").click(function () {
-    window.location.href = "index.html";
-});
+﻿//$("#btnsubmit").click(function () {
+//    window.location.href = "index.html";
+//});

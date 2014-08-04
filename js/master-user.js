@@ -8,16 +8,16 @@ var masterUserFunctions =
         deleteUsers: function () {
             var checked = $("li input:checkbox:checked");
             for (var i = 0; i < checked.length; i++) {
-                
+
                 var userDetailID = checked[i].id.split("-")[1];
-                
+
                 $.ajax({
-                   
+
                     url: SERVER_END_POINT_API + "/api/UserDetail/Delete/" + userDetailID,
                     type: "POST", // needs to be changed after Carso allows for DELETE on the server
                     //crossDomain: true,                
                     async: false,
-                   // contentType: "application/json",
+                    // contentType: "application/json",
                     //dataType: "json",
                     //statusCode: {
                     //    404: function () {
@@ -29,7 +29,7 @@ var masterUserFunctions =
                         setTimeout(function () { $("#popup_sucessfullyDeleteUser").popup("open"); }, 1000);
                         masterUserFunctions.generateListView();
                         //$('#userListView').listview('refresh');
-                       
+
                     },
                     error: function (jqXHR, exception) {
                         if (jqXHR.status === 0) {
@@ -54,11 +54,11 @@ var masterUserFunctions =
             };
         },
         generateListView: function () {
-     
+
             //alert(SERVER_END_POINT_API + "/api/userdetail/AllStaffListing");
-            $.ajax({            
+            $.ajax({
                 url: SERVER_END_POINT_API + "/api/userdetail/AllStaffListing",
-               
+
                 type: "GET",
                 crossDomain: true,
                 async: true,
@@ -85,8 +85,8 @@ var masterUserFunctions =
                             "<li data-icon='false'>" +
                                 "<a href='master-user-edit.html?userdetailid=" + data[i].UserDetailID + "' id='" + data[i].UserDetailID + "'>" +
                                     "<div class='floatleft'>" +
-                                         "<h5>" + data[i].UserName +  "</h5>" +
-                                         "<p>" + data[i].Role + "</p>" + 
+                                         "<h5>" + data[i].UserName + "</h5>" +
+                                         "<p>" + data[i].Role + "</p>" +
                                     "</div>" +
                                     "<div class='floatright'>" +
                                         "<input type='checkbox'  class='TimeReportingHideCheckbox' id='user-" + data[i].UserDetailID + "' />" +
@@ -98,7 +98,7 @@ var masterUserFunctions =
                     };
                     $("ul[data-role='listview']").empty();
                     $("ul[data-role='listview']").append(appendHTML).listview("refresh");
-                    $("input[type='checkbox']").checkboxradio();               
+                    $("input[type='checkbox']").checkboxradio();
                     mainFunctions.toggleShowAllInactive();
                 },
                 error: function (jqXHR, exception) {
@@ -133,7 +133,7 @@ $(document).one('pagecreate', '#master-user', function () {
         //$('#userListView').trigger('create');
         //$('#userListView').listview('refresh');
         //$('#userListView').listview().listview('refresh');
-       
+
         $.mobile.changePage("master-user.html", {
             transition: "none",
             reverse: false,

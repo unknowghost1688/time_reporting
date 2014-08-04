@@ -1,59 +1,65 @@
 ﻿<div data-role="page" id="master-accountcode-edit" data-theme="a">
     <script src="js/master-accountcode-edit.js"></script>
-    <div data-role="header" >
-        <a id="btnBack" href="master-accountcode.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
+    <div data-role="header">
+        <a id="btnBack" href="master-accountcode.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>Edit Account Code</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
-      
-     </div>
 
-      <div data-role="main" class="ui-content">
-    <div class="ui-grid-a">
-      
-     <br>
-       
-        <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable" >
-      <tbody>
-           <tr>
-         <th><label for="accountCode">Account Code</label></th>
-          <td>  <input type="text" id="accountCode" disabled /></td>
-        </tr>
-           <tr>
-         <th><label for="description">Account Code Description</label></th>
-          <td>  <input type="text" id="description" /></td>
-        </tr>
-       
-       
-          <tr>
-         <th> <label for="active" >Active</label><input type="checkbox" id="active" class="TimeReportingHideCheckbox"/></th>
-            <td> </td>
-        </tr>            
-      </tbody>
-    </table>         
-    </div>   
-  </div>
-          <div data-role="popup" id="popup_sucessfullyEditAccountcode" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
-            <div role="main" class="ui-content">
-                <h3>Success</h3>
-                <p class="ui-title" id="P1">Successfully Saved</p>
-                <a id="AccountcodeSuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+    </div>
+
+    <div data-role="main" class="ui-content">
+        <div class="ui-grid-a">
+
+            <br>
+
+            <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable">
+                <tbody>
+                    <tr>
+                        <th>
+                            <label for="accountCode">Account Code</label></th>
+                        <td>
+                            <input type="text" id="accountCode" maxlength="10" disabled /></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="description">Account Code Description</label></th>
+                        <td>
+                            <input type="text" id="description" maxlength="30" /></td>
+                    </tr>
+
+
+                    <tr>
+                        <th>
+                            <label for="active">Active</label><input type="checkbox" id="active" class="TimeReportingHideCheckbox" /></th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div data-role="popup" id="popup_sucessfullyEditAccountcode" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        <div role="main" class="ui-content">
+            <h3>Success</h3>
+            <p class="ui-title" id="P1">Successfully Saved</p>
+            <a id="AccountcodeSuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+        </div>
+    </div>
+    <div data-role="popup" id="popup_ErrMsg_MasterAccountCodeEdit" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        <div role="main" class="ui-content">
+            <!--<h3>Error</h3>-->
+            <p class="ui-title" id="ErroMessage_MasterAccountCodeEdit"></p>
+            <a id="btn_closeErrMsg_MasterAccountCodeEdit" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+        </div>
+    </div>
+        <div data-role="footer" data-position="fixed">
+        <div class="ui-grid-a">
+            <div class="ui-block-a center">
+                <a class="greenbtn" data-role="button" onclick="masterAccountCodeEditFunctions.updateAccountCode()">Save</a>
             </div>
-        </div>  
-          <div data-role="popup" id="popup_ErrMsg" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
-            <div role="main" class="ui-content">
-                <h3>Error</h3>
-                <p class="ui-title" id="ErroMessage"></p>
-                <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
-            </div>
-        </div>    
-    <div data-role="footer"  data-position="fixed">
-       
-        <div data-role="navbar">
-	 <ul>
-		<li><a  class="ui-btn-active ui-state-persist" onclick="masterAccountCodeFunctions.updateAccountCode()">Save</a></li>
-		<li><a href="master-accountcode.html">Cancel</a></li>
-	</ul>
-</div><!-- /navbar -->
+            <div class="ui-block-b center">
+                <a class="redbtn" data-role="button" href="master-accountcode.html">Cancel</a>
+            </div> 
+        </div>
     </div>
 </div>
 

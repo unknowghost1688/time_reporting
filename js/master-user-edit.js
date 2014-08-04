@@ -2,6 +2,7 @@
     GenerateManagerDropDownList();
     masterUserEditFunctions.renderDetails();
 });
+
 function GenerateManagerDropDownList() {
     $("#ReportTo").html("<option value='0' >Manager</option>");
 
@@ -15,11 +16,13 @@ function GenerateManagerDropDownList() {
             $('#ReportTo').selectmenu('refresh', true);
         },
         fail: function (jqXHR, exception) {
-            setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
+            setTimeout(function () { $("#popup_ErrMsg_MasterUserEdit").popup("open"); }, 1000);
+            $("#ErroMessage_MasterUserEdit").html(jqXHR.responseText);
         }
 
     });
 }
+
 var masterUserEditFunctions = {
     renderDetails: function () {
         var url = window.location.href;
@@ -47,22 +50,23 @@ var masterUserEditFunctions = {
                 }
             },
             error: function (jqXHR, exception) {
+                setTimeout(function () { $("#popup_ErrMsg_MasterUserEdit").popup("open"); }, 1000);
                 if (jqXHR.status === 0) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Not connect.\n Verify Network.');
+                    $('#ErroMessage_MasterUserEdit').html('Not connect.\n Verify Network.');
                 } else if (jqXHR.status == 404) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested page not found. [404]');
+                    $('#ErroMessage_MasterUserEdit').html('Requested page not found. [404]');
                 } else if (jqXHR.status == 401) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('401 Unauthorized');
+                    $('#ErroMessage_MasterUserEdit').html('401 Unauthorized');
                 } else if (jqXHR.status == 500) {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Internal Server Error [500].');
+                    $('#ErroMessage_MasterUserEdit').html('Internal Server Error [500].');
                 } else if (exception === 'parsererror') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested JSON parse failed.');
+                    $('#ErroMessage_MasterUserEdit').html('Requested JSON parse failed.');
                 } else if (exception === 'timeout') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Time out error.');
+                    $('#ErroMessage_MasterUserEdit').html('Time out error.');
                 } else if (exception === 'abort') {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Ajax request aborted.');
+                    $('#ErroMessage_MasterUserEdit').html('Ajax request aborted.');
                 } else {
-                    setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
+                    $('#ErroMessage_MasterUserEdit').html('Error Occur.');
                 }
             }
         });
@@ -86,11 +90,22 @@ var masterUserEditFunctions = {
     
         var userID = localStorage.getItem("UserID");
        
-        if (ReportTo == 0) {
-            $("#popup_ErrMsg").popup("open");
-            $("#ErroMessage").html("Please Select A manager");
-        }
-        else {
+        if (firstName == "") {
+            $("#popup_ErrMsg_MasterUserEdit").popup("open");
+            $("#ErroMessage_MasterUserEdit").html("Please insert first name, first name cannot be empty.");
+        } else if (lastName == "") {
+            $("#popup_ErrMsg_MasterUserEdit").popup("open");
+            $("#ErroMessage_MasterUserEdit").html("Please insert last name, last name cannot be empty.");
+        } else if (email == "") {
+            $("#popup_ErrMsg_MasterUserEdit").popup("open");
+            $("#ErroMessage_MasterUserEdit").html("Please insert email, email cannot be empty.");
+        } else if (!validateEmail(email)) {
+            $("#popup_ErrMsg_MasterUserEdit").popup("open");
+            $("#ErroMessage_MasterUserEdit").html("Invalid email format.");
+        } else if (ReportTo == 0) {
+            $("#popup_ErrMsg_MasterUserEdit").popup("open");
+            $("#ErroMessage_MasterUserEdit").html("Please Select A manager");
+        } else {
             $.ajax({
 
                 url: SERVER_END_POINT_API + "/api/UserDetail/" + userID,
@@ -115,22 +130,23 @@ var masterUserEditFunctions = {
                     setTimeout(function () { $("#popup_sucessfullyEditUser").popup("open"); }, 1000);
                 },
                 error: function (jqXHR, exception) {
+                    setTimeout(function () { $("#popup_ErrMsg_MasterUserEdit").popup("open"); }, 1000);
                     if (jqXHR.status === 0) {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Not connect.\n Verify Network.');
+                        $('#ErroMessage_MasterUserEdit').html('Not connect.\n Verify Network.');
                     } else if (jqXHR.status == 404) {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested page not found. [404]');
+                        $('#ErroMessage_MasterUserEdit').html('Requested page not found. [404]');
                     } else if (jqXHR.status == 401) {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('401 Unauthorized');
+                        $('#ErroMessage_MasterUserEdit').html('401 Unauthorized');
                     } else if (jqXHR.status == 500) {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Internal Server Error [500].');
+                        $('#ErroMessage_MasterUserEdit').html('Internal Server Error [500].');
                     } else if (exception === 'parsererror') {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Requested JSON parse failed.');
+                        $('#ErroMessage_MasterUserEdit').html('Requested JSON parse failed.');
                     } else if (exception === 'timeout') {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Time out error.');
+                        $('#ErroMessage_MasterUserEdit').html('Time out error.');
                     } else if (exception === 'abort') {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Ajax request aborted.');
+                        $('#ErroMessage_MasterUserEdit').html('Ajax request aborted.');
                     } else {
-                        setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
+                        $('#ErroMessage_MasterUserEdit').html('Error Occur.');
                     }
                 }
             });
@@ -138,10 +154,31 @@ var masterUserEditFunctions = {
     }
 };
 
+function validateEmail(email) {
+    var email_format = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return email_format.test(email);
+}
 $(document).one('pagecreate', '#master-user-edit', function () {
-    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-        $("#popup_ErrMsg").popup("close");
+    $("#phone").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+            // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
     });
+
+    $(document).off('click', '#btn_closeErrMsg_MasterUserEdit').on('click', '#btn_closeErrMsg_MasterUserEdit', function (e) {
+        $("#popup_ErrMsg_MasterUserEdit").popup("close");
+    });
+
     $(document).off('click', '#UserSuccessOK').on('click', '#UserSuccessOK', function (e) {
        
         $.mobile.changePage("master-user.html", {

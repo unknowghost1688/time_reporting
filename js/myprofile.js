@@ -115,7 +115,7 @@ var myProfile_ShowDetailsFunctions = {
             error_val = 1;
         } 
 
-        if (error_val === 0) {
+        if (error_val == 0) {
             $.ajax({
                 url: 'http://175.139.183.94:76/TimeReportingAPI/api/Account/ChangePassword',
                 type: 'POST',

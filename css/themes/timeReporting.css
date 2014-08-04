@@ -1,33 +1,110 @@
 div.ui-input-search {
     float: left !important;
-        width:30%;
+    width: 30%;
 }
-.floatleft
-{
-    float:left !important;
-    width:30%;
+
+.floatleft {
+    float: left !important;
+    width: 30%;
 }
-.floatright{
-    float: right !important;  
-       
+
+.floatright {
+    float: right !important;
 }
 
 ul.ui-listview.clearboth {
     clear: both !important;
 }
 
-label.ui-btn {
- border:none !important;
+label.ui-checkbox-on, label.ui-checkbox-off {
+    border: none !important;
+    background: none !important;
 }
 
-input[type="checkbox"].TimeReportingHideCheckbox {
-    visibility:hidden;
-     
+input[type="checkbox"] {
+    display: none;
 }
+
 .center {
     text-align: center;
 }
-.resize
-{
-  max-width: 50%;
+
+.vcenter {
+    position: relative !important;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.absolutecenter {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: auto !important;
+    position: absolute !important;
+}
+
+.resize {
+    max-width: 50%;
+}
+
+/*for Datepicker*/
+.demo {
+    display: none;
+}
+
+li > a > div.floatleft > div:nth-of-type(1) {
+    color: #008dde !important;
+}
+
+li > a > div.floatleft > div:nth-of-type(2) {
+    font-weight: normal !important;
+}
+
+label:not(:empty) {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+/*li {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}*/
+
+#login div.ui-content:not(input) {
+    background-color: transparent !important;
+}
+
+#login div.ui-btn {
+    background: white !important;
+}
+
+#login {
+    height: 100vh;
+    width: 100vw;
+}
+
+.greenbtn {
+    background: green !important;
+    width: 70px !important;
+    color: white !important;
+    border: none !important;
+    font-weight: normal !important;
+}
+
+.redbtn {
+    background: red !important;
+    width: 70px !important;
+    color: white !important;
+    border: none !important;
+    font-weight: normal !important;
+}
+
+/*.contenttab {
+    padding-top: 45px !important;
+}*/
+
+form.ui-filterable {
 }

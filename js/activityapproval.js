@@ -13,6 +13,7 @@
     $("#subaction").text(myFormatDate);
     //date shown beside datepicker
     dispSubordinate();
+    
 
 }
 
@@ -38,10 +39,10 @@ function dispTodayDate() {
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
     //January is 0!
-
+   
     var yyyy = today.getFullYear();
     if (dd < 10) { dd = '0' + dd } if (mm < 10) { mm = '0' + mm } var today = dd + '/' + mm + '/' + yyyy;
-
+  
     var t = today.split("/");
     if (t[1]) {
         myDate = new Date(t[2], t[1] - 1, t[0]);
@@ -51,6 +52,31 @@ function dispTodayDate() {
         myFormatDate = MONTHS[myDate.getMonth()] + "," + mydate.getDate();
     }
     $("#subaction").text(myFormatDate);
+
+    dispTodaySubordinate();
+}
+
+function dispTodaySubordinate()      {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+
+    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
+    var manID = localStorage.getItem("UserID");
+    //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) { dd = '0' + dd } if (mm < 10) { mm = '0' + mm } var datePick = yyyy+ '-' + mm + '-' + dd;
+
+   
+
+    var cred = {
+        "managerID": manID,
+        "date": datePick
+    };
+    
+    callAjax(realurl, cred, "POST");
+  
 }
 
 $(document).on("pageinit", function () {
@@ -210,7 +236,7 @@ function callAjaxApprove(someurl, approveList, sometype) {
     $Xhr.done(function renderData(data) {
 
         if (!data)
-            alert("Cannot Approve for more than one time. Please try again.");
+            alert("Minimum approval hour is 0.5 hours and maximum is 24 hours. ");
         else {
             alert("Approved Successfully !");
             dispSubordinate();
@@ -219,36 +245,36 @@ function callAjaxApprove(someurl, approveList, sometype) {
     });
 }
 
-$(document).one("pagecontainerbeforeshow", function () {
+//$(document).one("pagecontainerbeforeshow", function () {
 
 
-    //var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
+//    //var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
 
-    //var manID = localStorage.getItem("UserID");
+//    //var manID = localStorage.getItem("UserID");
 
-    //var today = new Date();
-    //var dd = today.getDate();
-    //var mm = today.getMonth() + 1;
+//    //var today = new Date();
+//    //var dd = today.getDate();
+//    //var mm = today.getMonth() + 1;
 
-    //var yyyy = today.getFullYear();
-    //if (dd < 10) { dd = '0' + dd } if (mm < 10) { mm = '0' + mm } var today = dd + '/' + mm + '/' + yyyy;
+//    //var yyyy = today.getFullYear();
+//    //if (dd < 10) { dd = '0' + dd } if (mm < 10) { mm = '0' + mm } var today = dd + '/' + mm + '/' + yyyy;
 
-    //var t = today.split("/").reverse().join("-");
-    //var datePick = t;
+//    //var t = today.split("/").reverse().join("-");
+//    //var datePick = t;
    
-    //var cred = {
-    //    "managerID": manID,
-    //    "date": datePick
-    //};
+//    //var cred = {
+//    //    "managerID": manID,
+//    //    "date": datePick
+//    //};
 
-    //// callAjax(realurl, cred, "POST");
+//    //// callAjax(realurl, cred, "POST");
 
-    $("#contentDetail").empty();
-    $("#contentDetail").html("<div style='text-align:center;'>Please select a date.</div>").trigger("create");
+//    $("#contentDetail").empty();
+//    $("#contentDetail").html("<div style='text-align:center;'>Please select a date.</div>").trigger("create");
 
 
 
-});
+//});
 
 
 function callAjax(someurl, somedata, sometype) {
@@ -305,6 +331,7 @@ function renderListtemp(data) {
 
     var tcountindex = 0;
 
+    //alert(JSON.stringify(data));
     //sort by Activity Hour to be approved
     //var sorted = data.sort(function (a, b) {
     //    return a.Hours > b.Hours ? 1 : -1;
@@ -377,7 +404,7 @@ function renderListtemp(data) {
                 tcountindex = tcount + 1;
                 lii += lit + "</tbody></table></div>" + "</div>" +
           "<div data-role='collapsible' data-collapsed='true' id='MainID'>" +
-                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[i].FirstName + ' ' + data[i].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[i].ActivityMainID + "-" + data[i].ActivityCode + "-" + data[i].AccountCode + "-" + tcountindex + "-" + dPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[tcount + 1] + " hour(s)" +
+                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[i].FirstName + ' ' + data[i].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[i].ActivityMainID + "-" + data[i].ActivityCode + "-" + data[i].AccountCode + "-" + tcountindex + "-" + dPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[tcount + 1] + " h" +
                        "</div></h3>" +
                            "<div><table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                                 "<thead></thead><tbody>";
@@ -391,8 +418,8 @@ function renderListtemp(data) {
             if (k < data.length) {
                 if (data[i].UserdetailID == data[k].UserdetailID) {
                     lit += "<tr>" +
-                                "<td>" + data[i].ActivityCode + "</td>" +
-                                "<td>" + data[i].AccountCode + "</td>" +
+                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountDescription + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
+                                //"<td>" + data[i].ActivityDescription + "</br>" + data[i].AccountDescription + "</td>" +
                                    //"<td >" + data[i].Hours + "</td>" +
                                 "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'>" +
                                     "<input style='text-align: right;' class='apphr" + tcount + "' data-role='mini' type='text' placeholder='" + dPlaceHolder + " appvdata='" + data[i].ActivityCode +"-"+ data[i].AccountCode + "'/>" +
@@ -402,20 +429,26 @@ function renderListtemp(data) {
 
                 }
                 else {
-                    lit += "<tr><td>" + data[i].ActivityCode + "</td>" +
-                             "<td>" + data[i].AccountCode + "</td>" +
-                               // "<td  >" + data[i].Hours + "</td>" +
-                                "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'><input style='text-align: right;' class='apphr" + tcount + "' data-role='mini'  type='text' placeholder='" + dPlaceHolder + " appvdata='" + data[i].ActivityCode + "-" + data[i].AccountCode + "'/ ></td>" +
-                            "</tr>";
+                    lit += "<tr>" +
+                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountDescription + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
+                                //"<td>" + data[i].ActivityDescription + "</br>" + data[i].AccountDescription + "</td>" +
+                                   //"<td >" + data[i].Hours + "</td>" +
+                                "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'>" +
+                                    "<input style='text-align: right;' class='apphr" + tcount + "' data-role='mini' type='text' placeholder='" + dPlaceHolder + " appvdata='" + data[i].ActivityCode + "-" + data[i].AccountCode + "'/>" +
+                                "</td>" +
+                           "</tr>";
                     changed = 1;
 
                 }
             }
             else {
-                lit += "<tr><td>" + data[i].ActivityCode + "</td>" +
-                            "<td>" + data[i].AccountCode + "</td>" +
-                              // "<td >" + data[i].Hours + "</td>" +
-                               "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'><input style='text-align: right;' class='apphr" + tcount + "'data-role='mini' type='text' placeholder='" + dPlaceHolder + " appvdata='" + data[i].ActivityCode + "-" + data[i].AccountCode + "'/ ></td>" +
+                lit += "<tr>" +
+                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountDescription + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
+                                //"<td>" + data[i].ActivityDescription + "</br>" + data[i].AccountDescription + "</td>" +
+                                   //"<td >" + data[i].Hours + "</td>" +
+                                "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'>" +
+                                    "<input style='text-align: right;' class='apphr" + tcount + "' data-role='mini' type='text' placeholder='" + dPlaceHolder + " appvdata='" + data[i].ActivityCode + "-" + data[i].AccountCode + "'/>" +
+                                "</td>" +
                            "</tr>";
             }
         }
@@ -430,28 +463,29 @@ function renderListtemp(data) {
            
             //firstdPlaceHolder = data[0].Hours;apphr" + i
             var appval = "#apphr" + 0;
-            firstdPlaceHolder = $(appval).val() + "'";
+            firstdPlaceHolder = $(appval).val()+"'";
         }
 
         headlii +=
            "<div data-role='collapsible' data-collapsed='true' id='MainID'>" +
-                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[0].FirstName + ' ' + data[0].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "-" + 0 + "-" + firstdPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " hour(s)" +
+                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[0].FirstName + ' ' + data[0].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "-" + 0 + "-" + firstdPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " h" +
                        "</div></h3>" +
                            "<div><table data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                                 "<thead></thead><tbody>";
         headlii += lii;
-       
+        //set the approval hour to disabled if the approval hour is not null
         $("input[disabled]").prop('disabled', true);
         $("input[disabled]:checkbox").prop('disabled', true);
        
         $('.ui-collapsible-heading-toggle .ui-btn .ui-btn-icon-left .ui-btn-c .ui-icon-minus').removeClass($.mobile.activeBtnClass);
-        //set the approval hour to disabled if the approval hour is not null
+        //$('.ui-collapsible .ui-collapsible-inset .ui-corner-all .ui-collapsible-themed-content .ui-last-child .ui-collapsible-collapsed').removeClass(ui-collapsible-inset ui-corner-all);
+       
         $("#contentDetail").empty();
         $("#contentDetail").html(headlii).trigger("create").collapsibleset('refresh');
     }
     else {
         $("#contentDetail").empty();
-        $("#contentDetail").html("<div style='text-align:center;'>No Submission Today.</div>").trigger("create");
+        $("#contentDetail").html("<div style='text-align:center;color:white;text-shadow:none'>No Submission Today.</div>").trigger("create");
     }
 
 }

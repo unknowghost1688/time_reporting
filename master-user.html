@@ -27,7 +27,7 @@
 
 
     <div data-role="header" data-position="fixed">
-        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
+        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>Users</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
     </div>
@@ -49,15 +49,14 @@
                 <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
             </div>
         </div>   
-    <div data-role="footer" data-position="fixed">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="master-user-add.html" class="ui-btn-active ui-state-persist">Add</a></li>
-                <li><a onclick="masterUserFunctions.deleteUsers()" >Delete</a></li>
-            </ul>
+        <div data-role="footer" data-position="fixed">
+        <div class="ui-grid-a">
+            <div class="ui-block-a center">
+                <a class="greenbtn" data-role="button" href="master-user-add.html">Add</a>
+            </div>
+            <div class="ui-block-b center">
+                <a class="redbtn" data-role="button" onclick="masterUserFunctions.deleteUsers()">Delete</a>
+            </div> 
         </div>
-        <!-- /navbar -->
     </div>
 </div>
-<!--  </body>
-</html>-->

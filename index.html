@@ -4,59 +4,47 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IFCA Time Reporting App</title>
-
-
     <script type="text/javascript" src="phonegap.js"></script>
     <link rel="stylesheet" href="css/themes/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" href="css/themes/hr360.css">
-    <link rel="stylesheet" href="css/themes/timeReporting.css">
+    <link rel="stylesheet" href="css/themes/TimeReporting.css">
     <script src="js/jquery.js"></script>
     <script src="js/fastclick.js"></script>
-    <script src="js/menu.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/jquery.mobile-1.4.2.min.js"></script>
-        <script type="application/javascript">
-            window.addEventListener('load', function () {
-                FastClick.attach(document.body);
-            }, false);
+    <script src="js/mobiscroll.core.js"></script>
+    <script src="js/mobiscroll.scroller.js"></script>
+    <script src="js/mobiscroll.datetime.js"></script>
+    <script src="js/mobiscroll.scroller.wp.js"></script>
+    <script src="js/mobiscroll.timereporting.js"></script>
+    <link rel="stylesheet" href="css/mobiscroll.icons.css" />
+    <link rel="stylesheet" href="css/mobiscroll.scroller.css" />
+    <link rel="stylesheet" href="css/mobiscroll.scroller.wp.css" />
+    <link rel="stylesheet" href="css/mobiscroll.animation.css" />
+    <script type="application/javascript">
+        window.addEventListener('load', function () {
+            FastClick.attach(document.body);
+        }, false);
     </script>
-      <script src="js/main.js"></script>
-      <script src="js/index.js"></script>
-
-     
+    <script src="js/main.js"></script>
 </head>
 <body>
- 
-      <!--================================= HOME PAGE =================================-->
-   <div data-role="page" id="login" data-theme="a">
-          <div data-role="header">
-
+    <div data-role="page" id="login" data-theme="a">
+        <!--<div data-role="header">
             <h1>Login</h1>
-
-          
-        </div>
-
-        <div data-role="content" data-theme="a">
-
-            <br />
-            <p class="center">
+        </div>-->
+        <div class="ui-content vcenter" data-theme="a">
+            <div class="center">
                 <img src="images/logo.png">
-            </p>
-            <br />
-          
-            <input type="text" placeholder="username" id="username" />
-            <input type="password" placeholder="password" id="password" />
-           
+            </div>
+            <form>
+                <input type="text" placeholder="username" id="username" />
+                <input type="password" placeholder="password" id="password" />
+                <input id="" type="submit" value="Login" />
+            </form>
 
-            <input id="btnsubmit" type="button" value="Login" />
-             
         </div>
-         <!-- <script src="js/login.js"></script>-->
-       
-</div>
-
-  
-   <!--================================= (END) HOME PAGE (END) =================================-->  
-
+        <script src="js/index.js"></script>
+    </div>
 </body>
 </html>

@@ -15,7 +15,7 @@ function GenerateManagerDropDownList() {
             $('#ReportTo').selectmenu('refresh', true);
         },
         fail: function (jqXHR, exception) {
-            setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html(jqXHR.responseText);
+            setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000); $("#ErroMessage_MasterUserAdd").html(jqXHR.responseText);
         }
 
     });
@@ -33,11 +33,44 @@ var masterUserAddFunctions = {
     var password = $("#pass").val();
     var role = $('#role').find(":selected").val();
   
-    if (reportTo == 0) {
-        $("#popup_ErrMsg").popup("open");
-        $("#ErroMessage").html("Please Select A manager");       
-    }
-    else {           
+    if (userName == "") {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Please insert user name, user name cannot be empty.");
+    } else if (password.length < 6) {
+        setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000);
+        $('#ErroMessage_MasterUserAdd').html('Password must be more that 6 character.');
+        error_val = 1;
+    } else if (!password.match(/([a-zA-Z])/)) {
+        setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000);
+        $('#ErroMessage_MasterUserAdd').html('Password must contains numeric, lower and uppercase characters.');
+        error_val = 1;
+    } else if (!password.match(/([0-9])/)) {
+        setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000);
+        $('#ErroMessage_MasterUserAdd').html('Password must contains numeric, lower and uppercase characters.');
+        error_val = 1;
+    } else if (!password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) {
+        setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000);
+        $('#ErroMessage_MasterUserAdd').html('Password must contains two special characters.\nMust containts two out of this few special characters: !,%,&,@,#,$,^,*,?,_,~');
+        error_val = 1;
+    } else if (firstName == "") {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Please insert first name, first name cannot be empty.");
+    } else if (lastName == "") {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Please insert last name, last name cannot be empty.");
+    } else if (email == "") {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Please insert email, email cannot be empty.");
+    } else if (!validateEmail(email)) {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Invalid email format.");
+    } else if (ReportTo == 0) {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Please Select A manager");
+    } else if (reportTo == 0) {
+        $("#popup_ErrMsg_MasterUserAdd").popup("open");
+        $("#ErroMessage_MasterUserAdd").html("Please Select A manager");
+    } else {           
         $.ajax({
             url: SERVER_END_POINT_API + "/api/Account/Register",
             type: "POST",
@@ -63,14 +96,23 @@ var masterUserAddFunctions = {
                 setTimeout(function () { $("#popup_sucessfullyAddUser").popup("open"); }, 1000);
             },
             error: function (jqXHR, exception) {
-                if (jqXHR.status === 0) {  setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Not connect.\n Verify Network.');                   
-                } else if (jqXHR.status == 404) {  setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000);  $("#ErroMessage").html('Requested page not found. [404]');                   
-                } else if (jqXHR.status == 401) { setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000);  $("#ErroMessage").html('401 Unauthorized');                   
-                } else if (jqXHR.status == 500) { setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000); $("#ErroMessage").html('Internal Server Error [500].');               
-                } else if (exception === 'parsererror') { setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000);  $("#ErroMessage").html('Requested JSON parse failed.');                                   
-                } else if (exception === 'timeout') {  setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000);  $("#ErroMessage").html('Time out error.');                   
-                } else if (exception === 'abort') {   setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000);   $("#ErroMessage").html('Ajax request aborted.');                    
-                } else {   setTimeout(function () { $("#popup_ErrMsg").popup("open"); }, 1000);  $("#ErroMessage").html(jqXHR.responseText);
+                setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000);
+                if (jqXHR.status === 0) {
+                    $('#ErroMessage_MasterUserAdd').html('Not connect.\n Verify Network.');
+                } else if (jqXHR.status == 404) {
+                    $('#ErroMessage_MasterUserAdd').html('Requested page not found. [404]');
+                } else if (jqXHR.status == 401) {
+                    $('#ErroMessage_MasterUserAdd').html('401 Unauthorized');
+                } else if (jqXHR.status == 500) {
+                    $('#ErroMessage_MasterUserAdd').html('Internal Server Error [500].');
+                } else if (exception === 'parsererror') {
+                    $('#ErroMessage_MasterUserAdd').html('Requested JSON parse failed.');
+                } else if (exception === 'timeout') {
+                    $('#ErroMessage_MasterUserAdd').html('Time out error.');
+                } else if (exception === 'abort') {
+                    $('#ErroMessage_MasterUserAdd').html('Ajax request aborted.');
+                } else {
+                    $('#ErroMessage_MasterUserAdd').html('Error Occur.');
                 }
             }
         });
@@ -80,10 +122,31 @@ var masterUserAddFunctions = {
 
 }
 
+function validateEmail(email) {
+    var email_format = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return email_format.test(email);
+}
 $(document).one('pagecreate', '#master-user-add', function () {
-    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-        $("#popup_ErrMsg").popup("close");
+    $("#phone").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+            // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
     });
+
+    $(document).off('click', '#btn_closeErrMsg_MasterUserAdd').on('click', '#btn_closeErrMsg_MasterUserAdd', function (e) {
+        $("#popup_ErrMsg_MasterUserAdd").popup("close");
+    });
+
     $(document).off('click', '#UserSuccessOK').on('click', '#UserSuccessOK', function (e) {
         
         $.mobile.changePage("master-user.html", {

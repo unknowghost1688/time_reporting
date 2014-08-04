@@ -3,20 +3,37 @@
 //var URL_API = "http://175.139.183.94:76/GolfAPI";
 var SERVER_END_POINT_API = "http://175.139.183.94:76/TimeReportingApi";
 
-
 var defaultDate_Test = "";
 
 function showLoading() {
-    $.mobile.loading("show", {
-        text: "Loading",
-        textVisible: true,
-        textonly: false,
-    });
+    setTimeout(function () {
+        $.mobile.loading("show", {
+            text: "Loading...",
+            textVisible: true,
+            textonly: true,
+        });
+    }, 1);
 }
 
-function HideLoading() {
-    $.mobile.loading("hide");
+function hideLoading() {
+    setTimeout(function () {
+        $.mobile.loading("hide", {
+            text: "Loading...",
+            textVisible: true,
+            textonly: true,
+        });
+    }, 1);
 }
+
+$(document).on({
+    ajaxStart: function () {
+        showLoading();
+    },
+    ajaxStop: function () {
+        hideLoading();
+    }
+});
+
 function formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -27,6 +44,7 @@ function formatAMPM(date) {
     strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
 }
+
 function convertJsonDateTime(data) {
     var dateString = data;
     var reggie = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/;
@@ -42,15 +60,6 @@ function convertJsonDateTime(data) {
     return dateObject;
 }
 
-$(document).on({
-    ajaxStart: function () {
-        showLoading();
-    },
-    ajaxStop: function () {
-        HideLoading();
-    }
-});
-
 if (localStorage.getItem("Token") != "") {
     $.ajaxSetup({
         headers: {
@@ -59,31 +68,20 @@ if (localStorage.getItem("Token") != "") {
     });
 }
 
-
-
 $(document).one('pagecreate', function () {
-
-    $("#btnBack").click(function () {
-        alert("back to previous page");
-        navigator.app.backHistory();
-    });
+    //$("#btnBack").click(function () {
+    //    //alert("back to previous page");
+    //    navigator.app.backHistory();
+    //});
     $("#btnPower").click(function () {
-
         if (confirm('Are you sure you want to exit the app?')) {
-            alert("Off the app");
+            //alert("Off the app");
             navigator.app.exitApp();
         } else {
             // Do nothing!
         }
-
-
     });
-
-
-
-
     document.addEventListener("deviceready", onDeviceReady, false);
-
     function onDeviceReady() {
         document.addEventListener("backbutton", function (e) {
 
@@ -100,16 +98,16 @@ $(document).one('pagecreate', function () {
 
             }
             else {
-                alert("back to history");
+                //alert("back to history");
                 navigator.app.backHistory();
             }
         }, false);
     }
 });
+
 var mainFunctions =
     {
         addShowAllCheckbox: function () {
-                  
             $("form.ui-filterable").append("<div class='floatright' id='divShowAll'><label for='showAll'>Show All</label><input class='TimeReportingHideCheckbox' type='checkbox' id='showAll' onchange='mainFunctions.toggleShowAllInactive()' /></div>");
             $("ul.ui-listview").addClass("clearboth");
             $("input[type='checkbox']").checkboxradio();
