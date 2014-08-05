@@ -6,7 +6,7 @@
     <script src="js/jquery.mobile-1.4.2.min.js"></script>
       <script src="js/main.js"></script>-->
 
-    <div data-role="header">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <a id="btnBack" href="master-user.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>Add User</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
@@ -17,7 +17,7 @@
                 <tbody>
                     <tr>
                         <th>
-                            <label for="userName">User Name</label></th>
+                            <label for="userName">Login ID</label></th>
                         <td>
                             <input type="text" id="userName" maxlength="100" /></td>
                     </tr>
@@ -63,9 +63,9 @@
                             <label for="role">Role</label></th>
                         <td>
                             <select id="role" data-native-menu="true" data-mini="true" data-theme="a">
-                                <option value="admin">Admin</option>
-                                <option value="manager">Manager</option>
                                 <option value="staff">Staff</option>
+                                <option value="manager">Manager</option>
+                                <option value="admin">Admin</option>
                             </select>
 
                         </td>
@@ -87,27 +87,20 @@
     </div>
     <div data-role="popup" id="popup_sucessfullyAddUser" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Success</h3>
-            <p class="ui-title" id="P1">User Successfully added</p>
+            <p class="ui-title" id="P1">New User added successfully.</p>
             <a id="UserSuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
     <div data-role="popup" id="popup_ErrMsg_MasterUserAdd" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <!--<h3>Error</h3>-->
             <p class="ui-title" id="ErroMessage_MasterUserAdd"></p>
             <a id="btn_closeErrMsg_MasterUserAdd" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
-    <div data-role="footer" data-position="fixed">
-        <div class="ui-grid-a">
-            <div class="ui-block-a center">
-                <a class="greenbtn" data-role="button" onclick="masterUserAddFunctions.addUser()">Save</a>
-            </div>
-            <div class="ui-block-b center">
-                <a class="redbtn" data-role="button" href="master-user.html">Cancel</a>
-            </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class="ui-grid center">
+            <a class="greenbtn" data-role="button" onclick="masterUserAddFunctions.addUser()">Save</a>&nbsp;&nbsp;
+            <a class="redbtn" data-role="button" href="master-user.html">Cancel</a>
         </div>
     </div>
-
 </div>

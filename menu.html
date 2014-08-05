@@ -1,6 +1,38 @@
-﻿<div id="homepage" data-role="page" data-theme="a">
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IFCA Time Reporting App</title>
+    <script type="text/javascript" src="phonegap.js"></script>
+    <link rel="stylesheet" href="css/themes/jquery.mobile-1.4.2.min.css" />
+    <link rel="stylesheet" href="css/themes/hr360.css">
+    <link rel="stylesheet" href="css/themes/TimeReporting.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/mobiscroll.core.js"></script>
+    <script src="js/mobiscroll.scroller.js"></script>
+    <script src="js/mobiscroll.datetime.js"></script>
+    <script src="js/mobiscroll.scroller.wp.js"></script>
+    <scrip src="js/mobiscroll.timereporting.js"></scrip
+        t>
+    <link rel="stylesheet" href="css/mobiscroll.icons.css" />
+    <link rel="stylesheet" href="css/mobiscroll.scroller.css" />
+    <link rel="stylesheet" href="css/mobiscroll.scroller.wp.css" />
+    <link rel="stylesheet" href="css/mobiscroll.animation.css" />
+    <script type="application/javascript">
+        window.addEventListener('load', function () {
+            FastClick.attach(document.body);
+        }, false);
+    </script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <div id="homepage" data-role="page" data-theme="a">
     <div data-role="header" data-position="fixed">
-        <a id="btnBack" href="index.html" class="ui-btn ui-corner-all ui-icon-user ui-btn-icon-notext iconstyle"></a>
+        <a id="btnBack" onclick="indexFunctions.logout()" class="ui-btn ui-corner-all ui-icon-user ui-btn-icon-notext iconstyle"></a>
         <a id="btnPower" class="ui-btn ui-corner-all ui-icon-power ui-btn-icon-notext iconstyle"></a>
         <h1>Home page</h1>
         <div class="subtitle">Welcome!</div>
@@ -10,4 +42,7 @@
     </div>
     <script src="js/menu.js"></script>
 </div>
+</body>
+</html>
+
 

@@ -40,8 +40,7 @@ var masterAccountCodeAddFunctions = {
                 }),
                 success: function () {
                     // Confirmational response from server
-                    // setTimeout(function () { $("#popup_sucessfullyAddAccountCode").popup("open"); }, 1000);
-                    alert("Successfully added.");
+                    setTimeout(function () { $("#popup_sucessfullyAddAccountCode").popup("open"); }, 1000);
                 },
                 error: function (jqXHR, exception) {
                     setTimeout(function () { $("#popup_ErrMsg_MasterAccountCodeAdd").popup("open"); }, 1000);

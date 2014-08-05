@@ -2,12 +2,13 @@
     myFavouritesFunctions.generateListView();
     myFavouritesFunctions.addFlipSwitch();
     myFavouritesFunctions.flipSwitch();
+
 });
 
 var myFavouritesFunctions =
     {
         flipSwitch: function () {
-            if ($("#flipswitch1").val() == "favourite") {
+            if ($("#flipswitch").val() == "favourite") {
                 myFavouritesFunctions.generateListView(); // the list of favourites
             } else {
                 myFavouritesFunctions.generateAddListView(); // the list of account codes
@@ -19,15 +20,15 @@ var myFavouritesFunctions =
                 "<div class='floatright'>" +
                     "<div class='fieldcontain'>" +
                         "<label for='flipswitch'></label>" +
-                        "<select data-role='flipswitch' id='flipswitch1' onchange='myFavouritesFunctions.flipSwitch()'>" +
-                            "<option value='favourite'>Favourite</option>" +
+                        "<select data-role='flipswitch' id='flipswitch' onchange='myFavouritesFunctions.flipSwitch()'>" +
+                            "<option value='favourite'>Fav</option>" +
                             "<option value='all'>All</option>" +
                         "</select>" +
                     "</div>" +
                 "</div>"
                 );
             $("ul.ui-listview").addClass("clearboth");
-            $("select#flipswitch1").flipswitch();
+            $("select#flipswitch").flipswitch();
         },
         addOrRemoveFavourites: function (event) {
             //alert(event.target.id);
@@ -85,8 +86,12 @@ var myFavouritesFunctions =
                         "UserDetailID": userID
                     }),
                     success: function () {
-                        $("#li_" + id).remove();
+                        //$("#li_" + id).remove();
                         $("#myFavouritesList").listview("refresh");
+                        //if ($("ul li").length < 1) {
+                        //    $("ul").append("<li class='nofavourites'>You have no favourites.</li>");
+                        //    $("ul").listview("refresh");
+                        //}
                     },
                     error: function (jqXHR, status, error) {
                         //alert(status + " " + error);
@@ -96,6 +101,7 @@ var myFavouritesFunctions =
             }
         },
         generateAddListView: function () {
+            $(".nofavourites").remove();
             var getAccountCodeAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode";
 
             $.ajax({
@@ -122,8 +128,8 @@ var myFavouritesFunctions =
                             "<li data-icon='star'>" +
                                 "<a id='" + data[i].AccountCode + "' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'>" +
                                     "<div class='floatleft'>" +
-                                        "<span>" + data[i].AccountCode + "</span><br />" +
-                                        "<span>" + data[i].Description + "</span>" +
+                                        "<h5>" + data[i].AccountCode + "</h5>" +
+                                        "<p>" + data[i].Description + "</p>" +
                                     "</div>" +
                                     "<div class='floatright'>" +
                                         //"<a class='ui-btn ui-shadow ui-corner-all ui-icon ui-icon-star ui-btn-icon-notext' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'></a>" +
@@ -135,7 +141,7 @@ var myFavouritesFunctions =
                     };
 
                     // Check to see if the flipswitch is in the right position when the async is done
-                    if ($("#flipswitch1").val() == "all") {
+                    if ($("#flipswitch").val() == "all") {
                         $("#myFavouritesList").empty().hide(); // hide it first, we will wait until the 2nd async is done before .show()-ing it again. This way, users will not feel like the app is jittery.
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
                         mainFunctions.toggleShowAllInactive();
@@ -202,8 +208,8 @@ var myFavouritesFunctions =
                             "<li id='li_" + data[i].AccountCode + "' data-icon='star'>" +
                                 "<a id='" + data[i].AccountCode + "' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'>" +
                                     "<div class='floatleft'>" +
-                                        "<span>" + data[i].AccountCode + "</span><br />" +
-                                        "<span>" + data[i].Description + "</span>" +
+                                        "<h5>" + data[i].AccountCode + "</h5>" +
+                                        "<p>" + data[i].Description + "</p>" +
                                     "</div>" +
                                     "<div class='floatright'>" +
                                         //"<a class='ui-btn ui-shadow ui-corner-all ui-icon ui-icon-star ui-btn-icon-notext' onclick='myFavouritesFunctions.addOrRemoveFavourites(event)'></a>" +
@@ -212,11 +218,15 @@ var myFavouritesFunctions =
                             "</li>";
                         appendHTML += li;
                     };
-                    if ($("#flipswitch1").val() == "favourite") {
+                    if ($("#flipswitch").val() == "favourite") {
                         $("#myFavouritesList").empty();
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
                         mainFunctions.toggleShowAllInactive();
                         $("#myFavouritesList li a").addClass("ui-btn-active");
+                        if ($("ul li").length < 1) {
+                            $("ul").append("<li class='nofavourites'>You have no favourites.</li>");
+                            $("ul").listview("refresh");
+                        }
                     }
                     //$("ul").listview("refresh");
                     //$("#myFavouritesAddList").listview("refresh");

@@ -1,8 +1,10 @@
 ﻿$(document).one("pagecontainerbeforeshow", function () {
+    $("#hrefAccountCode").text(localStorage.accountCode);
     myFavouritesFunctions.generateListView();
     myFavouritesFunctions.addFlipSwitch();
     myFavouritesFunctions.flipSwitch();
 });
+
 
 var myFavouritesFunctions =
     {
@@ -39,6 +41,10 @@ var myFavouritesFunctions =
             $("#" + id).toggleClass("ui-btn-active");
             //alert(id);
             //alert($("#" + id).hasClass("ui-btn-active"));
+
+            
+               
+           
 
             if ($("#" + id).hasClass("ui-btn-active")) {
                 // do API to add to favourites
@@ -97,6 +103,7 @@ var myFavouritesFunctions =
                     }
                 });
             }
+            
         },
         generateAddListView: function () {
             var getAccountCodeAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode";
@@ -167,6 +174,9 @@ var myFavouritesFunctions =
                             success: function (data) {
                                 for (var i = 0; i < data.length; i++) {
                                     $("#" + data[i].AccountCode).addClass("ui-btn-active");
+                                   
+
+                                  
                                 }
                                 $("#myFavouritesList").show();
                             }
@@ -244,6 +254,7 @@ var myFavouritesFunctions =
                             $("#myFavouritesList").css("overflow", "scroll");
                             $("#myFavouritesList").css("overflow-x", "hidden");
                             $("#myFavouritesList li a").addClass("ui-btn-active");
+                            
                         }
                     }
                     //$("ul").listview("refresh");

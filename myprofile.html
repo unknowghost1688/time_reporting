@@ -1,12 +1,12 @@
 ﻿<div data-role="page" id="myprofile" data-theme="a">
     <script src="js/myprofile.js"></script>
-    <div data-role="header">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>My Profile</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
     </div>
 
-    <div data-role="main" class="contenttab">
+    <div data-role="main" class="ui-content">
         <div class="ui-grid-a">
             <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable">
                 <tbody>
@@ -88,26 +88,20 @@
     </div>
     <div data-role="popup" id="popup_sucessfullyChangePassword" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Success</h3>
-            <p class="ui-title" id="P2">Password Successfully change</p>
+            <p class="ui-title" id="P2">Password successfully changed.</p>
             <a id="btn_sucessfullyChangePassword" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
     <div data-role="popup" id="popup_FailChangePassword" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Error</h3>
             <p class="ui-title" id="ErroMessage_FailChangePassword"></p>
             <a id="btn_FailChangePassword" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
-    <div data-role="footer" data-position="fixed">
-        <div class="ui-grid-a">
-            <div class="ui-block-a center">
-                <a class="greenbtn" data-role="button" id="btn_myProfile_save">Save</a>
-            </div>
-            <div class="ui-block-b center">
-                <a class="redbtn" data-role="button" href="menu.html">Cancel</a>
-            </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class="ui-grid center">
+            <a class="greenbtn" data-role="button" id="btn_myProfile_save">Save</a>&nbsp;&nbsp;
+            <a class="redbtn" data-role="button" href="menu.html">Cancel</a>
         </div>
     </div>
 </div>

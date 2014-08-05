@@ -3,6 +3,10 @@
 });
 
 var indexFunctions = {
+    logout: function () {
+        localStorage.clear();
+        $.mobile.pageContainer.pagecontainer('change', 'index.html')
+    },
     populateModules: function () {
         var role = localStorage.getItem("role");
         //alert(role);

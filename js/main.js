@@ -6,6 +6,7 @@ var SERVER_END_POINT_API = "http://175.139.183.94:76/TimeReportingApi";
 var defaultDate_Test = "";
 
 function showLoading() {
+    
     setTimeout(function () {
         $.mobile.loading("show", {
             text: "Loading...",
@@ -32,7 +33,32 @@ $(document).on({
     ajaxStop: function () {
         hideLoading();
     }
+    //ajaxSend: function () {
+    //    if ($(".ajaxloader").length < 1) {
+    //        $("ul").append("<li class='ajaxloader'>Loading...</li>");
+    //        $("ul").listview().listview("refresh");
+    //    }
+    //},
+    //ajaxComplete: function () {
+    //    $(".ajaxloader").remove();
+    //}
 });
+
+//$.ajaxSetup({
+//    beforeSend: function () {
+//        
+//    },
+//    complete: function () {
+//        $("#ajaxloader").remove();
+//    }
+//});
+
+
+//$(document).bind("ajaxSend", function () {
+//    showLoading();
+//}).bind("ajaxComplete", function () {
+//    hideLoading();
+//});
 
 function formatAMPM(date) {
     var hours = date.getHours();
@@ -108,7 +134,7 @@ $(document).one('pagecreate', function () {
 var mainFunctions =
     {
         addShowAllCheckbox: function () {
-            $("form.ui-filterable").append("<div class='floatright' id='divShowAll'><label for='showAll'>Show All</label><input class='TimeReportingHideCheckbox' type='checkbox' id='showAll' onchange='mainFunctions.toggleShowAllInactive()' /></div>");
+            $("form.ui-filterable").append("<div class='sub-header-floatright' id='divShowAll'><label class='shCheckBoxLabel' data-iconpos='right'>Show All<input type='checkbox' class='shCheckBox' id='showAll' onchange='mainFunctions.toggleShowAllInactive()'/></label></div>");
             $("ul.ui-listview").addClass("clearboth");
             $("input[type='checkbox']").checkboxradio();
         },

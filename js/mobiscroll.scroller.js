@@ -838,19 +838,33 @@
                 $.each(wg, function (j, w) { // Wheels
                     wheels[l] = w;
                     lbl = w.label !== undefined ? w.label : j;
-                    html += '<' + (hasFlex ? 'div' : 'td') + ' class="dwfl"' + ' style="' +
-                                    (s.fixedWidth ? ('width:' + (s.fixedWidth[l] || s.fixedWidth) + 'px;') :
-                                    (s.minWidth ? ('min-width:' + (s.minWidth[l] || s.minWidth) + 'px;') : 'min-width:' + s.width + 'px;') +
-                                    (s.maxWidth ? ('max-width:' + (s.maxWidth[l] || s.maxWidth) + 'px;') : '')) + '">' +
-                                '<div class="dwwl dwwl' + l + '">' +
-                                (s.mode != 'scroller' ?
-                                    '<a href="#" tabindex="-1" class="dwb-e dwwb dwwbp ' + (s.btnPlusClass || '') + '" style="height:' + itemHeight + 'px;line-height:' + itemHeight + 'px;"><span>+</span></a>' + // + button
-                                    '<a href="#" tabindex="-1" class="dwb-e dwwb dwwbm ' + (s.btnMinusClass  || '') + '" style="height:' + itemHeight + 'px;line-height:' + itemHeight + 'px;"><span>&ndash;</span></a>' : '') + // - button
-                                '<div class="dwl">' + lbl + '</div>' + // Wheel label
-                                '<div tabindex="0" aria-live="off" aria-label="' + lbl + '" role="listbox" class="dwww">' +
-                                    '<div class="dww" style="height:' + (s.rows * itemHeight) + 'px;">' +
-                                        '<div class="dw-ul">';
-
+                    if (lbl == "Year") {
+                        html += '<' + (hasFlex ? 'div' : 'td') + ' class="dwfl"' + ' style="' +
+                                        (s.fixedWidth ? ('width:' + (s.fixedWidth[l] || s.fixedWidth) + 'px;') :
+                                        (s.minWidth ? ('min-width:80px;') : 'min-width:' + s.width + 'px;') +
+                                        (s.maxWidth ? ('max-width:26%;') : '')) + '">' +
+                                    '<div class="dwwl dwwl' + l + '">' +
+                                    (s.mode != 'scroller' ?
+                                        '<a href="#" tabindex="-1" class="dwb-e dwwb dwwbp ' + (s.btnPlusClass || '') + '" style="height:' + itemHeight + 'px;line-height:' + itemHeight + 'px;"><span>+</span></a>' + // + button
+                                        '<a href="#" tabindex="-1" class="dwb-e dwwb dwwbm ' + (s.btnMinusClass || '') + '" style="height:' + itemHeight + 'px;line-height:' + itemHeight + 'px;"><span>&ndash;</span></a>' : '') + // - button
+                                    '<div class="dwl">' + lbl + '</div>' + // Wheel label
+                                    '<div tabindex="0" aria-live="off" aria-label="' + lbl + '" role="listbox" class="dwww">' +
+                                        '<div class="dww" style="height:' + (s.rows * itemHeight) + 'px;">' +
+                                            '<div class="dw-ul">';
+                    } else {
+                        html += '<' + (hasFlex ? 'div' : 'td') + ' class="dwfl"' + ' style="' +
+                                        (s.fixedWidth ? ('width:' + (s.fixedWidth[l] || s.fixedWidth) + 'px;') :
+                                        (s.minWidth ? ('min-width:50px;') : 'min-width:' + s.width + 'px;') +
+                                        (s.maxWidth ? ('max-width:26%;') : '')) + '">' +
+                                    '<div class="dwwl dwwl' + l + '">' +
+                                    (s.mode != 'scroller' ?
+                                        '<a href="#" tabindex="-1" class="dwb-e dwwb dwwbp ' + (s.btnPlusClass || '') + '" style="height:' + itemHeight + 'px;line-height:' + itemHeight + 'px;"><span>+</span></a>' + // + button
+                                        '<a href="#" tabindex="-1" class="dwb-e dwwb dwwbm ' + (s.btnMinusClass || '') + '" style="height:' + itemHeight + 'px;line-height:' + itemHeight + 'px;"><span>&ndash;</span></a>' : '') + // - button
+                                    '<div class="dwl">' + lbl + '</div>' + // Wheel label
+                                    '<div tabindex="0" aria-live="off" aria-label="' + lbl + '" role="listbox" class="dwww">' +
+                                        '<div class="dww" style="height:' + (s.rows * itemHeight) + 'px;">' +
+                                            '<div class="dw-ul">';
+                    }
                     // Create wheel values
                     html += generateWheelItems(l) +
                         '</div></div><div class="dwwo"></div></div><div class="dwwol"' +

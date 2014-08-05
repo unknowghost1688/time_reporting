@@ -1,15 +1,66 @@
+* {
+    /*box-sizing: border-box !important;*/
+    text-shadow: none !important;
+}
+
+div[data-role='page'] {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
 div.ui-input-search {
     float: left !important;
     width: 30%;
+     margin-left: 15px;
+}
+
+.ui-content .ui-input-search {
+    margin-left: 0px;
+}
+
+div[data-role='popup'] {
 }
 
 .floatleft {
     float: left !important;
-    width: 30%;
+    width: 80%;
+}
+
+.data-floatright {
+    float: right !important;
+    padding-top: 0.7em !important;
+    padding-right: 0.5em !important;
+}
+
+.ifca-data-list-anchor {
+    padding-left: 0.7em !important;
+    padding-top: 0em !important;
+    padding-bottom: 0em !important;
+    padding-right: 0em !important;
+}
+
+.nopadding {
+    padding: 0px !important;
+}
+
+.nomargin {
+    margin: 0px !important;
+}
+
+.showborder {
+    border: solid !important;
+    border-width: 1px !important;
+}
+
+.sub-header-floatright {
+    float: right !important;
+    padding-top: 0.5em !important;
+    padding-right: 0.5em !important;
 }
 
 .floatright {
     float: right !important;
+    width: auto;
 }
 
 ul.ui-listview.clearboth {
@@ -19,6 +70,13 @@ ul.ui-listview.clearboth {
 label.ui-checkbox-on, label.ui-checkbox-off {
     border: none !important;
     background: none !important;
+}
+
+label[for='showAll'] {
+    background: white !important;
+    height: 35px !important;
+    line-height: 35px !important;
+    margin-right: 15px !important;
 }
 
 input[type="checkbox"] {
@@ -86,20 +144,40 @@ label:not(:empty) {
     width: 100vw;
 }
 
+.ui-grid {
+    padding: 0.3em;
+    background: -webkit-linear-gradient(#4e5053, #4b4c50) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4e5053, #4b4c50) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4e5053, #4b4c50) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#4e5053, #4b4c50) !important; /* Standard syntax */
+}
+
 .greenbtn {
-    background: green !important;
-    width: 70px !important;
+    background: -webkit-linear-gradient(#47a12f, #348816) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#47a12f, #348816) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#47a12f, #348816) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#47a12f, #348816) !important; /* Standard syntax */
+    width: 100px;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
     color: white !important;
-    border: none !important;
-    font-weight: normal !important;
+    border: none;
+    font-weight: normal;
+    border-radius: 0.2em !important;
 }
 
 .redbtn {
-    background: red !important;
-    width: 70px !important;
+    background: -webkit-linear-gradient(#da3836, #bc2325) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#da3836, #bc2325) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#da3836, #bc2325) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#da3836, #bc2325) !important; /* Standard syntax */
+    width: 100px;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
     color: white !important;
-    border: none !important;
-    font-weight: normal !important;
+    border: none;
+    font-weight: normal;
+    border-radius: 0.2em !important;
 }
 
 /*.contenttab {
@@ -107,4 +185,36 @@ label:not(:empty) {
 }*/
 
 form.ui-filterable {
+}
+
+div[data-role='page'] {
+    background: #026EAE; 
+    /*#039 url(../../images/bg.jpg) repeat !important;*/
+}
+
+.ui-flipswitch {
+    background: white !important;
+    margin-right: 15px !important;
+}
+
+.ui-content .ui-flipswitch {
+    margin-right: 0px !important;
+}
+
+.ui-flipswitch-on, .ui-flipswitch-off {
+    color: black !important;
+}
+
+div.ui-overlay-a,
+div.ui-overlay-b,
+div.ui-overlay-c,
+div.ui-overlay-d,
+div.ui-overlay-e {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.shCheckBoxLabel {
+    color: #FFFFFF !important;
+    font-weight: lighter !important;
+    padding-top: 15em !important;
 }

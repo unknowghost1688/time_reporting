@@ -24,7 +24,7 @@ var myProfile_ShowDetailsFunctions = {
             },
             success: function (result) {
                 
-                $('#userID').val(result[0]['UserDetailID']);
+                $('#userID').val(result[0]['UserName']);
                 $('#name').val(result[0]['LastName'] + " " + result[0]['FirstName']);
                 $('#email').val(result[0]['Email']);
                 $('#phone').val(result[0]['Phone']);
@@ -81,7 +81,7 @@ var myProfile_ShowDetailsFunctions = {
                 } else if (exception === 'abort') {
                     $('#ErroMessage_FailChangePassword').html('Ajax request aborted.');
                 } else {
-                    $('#ErroMessage_FailChangePassword').html('Error Occur.');
+                    $('#ErroMessage_FailChangePassword').html('Error occurred.');
                 }
             }
         });
@@ -99,19 +99,19 @@ var myProfile_ShowDetailsFunctions = {
             error_val = 1;
         } else if (!newPassword_txt.match(/([a-zA-Z])/)) {
             setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
-            $('#ErroMessage_FailChangePassword').html('Password must contains numeric, lower and uppercase characters.');
+            $('#ErroMessage_FailChangePassword').html('Password must contain numeric, lower and uppercase characters.');
             error_val = 1;
         } else if (!newPassword_txt.match(/([0-9])/)) {
             setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
-            $('#ErroMessage_FailChangePassword').html('Password must contains numeric, lower and uppercase characters.');
+            $('#ErroMessage_FailChangePassword').html('Password must contain numeric, lower and uppercase characters.');
             error_val = 1;
         } else if (!newPassword_txt.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) {
             setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
-            $('#ErroMessage_FailChangePassword').html('Password must contains two special characters.\nMust containts two out of this few special characters: !,%,&,@,#,$,^,*,?,_,~');
+            $('#ErroMessage_FailChangePassword').html('Password must contain two special characters.\nMust contain two out of these few special characters: !,%,&,@,#,$,^,*,?,_,~');
             error_val = 1;
         } else if (encodeURIComponent(newPassword_txt) != encodeURIComponent(confirmPassword_txt)) {
             setTimeout(function () { $("#popup_FailChangePassword").popup("open"); }, 1000);
-            $('#ErroMessage_FailChangePassword').html('New password and confirm password do not match.');
+            $('#ErroMessage_FailChangePassword').html('New Password and Confirm Password do not match.');
             error_val = 1;
         } 
 
@@ -151,7 +151,7 @@ var myProfile_ShowDetailsFunctions = {
                     } else if (exception === 'abort') {
                         $('#ErroMessage_FailChangePassword').html('Ajax request aborted.');
                     } else {
-                        $('#ErroMessage_FailChangePassword').html('Error Occur.');
+                        $('#ErroMessage_FailChangePassword').html('Error occurred.');
                     }
                 }
             });

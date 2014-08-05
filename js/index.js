@@ -21,11 +21,12 @@ $(document).one('pagecontainerbeforeshow', function () {
         }
     });
 
-    localStorage.clear();
+    //localStorage.clear();
 
     function navigateToMenu() {
-        //window.location.href = "menu.html";
-        $.mobile.navigate("menu.html");
+        //$.mobile.pageContainer.pagecontainer('load', 'menu.html');
+        $.mobile.pageContainer.pagecontainer('change', 'menu.html');
+        //$.mobile.navigate("menu.html");
     }
 
     $("#login form").on("submit", function () {

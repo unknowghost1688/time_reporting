@@ -37,18 +37,23 @@ function dispTodayDate() {
         myDate = new Date(new Date().getFullYear(), t[0] - 1, t[1]);
         myFormatDate = MONTHS[myDate.getMonth()] + "," + mydate.getDate();
     }
-    $("#subaction").text(myFormatDate);
+    if (localStorage.ApvrDate == null) {
+        $("#subaction").text(myFormatDate);
+        localStorage.ApvrDate = today;
+    }
+    else
+        dispSetDate();
 }
 
 $(document).on("pageinit", function () {
    
 
-    dispTodayDate();
+    //dispTodayDate();
    
 
 });
 
-$(document).on('click', '.dwb ,.dwb0, .dwb-e', function () { // when click on set button on datepicker
+$(document).on('click', '.dwb0', function () { // when click on set button on datepicker
 
     dispSetDate();
 
@@ -56,8 +61,9 @@ $(document).on('click', '.dwb ,.dwb0, .dwb-e', function () { // when click on se
 });
 
 $(document).one("pagecontainerbeforeshow", function () {
+    dispTodayDate();
     myActivityFunctions.addSelectAllCheckbox();
-    myActivityFunctions.setDateToToday();
+    //myActivityFunctions.setDateToToday();
   //  myActivityFunctions.generateListView();
     $(document).off('click', '#btn_failDeleteMyActivity').on('click', '#btn_failDeleteMyActivity', function (e) {
         $("#popup_failDeleteMyActivity").popup("close");
@@ -145,7 +151,17 @@ var myActivityFunctions =
         generateListView: function () {
             var apiURL = SERVER_END_POINT_API + "/api/activity/myactivity";
             //var date = $("#date").val();
-            var date = localStorage.ApvrDate.split("/").reverse().join("-");
+            if (localStorage.ApvrDate == null) {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                //January is 0!
+
+                var yyyy = today.getFullYear();
+                if (dd < 10) { dd = '0' + dd } if (mm < 10) { mm = '0' + mm } var date = yyyy + '-' + mm + '-' + dd;
+            }
+            else
+                var date = localStorage.ApvrDate.split("/").reverse().join("-");
             var userID = localStorage.getItem("UserID");
 
             $.ajax({

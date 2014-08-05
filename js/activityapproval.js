@@ -90,7 +90,7 @@ $(document).on("pageinit", function () {
 
 });
 
-$(document).on('click', '.dwb ,.dwb0, .dwb-e', function () { // when click on set button on datepicker
+$(document).on('click', '.dwb0', function () { // when click on set button on datepicker
 
     dispSetDate();
 
@@ -402,11 +402,11 @@ function renderListtemp(data) {
 
             if (changed == 1) {
                 tcountindex = tcount + 1;
-                lii += lit + "</tbody></table></div>" + "</div>" +
+                lii += lit + "</tbody></table>" + "</div>" +
           "<div data-role='collapsible' data-collapsed='true' id='MainID'>" +
                        "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[i].FirstName + ' ' + data[i].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[i].ActivityMainID + "-" + data[i].ActivityCode + "-" + data[i].AccountCode + "-" + tcountindex + "-" + dPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[tcount + 1] + " h" +
                        "</div></h3>" +
-                           "<div><table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
+                           "<table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                                 "<thead></thead><tbody>";
                 changed = 0;
                 lit = "";
@@ -418,7 +418,7 @@ function renderListtemp(data) {
             if (k < data.length) {
                 if (data[i].UserdetailID == data[k].UserdetailID) {
                     lit += "<tr>" +
-                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountDescription + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
+                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountCode + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
                                 //"<td>" + data[i].ActivityDescription + "</br>" + data[i].AccountDescription + "</td>" +
                                    //"<td >" + data[i].Hours + "</td>" +
                                 "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'>" +
@@ -430,7 +430,7 @@ function renderListtemp(data) {
                 }
                 else {
                     lit += "<tr>" +
-                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountDescription + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
+                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountCode + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
                                 //"<td>" + data[i].ActivityDescription + "</br>" + data[i].AccountDescription + "</td>" +
                                    //"<td >" + data[i].Hours + "</td>" +
                                 "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'>" +
@@ -443,7 +443,7 @@ function renderListtemp(data) {
             }
             else {
                 lit += "<tr>" +
-                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountDescription + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
+                                "<td colspan='2'><p style='font-weight:bold;font-size:15px'>" + data[i].ActivityDescription + " (" + data[i].ActivityCode + ")<p></br><p style='font-size:15px'>" + data[i].AccountDescription + " (" + data[i].AccountCode + ")</p></br><p style='font-size:15px'>Remark : " + data[i].Remark + "</p></td>" +
                                 //"<td>" + data[i].ActivityDescription + "</br>" + data[i].AccountDescription + "</td>" +
                                    //"<td >" + data[i].Hours + "</td>" +
                                 "<td class='toright' style='width:20%;padding:0 0% 0 0;margin:0%!important'>" +
@@ -452,7 +452,7 @@ function renderListtemp(data) {
                            "</tr>";
             }
         }
-        lii += lit + "</tbody></table></div>" + "</div>";
+        lii += lit + "</tbody></table>" + "</div>";
 
         /*set disabled to first header*/
         if (data[0].ApprovedHours != null) {
@@ -470,7 +470,7 @@ function renderListtemp(data) {
            "<div data-role='collapsible' data-collapsed='true' id='MainID'>" +
                        "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[0].FirstName + ' ' + data[0].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "-" + 0 + "-" + firstdPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " h" +
                        "</div></h3>" +
-                           "<div><table data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
+                           "<table data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                                 "<thead></thead><tbody>";
         headlii += lii;
         //set the approval hour to disabled if the approval hour is not null
@@ -485,7 +485,7 @@ function renderListtemp(data) {
     }
     else {
         $("#contentDetail").empty();
-        $("#contentDetail").html("<div style='text-align:center;color:white;text-shadow:none'>No Submission Today.</div>").trigger("create");
+        $("#contentDetail").html("<div style='text-align:center;color:white;text-shadow:none'>No Submission Found.</div>").trigger("create");
     }
 
 }

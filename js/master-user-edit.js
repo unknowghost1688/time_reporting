@@ -11,6 +11,7 @@ function GenerateManagerDropDownList() {
         url: SERVER_END_POINT_API + "/api/UserDetail/GetAllManager",
         success: function (result) {
             $.each(result, function (index, element) {
+                if (element.UserDetailID != localStorage.getItem("UserID"))
                 $("#ReportTo").append("<option value=" + element.UserDetailID + ">" + element.FirstName + "</option>");
             });
             $('#ReportTo').selectmenu('refresh', true);
@@ -157,7 +158,8 @@ var masterUserEditFunctions = {
 function validateEmail(email) {
     var email_format = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return email_format.test(email);
-}
+}
+
 $(document).one('pagecreate', '#master-user-edit', function () {
     $("#phone").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .

@@ -2,38 +2,37 @@
     <script src="js/myactivity-add.js"></script>
     <script src="js/myfavouriteformyactivity.js"></script>
     <style type="text/css">
-        .demo {
-            display: none;
-        }
+    .demo {
+        display: none;
+    }
 
-        #datebtn {
-            float: right;
-        }
+    #datebtn {
+        float: right;
+        /*icon: data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkFsbF9nbHlwaHMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTM0MC43NTRweCIgaGVpZ2h0PSIxMzMycHgiIHZpZXdCb3g9IjAgMCAxMzQwLjc1NCAxMzMyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMzQwLjc1NCAxMzMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xMTUxLjc0NiwxODguNDhoLTYxLjY1MnYxMzcuMDA3SDg3MC44ODNWMTg4LjQ4aC0zOTcuMzJ2MTM3LjAwN0gyNTQuMzUyVjE4OC40OGgtNjEuNjUyDQoJCWMtNzUuMzU1LDAtMTM3LjAwOCw2MS42NTMtMTM3LjAwOCwxMzcuMDA3djgyMi4wNDJjMCw3NS4zNTQsNjEuNjUyLDEzNy4wMDcsMTM3LjAwOCwxMzcuMDA3aDk1OS4wNDcNCgkJYzc1LjM1NSwwLDEzNy4wMDgtNjEuNjUzLDEzNy4wMDgtMTM3LjAwN1YzMjUuNDg4QzEyODguNzU0LDI1MC4xMzQsMTIyNy4xMDIsMTg4LjQ4LDExNTEuNzQ2LDE4OC40OHogTTExNTEuNzQ2LDExNDcuNTNIMTkyLjY5OQ0KCQlWNTk5LjUwMmg5NTkuMDQ3VjExNDcuNTN6IE00MTEuOTEsNTEuNDc0aC05NS45MDZ2MjMyLjkxMmg5NS45MDZWNTEuNDc0eiBNMTAyOC40NDEsNTEuNDc0aC05NS45MDZ2MjMyLjkxMmg5NS45MDZWNTEuNDc0eiIvPg0KPC9nPg0KPC9zdmc+DQo=;*/
+    }
 
-        /*remove the active state of collapsible*/
-        a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-minus.ui-btn-active {
-            background: none!important;
-            border-color: #ddd!important;
-        }
+    /*remove the active state of collapsible*/
+    a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-minus.ui-btn-active {
+        background: none!important;
+        border-color: #ddd!important;
+    }
 
-        a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-plus.ui-btn-active {
-            background: none!important;
-            border-color: #ddd!important;
-        }
+    a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-plus.ui-btn-active {
+        background: none!important;
+        border-color: #ddd!important;
+    }
 
+    .custom-button .ui-btn-inner {
+        padding: 0 !important;
+        float: right!important;
+    }
 
-
-        .custom-button .ui-btn-inner {
-            padding: 0 !important;
-            float: right!important;
-        }
-
-            .custom-button .ui-btn-inner .ui-btn-text {
-                width: 100% !important;
-                background-image: url('images/icon/arrow-pointdown.png') !important;
-                background-repeat: no-repeat !important;
-                background-position: center !important;
-            }
+    .custom-button .ui-btn-inner .ui-btn-text {
+        width: 100% !important;
+        background-image: url('images/icon/arrow-pointdown.png') !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+    }
     </style>
     <!--    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>-->
@@ -49,68 +48,64 @@
     <link href="css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
-        $(function () {
-            var curr = new Date().getFullYear();
-            var opt = {
-                'date': {
-                    preset: 'date',
-                    //dateOrder: 'ddmmy',
-                    dateFormat: 'dd/mm/yy',
-                    invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
+    $(function () {
+        var curr = new Date().getFullYear();
+        var opt = {
+            'date': {
+                preset: 'date',
+                //dateOrder: 'ddmmy',
+                dateFormat: 'dd/mm/yy',
+                //invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
 
-                },
-                'datetime': {
-                    preset: 'datetime',
-                    minDate: new Date(2012, 3, 10, 9, 22),
-                    maxDate: new Date(2014, 7, 30, 15, 44),
-                    stepMinute: 5
-                },
-                'time': {
-                    preset: 'time'
-                },
-                'credit': {
-                    preset: 'date',
-                    dateOrder: 'mmyy',
-                    dateFormat: 'mm/yy',
-                    startYear: curr,
-                    endYear: curr + 10,
-                    width: 100
-                },
-                'select': {
-                    preset: 'select'
-                },
-                'select-opt': {
-                    preset: 'select',
-                    group: true,
-                    width: 50
-                }
+            },
+            'datetime': {
+                preset: 'datetime',
+                minDate: new Date(2012, 3, 10, 9, 22),
+                maxDate: new Date(2014, 7, 30, 15, 44),
+                stepMinute: 5
+            },
+            'time': {
+                preset: 'time'
+            },
+            'credit': {
+                preset: 'date',
+                dateOrder: 'mmyy',
+                dateFormat: 'mm/yy',
+                startYear: curr,
+                endYear: curr + 10,
+                width: 100
+            },
+            'select': {
+                preset: 'select'
+            },
+            'select-opt': {
+                preset: 'select',
+                group: true,
+                width: 50
+            }
+        }
+
+        $('.settings select').bind('change', function () {
+            var demo = "date";
+
+            if (!demo.match(/select/i)) {
+                $('.demo-test-' + demo).val('');
             }
 
-            $('.settings select').bind('change', function () {
-                var demo = "date";
-
-                if (!demo.match(/select/i)) {
-                    $('.demo-test-' + demo).val('');
-                }
-
-                $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
-                    theme: "wp light",
-                    mode: "scroller",
-                    lang: "",
-                    display: "modal",
-                    animate: "pop"
-                }));
-                $('.demo').hide();
-                $('.demo-' + demo).show();
-            });
-
-            $('#demo').trigger('change');
-
-            $("dwwc").append("Hello");
-
+            $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
+                theme: "wp light",
+                mode: "scroller",
+                lang: "",
+                display: "modal",
+                animate: "pop"
+            }));
+            $('.demo').hide();
+            $('.demo-' + demo).show();
         });
 
-
+        $('#demo').trigger('change');
+        $("dwwc").append("Hello");
+    });
     </script>
     <div data-role="header">
         <a id="btnBack" href="myactivity.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
@@ -134,7 +129,7 @@
                     <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
 
                 </div>
-                <div style="float: right; padding: 1% 10% 0 0" id="subaction">May 2014</div>
+                <div style="float: right; padding: 1% 10% 0 0" id="subaction1">May 2014</div>
             </div>
         </div>
     </div>
@@ -172,18 +167,18 @@
         </tr>-->
                     <tr>
                         <th>
-                            <label for="activityCode">Activity Code</label></th>
+                            <label for="activityCode">Activity Code</label>
+                        </th>
                         <td>
                             <select data-native-menu="true" data-mini="true" data-theme="a" id="activityCode"></select>
-
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            <label for="accountCode">Account Code</label></th>
-                        <td><a href="#accCodePopup" data-rel="popup" id="hrefAccountCode" class="ui-btn ui-btn-inline ui-corner-all" data-position-to="window">Select account code</a>
+                            <label for="accountCode">Account Code</label>
+                        </th>
+                        <td><a style="width:88%" href="#accCodePopup" data-rel="popup" id="hrefAccountCode" class="ui-btn ui-btn-inline ui-corner-all" data-position-to="window">Select account code</a>
                             <!-- <select data-native-menu="true"  data-mini="true" data-theme="a" id="accountCode"></select>-->
-
                         </td>
                     </tr>
                     <tr>
@@ -199,7 +194,6 @@
                             <label for="remark">Remark</label></th>
                         <td>
                             <textarea id="remark"></textarea>
-
                         </td>
                     </tr>
 
@@ -209,18 +203,16 @@
 
 
     </div>
-    <div data-role="popup" id="popup_sucessfullyAddMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+    <div data-role="popup" id="popup_sucessfully_AddMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Success</h3>
-            <p class="ui-title" id="P1">Activity Successfully added</p>
+            <p class="ui-title" id="SuccessMessage_AddMyActivity">New Activity added successfully.</p>
             <a id="MyActivitySuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
-    <div data-role="popup" id="popup_ErrMsg" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+    <div data-role="popup" id="popup_ErrMsg_AddMyActivity" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Error</h3>
-            <p class="ui-title" id="ErroMessage"></p>
-            <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+            <p class="ui-title" id="ErroMessage_AddMyActivity"></p>
+            <a id="btn_closeErrMsg_AddMyActivity" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
     <div data-role="popup" id="accCodePopup">
@@ -232,14 +224,10 @@
             </ul>
         </div>
     </div>
-    <div data-role="footer" data-position="fixed">
-        <div class="ui-grid-a">
-            <div class="ui-block-a center">
-                <a class="greenbtn" data-role="button" onclick="myActivityAddFunctions.addActivity()">Save</a>
-            </div>
-            <div class="ui-block-b center">
-                <a class="redbtn" data-role="button" href="myactivity.html">Cancel</a>
-            </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class="ui-grid center">
+            <a class="greenbtn" data-role="button" onclick="myActivityAddFunctions.addActivity()">Save</a>&nbsp;&nbsp;
+            <a class="redbtn" data-role="button" href="myactivity.html" onclick=" myActivityAddFunctions.dispTodayDate()">Cancel</a>
         </div>
     </div>
 </div>

@@ -77,20 +77,19 @@ var masterUserFunctions =
                         var activeOrInactive = function () {
                             var string = "";
                             if (data[i].ActiveFlag == 0) {
-                                string = "Inactive";
+                                string = "&nbsp;&nbsp;- Inactive";
                             }
                             return string;
                         }();
                         var li =
                             "<li data-icon='false'>" +
-                                "<a href='master-user-edit.html?userdetailid=" + data[i].UserDetailID + "' id='" + data[i].UserDetailID + "'>" +
-                                    "<div class='floatleft'>" +
-                                         "<h5>" + data[i].UserName + "</h5>" +
+                                "<a class='ifca-data-list-anchor' href='master-user-edit.html?userdetailid=" + data[i].UserDetailID + "' id='" + data[i].UserDetailID + "'>" +
+                                    "<div class='floatleft' width='80%'>" +
+                                         "<h5>" + data[i].UserName + "<div class='floatright'><label style='color: grey;'>" + activeOrInactive + "</label></div></h5>" +
                                          "<p>" + data[i].Role + "</p>" +
                                     "</div>" +
-                                    "<div class='floatright'>" +
-                                        "<input type='checkbox'  class='TimeReportingHideCheckbox' id='user-" + data[i].UserDetailID + "' />" +
-                                        "<label for='user-" + data[i].UserDetailID + "'" + "data-iconpos='right'>" + activeOrInactive + "</label>" +
+                                    "<div class='data-floatright' width='20%'>" +
+                                        "<label data-iconpos='right'><input type='checkbox' id='user-" + data[i].UserDetailID + "' /></label>" +
                                     "</div>" +
                                 "</a>" +
                             "</li>";
@@ -100,6 +99,7 @@ var masterUserFunctions =
                     $("ul[data-role='listview']").append(appendHTML).listview("refresh");
                     $("input[type='checkbox']").checkboxradio();
                     mainFunctions.toggleShowAllInactive();
+                    data.empty();
                 },
                 error: function (jqXHR, exception) {
                     if (jqXHR.status === 0) {
@@ -125,19 +125,19 @@ var masterUserFunctions =
     };
 
 
-$(document).one('pagecreate', '#master-user', function () {
-    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-        $("#popup_ErrMsg").popup("close");
-    });
-    $(document).off('click', '#UserSuccessOK').on('click', '#UserSuccessOK', function (e) {
-        //$('#userListView').trigger('create');
-        //$('#userListView').listview('refresh');
-        //$('#userListView').listview().listview('refresh');
+//$(document).one('pagecreate', '#master-user', function () {
+//    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
+//        $("#popup_ErrMsg").popup("close");
+//    });
+//    $(document).off('click', '#UserSuccessOK').on('click', '#UserSuccessOK', function (e) {
+//        //$('#userListView').trigger('create');
+//        //$('#userListView').listview('refresh');
+//        //$('#userListView').listview().listview('refresh');
 
-        $.mobile.changePage("master-user.html", {
-            transition: "none",
-            reverse: false,
-            changeHash: true
-        });
-    });
-});
+//        $.mobile.changePage("master-user.html", {
+//            transition: "none",
+//            reverse: false,
+//            changeHash: true
+//        });
+//    });
+//});

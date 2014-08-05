@@ -9,26 +9,21 @@
     </div>
     <div data-role="popup" id="popup_sucessfullyDeleteAccountCode" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Success</h3>
-            <p class="ui-title" id="P2">Account Code Successfully deleted</p>
+            <h3>Delete Account Code</h3>
+            <p class="ui-title" id="P2">Account Code deleted successfully.</p>
             <a id="AccountCodeSuccessOK" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
     <div data-role="popup" id="popup_ErrMsg" data-position-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
         <div role="main" class="ui-content">
-            <h3>Error</h3>
             <p class="ui-title" id="ErroMessage"></p>
             <a id="closeErrMsg" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
-    <div data-role="footer" data-position="fixed">
-        <div class="ui-grid-a">
-            <div class="ui-block-a center">
-                <a class="greenbtn" data-role="button" href="master-accountcode-add.html">Add</a>
-            </div>
-            <div class="ui-block-b center">
-                <a class="redbtn" data-role="button" onclick="masterAccountCodeFunctions.deleteAccountCodes()">Delete</a>
-            </div> 
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class="ui-grid center">
+            <a class="greenbtn" data-role="button" href="master-accountcode-add.html">Add</a>&nbsp;&nbsp;
+            <a class="redbtn" data-role="button" onclick="masterAccountCodeFunctions.deleteAccountCodes()">Delete</a>
         </div>
     </div>
     <script src="js/master-accountcode.js"></script>

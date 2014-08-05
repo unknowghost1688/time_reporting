@@ -52,20 +52,19 @@ var masterActivityFunctions =
                         var activeOrInactive = function () {
                             var string = "";
                             if (data[i].ActiveFlag == 0) {
-                                string = "Inactive";
+                                string = "&nbsp;&nbsp;- Inactive";
                             }
                             return string;
                         }();
                         var li =
                             "<li data-icon='false'>" +
-                                "<a href='master-activity-edit.html?activityid=" + data[i].ActivityCode + "' id='" + data[i].ActivityCode + "'>" +
-                                    "<div class='floatleft'>" +
-                                        "<h5>" + data[i].ActivityCode + "</h5>" +
+                                "<a class='ifca-data-list-anchor' href='master-activity-edit.html?activityid=" + data[i].ActivityCode + "' id='" + data[i].ActivityCode + "'>" +
+                                    "<div class='floatleft' width='80%'>" +
+                                        "<h5>" + data[i].ActivityCode + "<div class='floatright'><label style='color: grey;'>" + activeOrInactive + "</label></div></h5>" +
                                         "<p>" + data[i].Description + "</p>" +
                                     "</div>" +
-                                    "<div class='floatright'>" +
-                                        "<input type='checkbox' class='TimeReportingHideCheckbox' id='checkbox-" + data[i].ActivityCode + "' />" +
-                                        "<label for='checkbox-" + data[i].ActivityCode + "'" + "data-iconpos='right' >" + activeOrInactive + "</label>" +
+                                    "<div class='data-floatright' width='20%'>" +
+                                        "<label data-iconpos='right'><input type='checkbox' id='checkbox-" + data[i].ActivityCode + "' /></label>" +
                                     "</div>" +
                                 "</a>" +
                             "</li>";
@@ -75,6 +74,7 @@ var masterActivityFunctions =
                     $("ul[data-role='listview']").append(appendHTML).listview("refresh");
                     $("input[type='checkbox']").checkboxradio();
                     mainFunctions.toggleShowAllInactive();
+                    data.empty();
                 }
             });
         }
@@ -82,19 +82,19 @@ var masterActivityFunctions =
 
 
 
-$(document).one('pagecreate', '#master-activity', function () {
-    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-        $("#popup_ErrMsg").popup("close");
-    });
-    $(document).off('click', '#ActivitySuccessOK').on('click', '#ActivitySuccessOK', function (e) {
-        //$('#userListView').trigger('create');
-        //$('#userListView').listview('refresh');
-        //$('#userListView').listview().listview('refresh');
+//$(document).one('pagecreate', '#master-activity', function () {
+//    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
+//        $("#popup_ErrMsg").popup("close");
+//    });
+//    $(document).off('click', '#ActivitySuccessOK').on('click', '#ActivitySuccessOK', function (e) {
+//        //$('#userListView').trigger('create');
+//        //$('#userListView').listview('refresh');
+//        //$('#userListView').listview().listview('refresh');
 
-        $.mobile.changePage("master-activity.html", {
-            transition: "none",
-            reverse: false,
-            changeHash: true
-        });
-    });
-});
+//        $.mobile.changePage("master-activity.html", {
+//            transition: "none",
+//            reverse: false,
+//            changeHash: true
+//        });
+//    });
+//});

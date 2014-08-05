@@ -1,4 +1,13 @@
 ﻿$(document).one("pagecontainerbeforeshow", function () {
+    //$.ajaxSetup({
+    //    beforeSend: function () {
+    //        $("ul").append("<li id='ajaxloader'>Loading...</li>");
+    //        $("ul").listview().listview("refresh");
+    //    },
+    //    complete: function () {
+    //        $("#ajaxloader").remove();
+    //    }
+    //});
     mainFunctions.addShowAllCheckbox();
     masterAccountCodeFunctions.generateListView();
 });
@@ -46,20 +55,19 @@ var masterAccountCodeFunctions =
                         var activeOrInactive = function () {
                             var string = "";
                             if (data[i].ActiveFlag == 0) {
-                                string = "Inactive";
+                                string = "&nbsp;&nbsp;- Inactive";
                             }
                             return string;
                         }();
                         var li =
                             "<li data-icon='false'>" +
-                                "<a href='master-accountcode-edit.html?id=" + data[i].AccountCode + "' id='" + data[i].AccountCode + "'>" +
-                                    "<div class='floatleft'>" +
-                                         "<h5>" + data[i].AccountCode + "</h5>" +
+                                "<a class='ifca-data-list-anchor' href='master-accountcode-edit.html?id=" + data[i].AccountCode + "' id='" + data[i].AccountCode + "'>" +
+                                    "<div class='floatleft' width='80%'>" +
+                                         "<h5>" + data[i].AccountCode + "<div class='floatright'><label style='color: grey;'>" + activeOrInactive + "</label></div></h5>" +
                                           "<p>" + data[i].Description + "</p>" +
                                     "</div>" +
-                                    "<div class='floatright'>" +
-                                        "<input type='checkbox' class='TimeReportingHideCheckbox'  id='checkbox-" + data[i].AccountCode + "' />" +
-                                        "<label for='checkbox-" + data[i].AccountCode + "'" + "data-iconpos='right' class='inheritbackgroundcolor'>" + activeOrInactive + "</label>" +
+                                    "<div class='data-floatright' width='20%'>" +
+                                        "<label data-iconpos='right'><input type='checkbox' id='checkbox-" + data[i].AccountCode + "' /></label>" +
                                     "</div>" +
                                 "</a>" +
                             "</li>";
@@ -69,18 +77,17 @@ var masterAccountCodeFunctions =
                     $("ul[data-role='listview']").append(appendHTML).listview("refresh");
                     $("input[type='checkbox']").checkboxradio();                 
                     mainFunctions.toggleShowAllInactive();
+                    data.empty();
                 }
             });
         }
     };
+
 $(document).one('pagecreate', '#master-accountcode', function () {
     $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
         $("#popup_ErrMsg").popup("close");
     });
     $(document).off('click', '#AccountCodeSuccessOK').on('click', '#AccountCodeSuccessOK', function (e) {
-        //$('#userListView').trigger('create');
-        //$('#userListView').listview('refresh');
-        //$('#userListView').listview().listview('refresh');
 
         $.mobile.changePage("master-accountcode.html", {
             transition: "none",
@@ -89,4 +96,3 @@ $(document).one('pagecreate', '#master-accountcode', function () {
         });
     });
 });
-
