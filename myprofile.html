@@ -1,7 +1,7 @@
 ﻿<div data-role="page" id="myprofile" data-theme="a">
     <script src="js/myprofile.js"></script>
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
-        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
+        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>My Profile</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
     </div>
@@ -15,7 +15,7 @@
                             <label for="userID">User ID</label>
                         </th>
                         <td>
-                            <input type="text" id="userID" value="" disabled />
+                            <input type="text" id="userID" disabled />
                         </td>
                     </tr>
                     <tr>
@@ -24,6 +24,7 @@
                         </th>
                         <td>
                             <input type="password" id="oldPassword" maxlength="20" placeholder="*********" />
+                            <span style="color: red" id="span_myprofile_oldPassword"></span>
                         </td>
                     </tr>
                     <tr>
@@ -32,6 +33,7 @@
                         </th>
                         <td>
                             <input type="password" id="newPassword" maxlength="20" placeholder="*********" />
+                            <span style="color: red" id="span_myprofile_newPassword"></span>
                         </td>
                     </tr>
                     <tr>
@@ -40,6 +42,7 @@
                         </th>
                         <td>
                             <input type="password" id="confirmPassword" maxlength="20" placeholder="*********" />
+                            <span style="color: red" id="span_myprofile_confirmPassword"></span>
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +74,7 @@
                             <label for="role">Role</label>
                         </th>
                         <td>
-                            <input type="text" id="role" placeholder="Staff" disabled />
+                            <input type="text" id="role" placeholder="" disabled />
                         </td>
                     </tr>
                     <tr>

@@ -1,53 +1,5 @@
 ﻿<div id="approval" data-role="page">
-    <style type="text/css">
-        .demo {
-            display: none;
-        }
-
-        /*.ui-btn-corner-all, .ui-btn.ui-corner-all, .ui-slider-track.ui-corner-all, .ui-flipswitch.ui-corner-all, .ui-li-count {
-            background-color: white;
-            float:right;
-        }
-
-        .ui-btn-corner-all:hover, .ui-btn.ui-corner-all:hover, .ui-slider-track:hover.ui-corner-all:hover, .ui-flipswitch.ui-corner-all:hover, .ui-li-count:hover {
-            background-color: white;
-        }*/
-        #datebtn {
-            float:right;
-        }
-       
-        /*remove the active state of collapsible, change the blue background to white*/
-        a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-minus.ui-btn-active {
-            background:white!important;
-            border-color:#ddd!important;
-        }
-         a.ui-collapsible-heading-toggle.ui-btn.ui-btn-icon-left.ui-btn-c.ui-icon-plus.ui-btn-active {
-            background:white!important;
-            border-color:#ddd!important;
-        }
-         /*solved the active state of collapsible when background become white, the hour is show in black instead of covered by white*/
-        .collapfigure {
-            color:black;
-        }
-        /*set the hour input box alignment*/
-        .ui-input-text .ui-body-inherit .ui-corner-all, .ui-shadow-inset {
-        width: 80%;
-        }
-             
-
-.custom-button .ui-btn-inner {
-    padding: 0 !important;    
-    float: right!important;
-}
-
-.custom-button .ui-btn-inner .ui-btn-text {
-   
-    width: 100% !important;
-    background-image: url('images/icon/arrow-pointdown.png') !important;
-    background-repeat: no-repeat  !important;
-    background-position: center  !important; 
-}
-    </style>
+    
     <!--    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>-->
     <script src="js/mobiscroll.core.js"></script>
@@ -68,63 +20,64 @@
         });
     </script>
     <script type="text/javascript">
-$(function () {
-    var curr = new Date().getFullYear();
-    var opt = {
-        'date': {
-            preset: 'date',
-            //dateOrder: 'ddmmy',
-            dateFormat: 'dd/mm/yy',
-            //invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
+        $(function () {
+            var curr = new Date().getFullYear();
+            var opt = {
+                'date': {
+                    preset: 'date',
+                    //dateOrder: 'ddmmy',
+                    dateOrder: 'ddDmmMyy',
+                    dateFormat: 'dd/mm/yy',
+                    //invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
 
-        },
-        'datetime': {
-            preset: 'datetime',
-            minDate: new Date(2012, 3, 10, 9, 22),
-            maxDate: new Date(2014, 7, 30, 15, 44),
-            stepMinute: 5
-        },
-        'time': {
-            preset: 'time'
-        },
-        'credit': {
-            preset: 'date',
-            dateOrder: 'mmyy',
-            dateFormat: 'mm/yy',
-            startYear: curr,
-            endYear: curr + 10,
-            width: 100
-        },
-        'select': {
-            preset: 'select'
-        },
-        'select-opt': {
-            preset: 'select',
-            group: true,
-            width: 50
-        }
-    }
+                },
+                'datetime': {
+                    preset: 'datetime',
+                    minDate: new Date(2012, 3, 10, 9, 22),
+                    maxDate: new Date(2014, 7, 30, 15, 44),
+                    stepMinute: 5
+                },
+                'time': {
+                    preset: 'time'
+                },
+                'credit': {
+                    preset: 'date',
+                    dateOrder: 'mmyy',
+                    dateFormat: 'mm/yy',
+                    startYear: curr,
+                    endYear: curr + 10,
+                    width: 100
+                },
+                'select': {
+                    preset: 'select'
+                },
+                'select-opt': {
+                    preset: 'select',
+                    group: true,
+                    width: 50
+                }
+            }
 
-    $('.settings select').bind('change', function () {
-        var demo = "date";
+            $('.settings select').bind('change', function () {
+                var demo = "date";
 
-        if (!demo.match(/select/i)) {
-            $('.demo-test-' + demo).val('');
-        }
+                if (!demo.match(/select/i)) {
+                    $('.demo-test-' + demo).val('');
+                }
 
-        $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
-            theme: "wp light",
-            mode: "scroller",
-            lang: "",
-            display: "modal",
-            animate: "pop"
-        }));
-        $('.demo').hide();
-        //$('.demo-' + demo).show();
-    });
-    $('#demo').trigger('change');
-    $("dwwc").append("Hello");
-});
+                $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
+                    theme: "wp light",
+                    mode: "scroller",
+                    lang: "",
+                    display: "modal",
+                    animate: "pop"
+                }));
+                $('.demo').hide();
+                //$('.demo-' + demo).show();
+            });
+            $('#demo').trigger('change');
+            $("dwwc").append("Hello");
+        });
     </script>
 
     <div data-role="header" data-position="fixed">
@@ -142,25 +95,31 @@ $(function () {
                         </select>
                     </div>
             </span>-->
-            
-            <div class="clearfix">   
-<!--            <div style="float:left"> <span id="subaction">May 2014</span></div>-->
-                <div style="float:right;padding: 0% 5% 0 0">
-                    <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit"  style="display: none;" id="datebtn">
+
+            <div class="clearfix">
+                <!--            <div style="float:left"> <span id="subaction">May 2014</span></div>-->
+                <div style="float: right;">
+                    <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit" style="display: none;" id="datebtn">
                         <select name="demo" id="demo" style="display: none;">
                             <option value="date">Date</option>
                         </select>
                     </div>
-                    <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
+                    <input type="button" data-icon="carat-d" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit" />
                 </div>
-                <div style="float:right;padding: 1% 10% 0 0" id="subaction">May 2014</div>
+                <div style="float: right;" id="subaction">May 2014</div>
             </div>
         </div>
     </div>
     <div data-role="content">
-     
-    <div  id="contentDetail" data-theme="c" class="collapstop"></div>
+
+        <div id="contentDetail" data-theme="c" class="collapstop"></div>
         <br />
+    </div>
+    <div data-role="popup" id="reusableDialog" data-transition-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        <div role="main" class="ui-content">
+            <p class="ui-title"></p>
+            <a data-role="button" data-mini="true" data-transition="none" data-theme="e" data-rel="back">OK</a>
+        </div>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div class="ui-grid center">

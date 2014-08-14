@@ -6,7 +6,7 @@
 var masterActivityFunctions =
     {
         deleteActivities: function () {
-            var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity/delete/"; // needs to be changed after Carso allows for DELETE on the server
+            var apiURL = SERVER_URL + "/api/activity/delete/"; // needs to be changed after Carso allows for DELETE on the server
             var checked = $("input:checkbox:checked");
             for (var i = 0; i < checked.length; i++) {
                 var activityCode = checked[i].id.split("-")[1];
@@ -15,11 +15,6 @@ var masterActivityFunctions =
                     type: "POST", // needs to be changed after Carso allows for DELETE on the server
                     crossDomain: true,
                     async: false,
-                    statusCode: {
-                        404: function () {
-                            alert("Server not found.");
-                        }
-                    },
                     success: function () {
                         setTimeout(function () { $("#popup_sucessfullyDeleteActivity").popup("open"); }, 1000);
                         masterActivityFunctions.generateListView();
@@ -34,18 +29,14 @@ var masterActivityFunctions =
             };
         },
         generateListView: function () {
-            var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity";
+            $("ul[data-role='listview']").empty(); // in case users click on something while the async ajax is still running, we remove everything from the listview upon initialization
+            var apiURL = SERVER_URL + "/api/activity";
 
             $.ajax({
                 url: apiURL,
                 type: "GET",
                 crossDomain: true,
                 async: true,
-                statusCode: {
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
                 success: function (data) {
                     var appendHTML = "";
                     for (var i = 0; i < data.length; i++) {
@@ -59,11 +50,11 @@ var masterActivityFunctions =
                         var li =
                             "<li data-icon='false'>" +
                                 "<a class='ifca-data-list-anchor' href='master-activity-edit.html?activityid=" + data[i].ActivityCode + "' id='" + data[i].ActivityCode + "'>" +
-                                    "<div class='floatleft' width='80%'>" +
+                                    "<div class='floatleft'>" +
                                         "<h5>" + data[i].ActivityCode + "<div class='floatright'><label style='color: grey;'>" + activeOrInactive + "</label></div></h5>" +
                                         "<p>" + data[i].Description + "</p>" +
                                     "</div>" +
-                                    "<div class='data-floatright' width='20%'>" +
+                                    "<div class='data-floatright'>" +
                                         "<label data-iconpos='right'><input type='checkbox' id='checkbox-" + data[i].ActivityCode + "' /></label>" +
                                     "</div>" +
                                 "</a>" +
@@ -74,7 +65,7 @@ var masterActivityFunctions =
                     $("ul[data-role='listview']").append(appendHTML).listview("refresh");
                     $("input[type='checkbox']").checkboxradio();
                     mainFunctions.toggleShowAllInactive();
-                    data.empty();
+                    // data.empty(); // What is this?
                 }
             });
         }
@@ -82,19 +73,16 @@ var masterActivityFunctions =
 
 
 
-//$(document).one('pagecreate', '#master-activity', function () {
-//    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-//        $("#popup_ErrMsg").popup("close");
-//    });
-//    $(document).off('click', '#ActivitySuccessOK').on('click', '#ActivitySuccessOK', function (e) {
-//        //$('#userListView').trigger('create');
-//        //$('#userListView').listview('refresh');
-//        //$('#userListView').listview().listview('refresh');
+$(document).one('pagecreate', '#master-activity', function () {
+    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
+        $("#popup_ErrMsg").popup("close");
+    });
+    $(document).off('click', '#ActivitySuccessOK').on('click', '#ActivitySuccessOK', function (e) {
 
-//        $.mobile.changePage("master-activity.html", {
-//            transition: "none",
-//            reverse: false,
-//            changeHash: true
-//        });
-//    });
-//});
+        $.mobile.changePage("master-activity.html", {
+            transition: "none",
+            reverse: false,
+            changeHash: true
+        });
+    });
+});

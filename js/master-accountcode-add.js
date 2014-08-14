@@ -5,7 +5,7 @@
 
 var masterAccountCodeAddFunctions = {
     addAccountCode: function () {
-        var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/accountcode";
+        var apiURL = SERVER_URL + "/api/accountcode";
 
         var accountCode = $("#accountCode").val();
         var description = $("#description").val();
@@ -22,15 +22,7 @@ var masterAccountCodeAddFunctions = {
                 url: apiURL,
                 type: "POST",
                 crossDomain: true,
-                async: false, // false for now
-                statusCode: {
-                    400: function () {
-                        alert("Something went wrong.")
-                    },
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
+                async: false,
                 contentType: "application/json",
                 data: JSON.stringify({
                     "AccountCode": accountCode,
@@ -39,16 +31,20 @@ var masterAccountCodeAddFunctions = {
                     "CreatedBy": userID
                 }),
                 success: function () {
+                  
                     // Confirmational response from server
                     setTimeout(function () { $("#popup_sucessfullyAddAccountCode").popup("open"); }, 1000);
                 },
-                error: function (jqXHR, exception) {
+                error: function (jqXHR, exception,err) {
                     setTimeout(function () { $("#popup_ErrMsg_MasterAccountCodeAdd").popup("open"); }, 1000);
                     if (jqXHR.status === 0) {
                         $('#ErroMessage_MasterAccountCodeAdd').html('Not connect.\n Verify Network.');
                     } else if (jqXHR.status == 404) {
                         $('#ErroMessage_MasterAccountCodeAdd').html('Requested page not found. [404]');
-                    } else if (jqXHR.status == 401) {
+                    } else if (jqXHR.status == 400) {
+                        $('#ErroMessage_MasterAccountCodeAdd').html(err);
+                    }
+                    else if (jqXHR.status == 401) {
                         $('#ErroMessage_MasterAccountCodeAdd').html('401 Unauthorized');
                     } else if (jqXHR.status == 500) {
                         $('#ErroMessage_MasterAccountCodeAdd').html('Internal Server Error [500].');
@@ -59,7 +55,7 @@ var masterAccountCodeAddFunctions = {
                     } else if (exception === 'abort') {
                         $('#ErroMessage_MasterAccountCodeAdd').html('Ajax request aborted.');
                     } else {
-                        $('#ErroMessage_MasterAccountCodeAdd').html('Error Occur.');
+                        $('#ErroMessage_MasterAccountCodeAdd').html("Error");
                     }
                 }
             });

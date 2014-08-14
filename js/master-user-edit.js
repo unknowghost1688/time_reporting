@@ -8,11 +8,11 @@ function GenerateManagerDropDownList() {
 
     $.ajax({
         type: "GET",
-        url: SERVER_END_POINT_API + "/api/UserDetail/GetAllManager",
+        url: SERVER_URL + "/api/UserDetail/GetAllManager",
         success: function (result) {
             $.each(result, function (index, element) {
                 if (element.UserDetailID != localStorage.getItem("UserID"))
-                $("#ReportTo").append("<option value=" + element.UserDetailID + ">" + element.FirstName + "</option>");
+                    $("#ReportTo").append("<option value=" + element.UserDetailID + ">" + display_name_format(element.FirstName, element.LastName) + "</option>");
             });
             $('#ReportTo').selectmenu('refresh', true);
         },
@@ -30,7 +30,7 @@ var masterUserEditFunctions = {
         var userDetailID = url.split("=")[1];
 
         $.ajax({          
-            url: SERVER_END_POINT_API + "/api/UserDetail/DetailbyID/" + userDetailID,
+            url: SERVER_URL + "/api/UserDetail/DetailbyID/" + userDetailID,
             type: "GET",     
             success: function (data) {
                 //alert(data.FirstName);
@@ -109,7 +109,7 @@ var masterUserEditFunctions = {
         } else {
             $.ajax({
 
-                url: SERVER_END_POINT_API + "/api/UserDetail/" + userID,
+                url: SERVER_URL + "/api/UserDetail/" + userID,
                 //url: SERVER_END_POINT_API + "/api/Account/SetPassword/",
                 type: "POST",
                 contentType: "application/json",

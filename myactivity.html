@@ -6,7 +6,7 @@
         }
 
         #datebtn {
-            float: right;
+            /*float: right;*/
         }
 
         /*remove the active state of collapsible*/
@@ -26,10 +26,10 @@
         }
 
             .custom-button .ui-btn-inner .ui-btn-text {
-                width: 100% !important;
+                /*width: 100% !important;
                 background-image: url('images/icon/arrow-pointdown.png') !important;
-                background-repeat: no-repeat !important;
-                background-position: center !important;
+                background-repeat: no-repeat !important;*/
+                /*background-position: center !important;*/
             }
     </style>
     <!--    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -52,7 +52,7 @@
                 'date': {
                     preset: 'date',
                     //dateOrder: 'ddmmy',
-                    dateOrder: 'ddDDmmMMyy',
+                    dateOrder: 'ddDmmMyy',
                     dateFormat: 'dd/mm/yy',
                     //invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
 
@@ -112,7 +112,7 @@
     </script>
 
     <div data-role="header" data-position="fixed">
-        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
+        <a id="btnBack" href="menu.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>My Activity</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
 
@@ -126,23 +126,19 @@
                         </select>
                     </div>
             </span>-->
-
             <div class="clearfix">
-
                 <!--                      <div style="float:left"> <span id="subaction">May 2014</span></div>-->
-                <div style="float: right; padding: 0% 5% 0 0">
+                <div style="float: right;">
                     <div data-role="fieldcontain" class="settings demo demo-date demo-datetime demo-time demo-credit" style="display: none;" id="datebtn">
-                        <div style="display: none;">
+                        <div style="display: none;"> 
                             <select name="demo" id="demo" style="display: none;">
                                 <option value="date">Date</option>
                             </select>
                         </div>
                     </div>
-
-                    <input type="button" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit dropdownicon" />
-
+                    <input type="button" data-icon="carat-d" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit" />
                 </div>
-                <div style="float: right; padding: 1% 10% 0 0" id="subaction">May 2014</div>
+                <div style="float: right;" id="subaction">May 2014</div>
             </div>
         </div>
     </div>
@@ -164,14 +160,16 @@
             <a id="btn_failDeleteMyActivity" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
         </div>
     </div>
-    <div data-role="footer" data-position="fixed">
-        <div class="ui-grid-a">
-            <div class="ui-block-a center">
-                <a class="greenbtn" data-role="button" href="myactivity-add.html" onclick="dispTodayDate()">Add</a>
-            </div>
-            <div class="ui-block-b center">
-                <a class="redbtn" data-role="button" onclick="myActivityFunctions.deleteActivities()">Delete</a>
-            </div>
+    <div data-role="popup" id="reusableDialog" data-transition-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        <div role="main" class="ui-content">
+            <p class="ui-title"></p>
+            <a data-role="button" data-mini="true" data-transition="none" data-theme="e" data-rel="back">OK</a>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class="ui-grid center">
+            <a class="greenbtn" data-role="button" href="myactivity-add.html" onclick="dispTodayDate()">Add</a>&nbsp;&nbsp;
+            <a class="redbtn" data-role="button" onclick="myActivityFunctions.deleteActivities()">Delete</a>
         </div>
     </div>
 </div>

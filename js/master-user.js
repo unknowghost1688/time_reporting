@@ -13,7 +13,7 @@ var masterUserFunctions =
 
                 $.ajax({
 
-                    url: SERVER_END_POINT_API + "/api/UserDetail/Delete/" + userDetailID,
+                    url: SERVER_URL + "/api/UserDetail/Delete/" + userDetailID,
                     type: "POST", // needs to be changed after Carso allows for DELETE on the server
                     //crossDomain: true,                
                     async: false,
@@ -54,10 +54,10 @@ var masterUserFunctions =
             };
         },
         generateListView: function () {
-
+            $("ul[data-role='listview']").empty(); // in case users click on something while the async ajax is still running, we remove everything from the listview upon initialization
             //alert(SERVER_END_POINT_API + "/api/userdetail/AllStaffListing");
             $.ajax({
-                url: SERVER_END_POINT_API + "/api/userdetail/AllStaffListing",
+                url: SERVER_URL + "/api/userdetail/AllStaffListing",
 
                 type: "GET",
                 crossDomain: true,
@@ -84,11 +84,16 @@ var masterUserFunctions =
                         var li =
                             "<li data-icon='false'>" +
                                 "<a class='ifca-data-list-anchor' href='master-user-edit.html?userdetailid=" + data[i].UserDetailID + "' id='" + data[i].UserDetailID + "'>" +
-                                    "<div class='floatleft' width='80%'>" +
-                                         "<h5>" + data[i].UserName + "<div class='floatright'><label style='color: grey;'>" + activeOrInactive + "</label></div></h5>" +
-                                         "<p>" + data[i].Role + "</p>" +
+                                    "<div class='floatleft'>" +
+                                        "<h5>" +
+                                            display_name_format(data[i].FirstName, data[i].LastName) +
+                                            "<div class='floatright'>" +
+                                                "<label style='color: grey;'>" + activeOrInactive + "</label>" +
+                                            "</div>" +
+                                         "</h5>" +
+                                         "<p>" + data[i].Role + " - " + data[i].Email + "</p>" +
                                     "</div>" +
-                                    "<div class='data-floatright' width='20%'>" +
+                                    "<div class='data-floatright'>" +
                                         "<label data-iconpos='right'><input type='checkbox' id='user-" + data[i].UserDetailID + "' /></label>" +
                                     "</div>" +
                                 "</a>" +
@@ -99,7 +104,7 @@ var masterUserFunctions =
                     $("ul[data-role='listview']").append(appendHTML).listview("refresh");
                     $("input[type='checkbox']").checkboxradio();
                     mainFunctions.toggleShowAllInactive();
-                    data.empty();
+                    //data.empty(); // What is this?
                 },
                 error: function (jqXHR, exception) {
                     if (jqXHR.status === 0) {
@@ -125,19 +130,16 @@ var masterUserFunctions =
     };
 
 
-//$(document).one('pagecreate', '#master-user', function () {
-//    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
-//        $("#popup_ErrMsg").popup("close");
-//    });
-//    $(document).off('click', '#UserSuccessOK').on('click', '#UserSuccessOK', function (e) {
-//        //$('#userListView').trigger('create');
-//        //$('#userListView').listview('refresh');
-//        //$('#userListView').listview().listview('refresh');
+$(document).one('pagecreate', '#master-user', function () {
+    $(document).off('click', '#closeErrMsg').on('click', '#closeErrMsg', function (e) {
+        $("#popup_ErrMsg").popup("close");
+    });
+    $(document).off('click', '#UserSuccessOK').on('click', '#UserSuccessOK', function (e) {
 
-//        $.mobile.changePage("master-user.html", {
-//            transition: "none",
-//            reverse: false,
-//            changeHash: true
-//        });
-//    });
-//});
+        $.mobile.changePage("master-user.html", {
+            transition: "none",
+            reverse: false,
+            changeHash: true
+        });
+    });
+});

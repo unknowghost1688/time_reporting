@@ -18,7 +18,7 @@
 }
 
 function dispSubordinate() {
-    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
+    var realurl = SERVER_URL + "/api/activity/SubordinateWithDetail";
     //var realurl = "http://localhost:8080/api/activity/SubordinateWithDetail";
     var manID = localStorage.getItem("UserID");
     var datePick = localStorage.ApvrDate.split("/").reverse().join("-");
@@ -61,7 +61,7 @@ function dispTodaySubordinate()      {
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
 
-    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
+    var realurl = SERVER_URL + "/api/activity/SubordinateWithDetail";
     var manID = localStorage.getItem("UserID");
     //January is 0!
 
@@ -100,7 +100,7 @@ $(document).on('click', '.dwb0', function () { // when click on set button on da
 });
 
 function approveList() {
-    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/Activity/ApproveActivity";
+    var realurl = SERVER_URL + "/api/Activity/ApproveActivity";
      //var realurl = "http://localhost:8080/api/Activity/ApproveActivity";
 
     var manID = localStorage.getItem("UserID");
@@ -406,7 +406,7 @@ function renderListtemp(data) {
                 tcountindex = tcount + 1;
                 lii += lit + "</tbody></table>" + "</div>" +
           "<div data-role='collapsible' data-inset='false' data-collapsed='true' id='MainID'>" +
-                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[i].FirstName + ' ' + data[i].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[i].ActivityMainID + "-" + data[i].ActivityCode + "-" + data[i].AccountCode + "-" + tcountindex + "-" + dPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[tcount + 1] + " h" +
+                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + display_name_format(data[i].FirstName, data[i].LastName) + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[i].ActivityMainID + "-" + data[i].ActivityCode + "-" + data[i].AccountCode + "-" + tcountindex + "-" + dPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[tcount + 1] + " h" +
                        "</div></h3>" +
                            "<table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                                 "<thead></thead><tbody>";
@@ -470,7 +470,7 @@ function renderListtemp(data) {
 
         headlii +=
            "<div data-role='collapsible' data-inset='false' data-collapsed='true' id='MainID'>" +
-                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + data[0].FirstName + ' ' + data[0].LastName + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "-" + 0 + "-" + firstdPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " h" +
+                       "<h3><div class='collaptitle' style='padding-top:2%' id='MainID" + i + "'>" + display_name_format(data[0].FirstName, data[0].LastName) + "</div><div class='collapfigure'><label style='padding-right:0%;width:10%;float:right'  ><input class='TimeReportingHideCheckbox' type='checkbox' id='checkbox-" + data[0].ActivityMainID + "-" + data[0].ActivityCode + "-" + data[0].AccountCode + "-" + 0 + "-" + firstdPlaceHolder + "></label></div><div class='collapfigure' style='padding-top:2%'>" + totalhr[0] + " h" +
                        "</div></h3>" +
                            "<table data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                                 "<thead></thead><tbody>";
@@ -489,7 +489,7 @@ function renderListtemp(data) {
     }
     else {
         $("#contentDetail").empty();
-        $("#contentDetail").html("<div style='text-align:center;color:white;text-shadow:none'>No Submission Found.</div>").trigger("create");
+        $("#contentDetail").html("<br/><div style='text-align:center;color:white;text-shadow:none'>No Submission Today.</div>").trigger("create");
     }
 
 }

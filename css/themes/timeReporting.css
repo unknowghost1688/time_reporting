@@ -3,33 +3,39 @@
     text-shadow: none !important;
 }
 
+body {
+    width: 100vw;
+}
+
 div[data-role='page'] {
     min-height: 100vh;
-    min-width: 100vw;
 }
 
 div.ui-input-search {
     float: left !important;
     width: 30%;
-     margin-left: 15px;
+    margin-left: 15px;
 }
 
 .ui-content .ui-input-search {
     margin-left: 0px;
 }
 
-div[data-role='popup'] {
-}
-
 .floatleft {
     float: left !important;
-    width: 80%;
+    width: 75%;
+}
+
+.floatright {
+    float: right !important;
+    width: auto;
 }
 
 .data-floatright {
     float: right !important;
     padding-top: 0.7em !important;
     padding-right: 0.5em !important;
+    vertical-align: central !important;
 }
 
 .ifca-data-list-anchor {
@@ -58,11 +64,6 @@ div[data-role='popup'] {
     padding-right: 0.5em !important;
 }
 
-.floatright {
-    float: right !important;
-    width: auto;
-}
-
 ul.ui-listview.clearboth {
     clear: both !important;
 }
@@ -89,10 +90,11 @@ input[type="checkbox"] {
 
 .vcenter {
     position: relative !important;
-    top: 50%;
-    -ms-transform: translateY(-50%);
+    /*top: 50vh;*/
+    padding-top: 50%;
+    /*-ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    transform: translateY(-50%);*/
 }
 
 .absolutecenter {
@@ -139,9 +141,9 @@ label:not(:empty) {
     background: white !important;
 }
 
-#login {
+#login > .ui-content,
+#splashpage {
     height: 100vh;
-    width: 100vw;
 }
 
 .ui-grid {
@@ -188,7 +190,7 @@ form.ui-filterable {
 }
 
 div[data-role='page'] {
-    background: #026EAE; 
+    background: #026EAE;
     /*#039 url(../../images/bg.jpg) repeat !important;*/
 }
 
@@ -217,4 +219,54 @@ div.ui-overlay-e {
     color: #FFFFFF !important;
     font-weight: lighter !important;
     padding-top: 15em !important;
+}
+
+div[data-role='popup'] {
+    min-width: 50vw;
+}
+
+/*Datepicker set button color*/
+.dwb-s-text {
+    background: -webkit-linear-gradient(#47a12f, #348816) !important;
+    background: -o-linear-gradient(#47a12f, #348816) !important;
+    background: -moz-linear-gradient(#47a12f, #348816) !important;
+    background: linear-gradient(#47a12f, #348816) !important;
+}
+
+ui-icon-star:after {
+    background-color: rgba(0,0,0,0) !important;
+    background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="30px" height="30px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"><stop offset="0%" style="stop-color:rgb(255,252,200);stop-opacity:1" /><stop offset="100%" style="stop-color:rgb(255,240,0);stop-opacity:1" /></radialGradient></defs><polygon fill="url(#grad1)" points="66.726,62.779 98.786,5.164 131.31,62.779 194.5,74.859150.825,121.787 157.33,186.837 98.786,159.423 40.242,186.837 47.676,122.717 4,74.859 "/></svg>') !important;
+}
+
+.ui-icon-star-hl:after {
+    background-color: rgba(0,0,0,0) !important;
+    background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In. SVG Version: 6.00 Build 0)--><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve"><defs>    <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"><stop offset="0%" style="stop-color:rgb(255,252,200);stop-opacity:1" /><stop offset="100%" style="stop-color:rgb(255,240,0);stop-opacity:1" /></radialGradient></defs><polygon fill="url(#grad1)" points="66.726,62.779 98.786,5.164 131.31,62.779 194.5,74.859 150.825,121.787 157.33,186.837 98.786,159.423 40.242,186.837 47.676,122.717 4,74.859 "/></svg>');
+}
+
+/*.ui-listview .ui-li-icon  {
+    max-height: 30px;
+    max-width: 30px;
+    top: 50%;
+    margin-top: -15px;
+}*/
+
+#login .ui-btn,
+#login .ui-btn:active,
+#login .ui-btn:hover,
+#login .ui-btn:focus {
+    color: black !important;
+    /*background-color: orange !important;*/
+}
+
+#myActivity .clearfix .ui-btn,
+#approval .clearfix .ui-btn,
+#myActivity-add .clearfix .ui-btn {
+    border: none;
+    display: inline;
+}
+
+#myActivity div[data-role='fieldcontain'],
+#approval div[data-role='fieldcontain'],
+#myActivity-add div[data-role='fieldcontain'] {
+    display: none !important;
 }

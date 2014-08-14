@@ -23,7 +23,7 @@ var masterActivityEditFunctions = {
         var formattedDate = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6);
         var userID = localStorage.getItem("UserID");
 
-        var apiURL = "http://175.139.183.94:76/TimeReportingAPI/api/activity/myactivity";
+        var apiURL = SERVER_URL + "/api/activity/myactivity";
 
         $.ajax({
             url: apiURL,
@@ -78,10 +78,9 @@ var masterActivityEditFunctions = {
     },
     populateSelectMenu: function () {
         //ajax GET activityCode
-        var getActivityCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/activity";
 
         $.ajax({
-            url: getActivityCodesAPI,
+            url: SERVER_URL + "/api/activity",
             type: "GET",
             crossDomain: true,
             async: true,
@@ -173,7 +172,7 @@ var masterActivityEditFunctions = {
         //});
     },
     updateActivity: function () {
-        var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/Activity/UpdateMyActivity";
+        var apiURL = SERVER_URL + "/api/Activity/UpdateMyActivity";
 
         var url = window.location.href;
         var activityMainID = url.split("=")[1].split("-")[0];

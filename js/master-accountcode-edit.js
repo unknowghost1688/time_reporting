@@ -7,18 +7,13 @@ var masterAccountCodeEditFunctions = {
         var url = window.location.href;
         var accountCode = url.split("=")[1];
 
-        var apiURL = "http://175.139.183.94:76/TimeReportingAPI/api/accountcode/";
+        var apiURL = SERVER_URL + "/api/accountcode/";
 
         $.ajax({
             url: apiURL + accountCode,
             type: "GET",
             crossDomain: true,
             async: false,
-            statusCode: {
-                404: function () {
-                    alert("Server not found.");
-                }
-            },
             success: function (data) {
                 $("#accountCode").val(data[0].AccountCode);
                 $("#description").val(data[0].Description);
@@ -49,7 +44,7 @@ var masterAccountCodeEditFunctions = {
         });
     },
     updateAccountCode: function () {
-        var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/accountcode/";
+        var apiURL = SERVER_URL + "/api/accountcode/";
 
         var accountCode = $("#accountCode").val();
         var description = $("#description").val();
@@ -73,12 +68,7 @@ var masterAccountCodeEditFunctions = {
                 url: apiURL + accountCode,
                 type: "POST",
                 crossDomain: true,
-                async: false, // false for now
-                statusCode: {
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
+                async: false,
                 contentType: "application/json",
                 data: JSON.stringify({
                     "AccountCode": accountCode,

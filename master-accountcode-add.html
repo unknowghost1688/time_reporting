@@ -1,7 +1,7 @@
 ﻿<div data-role="page" id="master-accountcode-add" data-theme="a">
     <script src="js/master-accountcode-add.js"></script>
     <div data-role="header">
-        <a id="btnBack" href="master-accountcode.html" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext iconstyle">Power Icon</a>
+        <a id="btnBack" href="master-accountcode.html" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext iconstyle">Power Icon</a>
         <h1>Add Account Code</h1>
         <a id="btnHome" href="menu.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
     </div>
@@ -42,6 +42,12 @@
             <!--<h3>Error</h3>-->
             <p class="ui-title" id="ErroMessage_MasterAccountCodeAdd"></p>
             <a id="btn_closeErrMsg_MasterAccountCodeAdd" data-role="button" data-mini="true" data-transition="none" data-theme="e">OK</a>
+        </div>
+    </div>
+    <div data-role="popup" id="reusableDialog" data-transition-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        <div role="main" class="ui-content">
+            <p class="ui-title"></p>
+            <a data-role="button" data-mini="true" data-transition="none" data-theme="e" data-rel="back">OK</a>
         </div>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">

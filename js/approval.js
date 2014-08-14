@@ -2,7 +2,7 @@
 
 $(document).one("pagecontainerbeforeshow", function () {
 
-    var realurl = "http://175.139.183.94:76/TimeReportingapi/api/activity/SubordinateWithDetail";
+    var realurl = SERVER_URL + "/api/activity/SubordinateWithDetail";
 
     var cred = {
         "managerID": "5",
@@ -80,7 +80,7 @@ $(document).one("pagecontainerbeforeshow", function () {
 
 
 function deleteMyActivity() {
-    var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity/deletemyactivitycode/";
+    var apiURL = SERVER_URL + "/api/activity/deletemyactivitycode/";
     var checked = $("input:checkbox:checked");
 
     for (var i = 0; i < checked.length; i++) {
@@ -100,7 +100,7 @@ function deleteMyActivity() {
                 }
             },
             success: function () {
-                var credurl = "http://175.139.183.94:76/TimeReportingapi/api/activity";
+                var credurl = SERVER_URL + "/api/activity";
                 callAjax(credurl, "", "GET");
             }
         });
@@ -146,7 +146,7 @@ function renderList(data) {
 
     lii +=
        "<div data-role='collapsible' data-collapsed='true'>" +
-                   "<h3><span class='collaptitle'>" + data[0].FirstName + ' ' + data[0].LastName + "<br><i class='headcounts'>" + data[0].AccountCode + "</i></span><span class='collapfigure'>" + data[0].Hours + "</span></h3>" +
+                   "<h3><span class='collaptitle'>" + display_name_format(data[0].FirstName, data[0].LastName) + "<br><i class='headcounts'>" + data[0].AccountCode + "</i></span><span class='collapfigure'>" + data[0].Hours + "</span></h3>" +
                        "<table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                         "<thead><tr>" +
                                 "<th>Activity</th>" +
@@ -162,7 +162,7 @@ function renderList(data) {
         if (changed == 1) {
             lii += lit + "</tbody></table>" + "</div>" +
        "<div data-role='collapsible' data-collapsed='true'>" +
-                   "<h3><span class='collaptitle'>" + data[i].FirstName + ' ' + data[i].LastName + "<br><i class='headcounts'>" + data[i].AccountCode + "</i></span><span class='collapfigure'>" + data[i].Hours + "</span></h3>" +
+                   "<h3><span class='collaptitle'>" + display_name_format(data[i].FirstName, data[i].LastName) + "<br><i class='headcounts'>" + data[i].AccountCode + "</i></span><span class='collapfigure'>" + data[i].Hours + "</span></h3>" +
                        "<table  data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow collapstb'>" +
                         "<thead><tr>" +
                                 "<th>Activity</th>" +

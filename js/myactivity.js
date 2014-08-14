@@ -1,4 +1,6 @@
-﻿function dispSetDate() {
+﻿
+
+function dispSetDate() {
     var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var myDate, myFormatDate;
     var t = localStorage.ApvrDate.split("/");
@@ -45,13 +47,7 @@ function dispTodayDate() {
         dispSetDate();
 }
 
-$(document).on("pageinit", function () {
-   
 
-    //dispTodayDate();
-   
-
-});
 
 $(document).on('click', '.dwb0', function () { // when click on set button on datepicker
 
@@ -90,7 +86,7 @@ var myActivityFunctions =
            // $("#date")[0].valueAsDate = new Date();
         },
         deleteActivities: function () {
-            var DELETEAPIURL = SERVER_END_POINT_API + "/api/Activity/DeleteMyActivity/"; // needs to be changed after Carso allows for DELETE on the server
+            var DELETEAPIURL = SERVER_URL + "/api/Activity/DeleteMyActivity/"; // needs to be changed after Carso allows for DELETE on the server
             var regenerate_list = 0;
 
             $("li input[type='checkbox']").filter(':checkbox').each(function () {
@@ -149,7 +145,7 @@ var myActivityFunctions =
             });
         },
         generateListView: function () {
-            var apiURL = SERVER_END_POINT_API + "/api/activity/myactivity";
+            var apiURL = SERVER_URL + "/api/activity/myactivity";
             //var date = $("#date").val();
             if (localStorage.ApvrDate == null) {
                 var today = new Date();
@@ -176,41 +172,50 @@ var myActivityFunctions =
                     "date": date
                 }),
                 success: function (data) {
-                    var appendHTML = "";
 
-                    for (var i = 0; i < data.length; i++) {
-                        var approvedHours = function () {
-                            if (data[i].ApprovedHours == null) { // use ternary in the future to save time
-                                return 0;
-                            } else {
-                                return data[i].ApprovedHours;
-                            }
-                        }();
-                        var uniqueID = data[i].ActivityMainID + "-" + data[i].ActivityCode.replace(/ +/g, "_") + "-" + data[i].AccountCode + "-" + date.replace(/-+/g, "");
+                    if (data != "") {
+                        var appendHTML = "";
 
-                        var li =
-                            "<li data-icon='false' id='li_" + uniqueID + "'>" +
-                                "<a href='myactivity-edit.html?id=" + uniqueID + "'>" +
-                                    "<div class='floatleft'>" +
-                                         "<h5>" + data[i].ActivityCode + "</h5>" +
-                                        "<p>" + data[i].AccountCode + "</p>" +
-                                    "</div>" +
-                                    "<div class='floatright'>" +
-                                        "<input type='checkbox' class='TimeReportingHideCheckbox' id='checkbox-" + uniqueID + "' />" +
-                                        "<label for='checkbox-" + uniqueID + "'" + "data-iconpos='right'>" + approvedHours + "hrs/" + data[i].Hours + "hrs" + "</label>" +
-                                    "</div>" +
-                                "</a>" +
-                            "</li>";
-                        appendHTML += li;
-                        //alert(li);
-                        //data[i].Activity data[i].AcccountDescription data[i].Hours
-                    };
+                        for (var i = 0; i < data.length; i++) {
+                            var approvedHours = function () {
+                                if (data[i].ApprovedHours == null) { // use ternary in the future to save time
+                                    return 0;
+                                } else {
+                                    return data[i].ApprovedHours;
+                                }
+                            }();
+                            var uniqueID = data[i].ActivityMainID + "-" + data[i].ActivityCode.replace(/ +/g, "_") + "-" + data[i].AccountCode + "-" + date.replace(/-+/g, "");
 
-                    $("#ul_myactivity_list").empty();
-                    $("#ul_myactivity_list").append(appendHTML).listview("refresh");
-                    $("input[type='checkbox']").checkboxradio();
-                   // $("label:not(:empty)").addClass("notopbottompadding");
-                    mainFunctions.toggleShowAllInactive();
+                            var li =
+                                "<li data-icon='false' id='li_" + uniqueID + "'>" +
+                                    "<a class='ifca-data-list-anchor' href='myactivity-edit.html?id=" + uniqueID + "'>" +
+                                        "<div class='floatleft'>" +
+                                             "<h5>" + data[i].ActivityCode + "</h5><div class='floatright'><label style='color: grey; font-size: +1; font-weight: bold;'>" + data[i].Hours + " h</label></div>" +
+                                            "<p>" + data[i].AccountCode + "</p>" +
+                                        "</div>" +
+                                        "<div class='data-floatright'>" +
+                                            "<label data-conpos='right'><input type='checkbox' id='checkbox-" + uniqueID + "' /></label>" +
+                                            //"<label for='checkbox-" + uniqueID + "'" + "data-iconpos='right'>" + approvedHours + "hrs/" + data[i].Hours + "hrs" + "</label>" +
+                                        "</div>" +
+                                    "</a>" +
+                                "</li>";
+
+
+                            appendHTML += li;
+                            //alert(li);
+                            //data[i].Activity data[i].AcccountDescription data[i].Hours
+                        };
+
+                        $("#ul_myactivity_list").empty();
+                        $("#ul_myactivity_list").append(appendHTML).listview("refresh");
+                        $("input[type='checkbox']").checkboxradio();
+                        // $("label:not(:empty)").addClass("notopbottompadding");
+                        mainFunctions.toggleShowAllInactive();
+                    }
+                    else {
+                        $("#ul_myactivity_list").empty();
+                        $("#ul_myactivity_list").append("<br/><div style='text-align:center;color:white;text-shadow:none'>No Activity Today.</div>").listview("refresh");
+                    }
                 }
             });
         }

@@ -1,11 +1,9 @@
 ﻿$(document).one("pagebeforeshow", function () {
-    //$("div[data-role='page']").trigger('create');
-    //$("#active").prop("checked", true).checkboxradio('refresh');
 });
 
 var masterActivityAddFunctions = {
     addActivity: function () {
-        var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity";
+        var apiURL = SERVER_URL + "/api/activity";
 
         var activityCode = $("#activityCode").val();
         var description = $("#description").val();
@@ -22,17 +20,8 @@ var masterActivityAddFunctions = {
                 url: apiURL,
                 type: "POST",
                 crossDomain: true,
-                async: false, // false for now
-                statusCode: {
-                    400: function () {
-                        alert("Something went wrong.")
-                    },
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
+                async: false,
                 contentType: "application/json",
-
                 data: JSON.stringify({
                     "ActivityCode": activityCode,
                     "Description": description,

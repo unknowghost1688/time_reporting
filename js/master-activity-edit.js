@@ -7,7 +7,7 @@ var masterActivityEditFunctions = {
         var url = window.location.href;
         var activityCode = url.split("=")[1];
 
-        var apiURL = "http://175.139.183.94:76/TimeReportingAPI/api/activity/";
+        var apiURL = SERVER_URL + "/api/activity/";
         //alert(activityCode);
         $.ajax({
             url: apiURL + activityCode,
@@ -15,11 +15,6 @@ var masterActivityEditFunctions = {
             //crossDomain: true,
             //async: false,
             //dataType: "json",
-            statusCode: {
-                404: function () {
-                    alert("Server not found.");
-                }
-            },
             success: function (data) {
                 $("#activityCode").val(data[0].ActivityCode);
                 if (data[0].ActiveFlag == 1) {
@@ -50,7 +45,7 @@ var masterActivityEditFunctions = {
         });
     },
     updateActivityCode: function () {
-        var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity/";
+        var apiURL = SERVER_URL + "/api/activity/";
 
         var activityCode = $("#activityCode").val();
         var description = $("#description").val();
@@ -74,12 +69,7 @@ var masterActivityEditFunctions = {
                 url: apiURL + activityCode,
                 type: "POST",
                 crossDomain: true,
-                async: false, // false for now
-                statusCode: {
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
+                async: false,
                 contentType: "application/json",
                 data: JSON.stringify({
                     "Description": description,
@@ -106,7 +96,7 @@ var masterActivityEditFunctions = {
                     } else if (exception === 'abort') {
                         $('#ErroMessage_MasterActivityEdit').html('Ajax request aborted.');
                     } else {
-                        $('#ErroMessage_MasterActivityEdit').html('Error Occur.');
+                        $('#ErroMessage_MasterActivityEdit').html('Error occurred.');
                     }
                 }
             });

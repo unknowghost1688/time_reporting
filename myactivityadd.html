@@ -11,19 +11,15 @@
     <link href="css/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-      
-
         /**change default pop up size*/
         #imagePopup {
             right: 10%;
             left: 10%;
             width: 80%;
         }
-
-        
     </style>
 
-    <script language="javascript">
+    <script>
 
         var mainFunctions =
     {
@@ -36,62 +32,62 @@
         }
     };
 
-        /*==============Hour Input TextBox Script=================*/
-        function numbersOnly(oToCheckField, oKeyEvent) {
-            var s = String.fromCharCode(oKeyEvent.charCode);
-            var containsDecimalPoint = /\./.test(oToCheckField.value);
-            return oKeyEvent.charCode === 0 || /\d/.test(s) ||
-                /\./.test(s) && !containsDecimalPoint;
-        }
+            /*==============Hour Input TextBox Script=================*/
+            function numbersOnly(oToCheckField, oKeyEvent) {
+                var s = String.fromCharCode(oKeyEvent.charCode);
+                var containsDecimalPoint = /\./.test(oToCheckField.value);
+                return oKeyEvent.charCode === 0 || /\d/.test(s) ||
+                    /\./.test(s) && !containsDecimalPoint;
+            }
 
 
-        function getHourVal() {
+            function getHourVal() {
 
-           // alert(parseFloat($("#hourval").val(), 10).toFixed(2)); // 2decimal places
-        }
+                // alert(parseFloat($("#hourval").val(), 10).toFixed(2)); // 2decimal places
+            }
 
-        function SaveMyActivity()
-        {
-            var hour = parseFloat($("#hourval").val(), 10).toFixed(2);
+            function SaveMyActivity()
+            {
+                var hour = parseFloat($("#hourval").val(), 10).toFixed(2);
 
-            var date = $("#test").val();
-            date = date.split("/").reverse().join("-");
-            //alert(date);
+                var date = $("#test").val();
+                date = date.split("/").reverse().join("-");
+                //alert(date);
 
-            if(date!=null)
-                $(".subaction").text(date);
+                if(date!=null)
+                    $(".subaction").text(date);
 
-            var refNo = $("#refNo").val();
-            var remark = $("#remark").val();
+                var refNo = $("#refNo").val();
+                var remark = $("#remark").val();
 
-            var actCode = $("#imagePopupLink").text();
-            var accCode = $("#accountCode option:selected").text();
+                var actCode = $("#imagePopupLink").text();
+                var accCode = $("#accountCode option:selected").text();
 
-            var credurl = "http://175.139.183.94:76/TimeReportingapi/api/Activity/SaveMyActivity";
+                var credurl = "http://175.139.183.94:76/TimeReportingapi/api/Activity/SaveMyActivity";
 
-            var somedata = {
+                var somedata = {
 
-            };
-
-
-
-           // callAjaxPost(credurl,somedata, "POST");
-
-            $('input').val('');
-            $('option').attr('selected', false);
-
-        }
-
-        function clearFormAfterSaved() {
-            $('input').val('');
-            $('option').attr('selected', false);
+                };
 
 
-            $('#successMessage').delay(1000).fadeIn('slow');
-            $('#successMessage').delay(3000).fadeOut('slow');
-        }
 
-    </script>
+                // callAjaxPost(credurl,somedata, "POST");
+
+                $('input').val('');
+                $('option').attr('selected', false);
+
+            }
+
+            function clearFormAfterSaved() {
+                $('input').val('');
+                $('option').attr('selected', false);
+
+
+                $('#successMessage').delay(1000).fadeIn('slow');
+                $('#successMessage').delay(3000).fadeOut('slow');
+            }
+
+            </script>
 
 
 
@@ -102,9 +98,11 @@
         <h1>Add My Activity</h1>
         <a id="btnHome" href="index.html" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext iconstyle">Gear Icon</a>
     </div>
-   
-     <div data-role="main" class="ui-content">
-         <div><p id="successMessage" hidden="hidden">Successfully Updated</p></div>
+
+    <div data-role="main" class="ui-content">
+        <div>
+            <p id="successMessage" hidden="hidden">Successfully Updated</p>
+        </div>
         <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow ttable">
             <tbody>
                 <tr>
@@ -112,9 +110,9 @@
                         <div class="subtitle">
                             <span class="subaction">May 2014</span><span class="dropdownbtn">
                                 <div class="settings">
-                                    <div data-role="fieldcontain" style="display:none;">
-                                        <label for="demo" style="display:none;">Demo</label>
-                                        <select name="demo" id="demo" style="display:none;">
+                                    <div data-role="fieldcontain" style="display: none;">
+                                        <label for="demo" style="display: none;">Demo</label>
+                                        <select name="demo" id="demo" style="display: none;">
                                             <option value="date">Date</option>
                                         </select>
                                     </div>
@@ -123,14 +121,14 @@
 
                     </th>
                     <td>
-                        <div style="width:10%" class="demo demo-date demo-datetime demo-time demo-credit">
+                        <div style="width: 10%" class="demo demo-date demo-datetime demo-time demo-credit">
                             <input type="button" data-icon="arrow-d" name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit " />
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <th> Activity</th>
-                    <td> <a href="#" data-role="button" data-rel="popup" id="imagePopupLink">Activity Code</a> </td>
+                    <th>Activity</th>
+                    <td><a href="#" data-role="button" data-rel="popup" id="imagePopupLink">Activity Code</a> </td>
                 </tr>
                 <tr>
                     <th>Account Code</th>
@@ -153,7 +151,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th> Ref No.</th>
+                    <th>Ref No.</th>
                     <td>
                         <input type="number" step="any" id="refNo" />
 
@@ -168,25 +166,32 @@
 
             </tbody>
         </table>
-     
-  </div>   
+
+    </div>
+    <div data-role="popup" id="reusableDialog" data-transition-to="window" data-overlay-theme="b" data-theme="a" data-dismissible="false">
+        <div role="main" class="ui-content">
+            <p class="ui-title"></p>
+            <a data-role="button" data-mini="true" data-transition="none" data-theme="e" data-rel="back">OK</a>
+        </div>
+    </div>
     <div data-role="footer" class="ui-bar" data-position="fixed">
-         <div data-role="navbar">
-	<ul>
-		<!--<li><a  class="ui-btn-active ui-state-persist">Save</a></li>
-		<li><a href="myactivity.html">Cancel</a></li>--> 
-        <li><a class="ui-btn-active ui-state-persist" onclick="SaveMyActivity()">Save</a></li>
-        <li><a href="myactivity.html" class="ui-btn-a" >Cancel</a></li>
-	</ul>
-</div><!-- /navbar -->
+        <div data-role="navbar">
+            <ul>
+                <!--<li><a  class="ui-btn-active ui-state-persist">Save</a></li>
+		<li><a href="myactivity.html">Cancel</a></li>-->
+                <li><a class="ui-btn-active ui-state-persist" onclick="SaveMyActivity()">Save</a></li>
+                <li><a href="myactivity.html" class="ui-btn-a">Cancel</a></li>
+            </ul>
+        </div>
+        <!-- /navbar -->
     </div>
 
 
     <div data-role="popup" id="imagePopup">
         <a href="#" data-rel="back" data-role="button" data-icon="delete"
-           data-iconpos="notext" class="ui-btn-right">Close</a>
+            data-iconpos="notext" class="ui-btn-right">Close</a>
         <div data-role="content">
-            <ul data-role="listview" data-inset="true" data-filter="true" id="ActivityMainList"></ul>
+            <ul data-role="listview" data-inset="true" data-filter="false" id="ActivityMainList"></ul>
         </div>
     </div>
 

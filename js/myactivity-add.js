@@ -1,7 +1,5 @@
 ﻿
 
-
-
 $(document).on('click', '.dwb0', function () { // when click on set button on datepicker
 
     myActivityAddFunctions.dispSetDate();
@@ -24,21 +22,27 @@ var myActivityAddFunctions = {
     },
     populateSelectMenu: function () {
         //ajax GET activityCode
-        var getActivityCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/activity";
+        var cacheSelect = $("select#activityCode");
 
         $.ajax({
-            url: getActivityCodesAPI,
+            url: SERVER_URL + "/api/activity",
             type: "GET",
             crossDomain: true,
             async: true,
             success: function (data) {
                 // Confirmational response from server
-                for (var i = 0; i < data.length; i++) {
-                    var appendActivityCodes =
-                        "<option value='" + data[i].ActivityCode + "'>" + data[i].ActivityCode + " " + data[i].Description + "</option>";
-                    $("select#activityCode").append(appendActivityCodes);
+                if (data != "") {
+                    for (var i = 0; i < data.length; i++) {
+                        var appendActivityCodes =
+                            "<option value='" + data[i].ActivityCode + "'>" + data[i].ActivityCode + " " + data[i].Description + "</option>";
+                        cacheSelect.html(appendActivityCodes);
+                    }
+                    cacheSelect.selectmenu("refresh");
                 }
-                $("select#activityCode").selectmenu("refresh");
+                else {
+                    cacheSelect.html("<option value=''>No Activity Code</option>'");
+                    cacheSelect.selectmenu("refresh");
+                }
             },
             error: function (jqXHR, exception) {
                 setTimeout(function () { $("#popup_ErrorMsg_AddMyActivity").popup("open"); }, 1000);
@@ -62,11 +66,10 @@ var myActivityAddFunctions = {
             }
         });
 
-        //ajax GET accountCode
-        var getAccountCodesAPI = "http://175.139.183.94:76/TimeReportingAPI/api/accountcode/MyFavouriteCode";
+        //ajax GET accountCodeMyFavouriteCode";
         var userID = localStorage.getItem("UserID");
         $.ajax({
-            url: getAccountCodesAPI ,
+            url: SERVER_URL + "/api/accountcode/myfavouritecode",
             type: "POST",
             crossDomain: true,
             async: true,
@@ -79,7 +82,7 @@ var myActivityAddFunctions = {
                 for (var i = 0; i < data.length; i++) {
                     var appendAccountCodes =
                         "<option value='" + data[i].AccountCode + "'>" + data[i].AccountCode + " " + data[i].Description + "</option>";
-                    $("select#accountCode").append(appendAccountCodes);
+                    $("select#accountCode").html(appendAccountCodes);
                 }
                 $("select#accountCode").selectmenu("refresh");
             },
@@ -107,7 +110,7 @@ var myActivityAddFunctions = {
     },
     addActivity: function () {
        
-        var apiURL = "http://175.139.183.94:76/TimeReportingApi/api/activity/savemyactivity";
+        var apiURL = SERVER_URL + "/api/activity/savemyactivity";
 
         var activityCode = $("#activityCode").val();
         var accountCode = $("#hrefAccountCode").text();

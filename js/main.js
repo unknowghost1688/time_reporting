@@ -1,9 +1,48 @@
 //var SERVER_END_POINT_API = "http://localhost:8080";
 //var URL_API = "http://localhost:3998";
 //var URL_API = "http://175.139.183.94:76/GolfAPI";
-var SERVER_END_POINT_API = "http://175.139.183.94:76/TimeReportingApi";
+var SERVER_URL = "http://www.ifcaapps.com/timesheet"; // do not include a "/" at the end of this
+//var SERVER_URL = "http://localhost:8080/";
 
-var defaultDate_Test = "";
+var mainAjaxSetup = function () {
+    $.ajaxSetup({
+        error: function (jqXHR, exception, err) {
+            if (jqXHR.status === 0) {
+                error = 'Not connected.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+                error = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 400) {
+                error = err;
+            }
+            else if (jqXHR.status == 401) {
+                error = '401 Unauthorized';
+            } else if (jqXHR.status == 500) {
+                error = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+                error = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                error = 'Time out error.';
+            } else if (exception === 'abort') {
+                error = 'Ajax request aborted.';
+            } else {
+                error = err;
+            };
+            $("#reusableDialog p.ui-title").text(error);
+            $("#reusableDialog").popup("reposition", "positionTo: window").popup("open");
+        }
+    });
+};
+
+// Initialize AJAX Setup
+mainAjaxSetup();
+
+//var defaultDate_Test = "";
+
+function display_name_format(firstname, lastname) {
+    var display_full_name = firstname + ' ' + lastname;
+    display_full_name = display_full_name.trim();
+    return display_full_name;
+}
 
 function showLoading() {
     
@@ -23,25 +62,26 @@ function hideLoading() {
             textVisible: true,
             textonly: true,
         });
-    }, 1);
+    }, 500);
 }
 
 $(document).on({
-    ajaxStart: function () {
-        showLoading();
-    },
-    ajaxStop: function () {
-        hideLoading();
-    }
-    //ajaxSend: function () {
-    //    if ($(".ajaxloader").length < 1) {
-    //        $("ul").append("<li class='ajaxloader'>Loading...</li>");
-    //        $("ul").listview().listview("refresh");
+    //ajaxStart: function () {
+    //    showLoading();
+    //},
+    //ajaxStop: function () {
+    //    if ($.active == 1) {
+    //        hideLoading();
     //    }
     //},
-    //ajaxComplete: function () {
-    //    $(".ajaxloader").remove();
-    //}
+    ajaxSend: function () {
+        showLoading();
+    },
+    ajaxComplete: function () {
+        if ($.active == 1) {
+            hideLoading();
+        }
+    }
 });
 
 //$.ajaxSetup({
@@ -139,7 +179,7 @@ var mainFunctions =
             $("input[type='checkbox']").checkboxradio();
         },
         toggleShowAllInactive: function () {
-            if ($("#showAll").is(":checked") == true) {
+            if ($("#showAll").is(":checked")) {
                 $("label:contains('Inactive')").closest("li[data-icon='false']").show();
             } else {
                 $("label:contains('Inactive')").closest("li[data-icon='false']").hide();

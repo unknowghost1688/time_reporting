@@ -3,15 +3,15 @@
 });
 
 function GenerateManagerDropDownList() {
-    $("#ReportTo").html("<option value='0' >Manager</option>");
+    $("#ReportTo").html("<option value=''>Manager</option>");
 
     $.ajax({
         type: "GET",
-        url: SERVER_END_POINT_API + "/api/UserDetail/GetAllManager",
+        url: SERVER_URL + "/api/UserDetail/GetAllManager",
         success: function (result) {
             $.each(result, function (index, element) {
                 if(element.UserDetailID!=localStorage.getItem("UserID"))
-                $("#ReportTo").append("<option value=" + element.UserDetailID + ">" + element.FirstName + "</option>");
+                    $("#ReportTo").append("<option value=" + element.UserDetailID + ">" + display_name_format(element.FirstName, element.LastName) + "</option>");
             });
             $('#ReportTo').selectmenu('refresh', true);
         },
@@ -65,15 +65,32 @@ var masterUserAddFunctions = {
     } else if (!validateEmail(email)) {
         $("#popup_ErrMsg_MasterUserAdd").popup("open");
         $("#ErroMessage_MasterUserAdd").html("Invalid email format.");
-    } else if (ReportTo == 0) {
-        $("#popup_ErrMsg_MasterUserAdd").popup("open");
-        $("#ErroMessage_MasterUserAdd").html("Please Select A manager");
-    } else if (reportTo == 0) {
-        $("#popup_ErrMsg_MasterUserAdd").popup("open");
-        $("#ErroMessage_MasterUserAdd").html("Please Select A manager");
-    } else {           
+    //} else if (ReportTo == 0) {
+    //    $("#popup_ErrMsg_MasterUserAdd").popup("open");
+    //    $("#ErroMessage_MasterUserAdd").html("Please select a manager");
+    //} else if (reportTo == 0) {
+    //    $("#popup_ErrMsg_MasterUserAdd").popup("open");
+    //    $("#ErroMessage_MasterUserAdd").html("Please select a manager");
+    } else {
+        alert(JSON.stringify(
+               {
+                   "UserName": userName,
+                   "Password": password,
+                   "ConfirmPassword": password,
+                   "Role": role,
+                   "CreateUserDetail": {
+                       "FirstName": firstName,
+                       "LastName": lastName,
+                       "Phone": phone,
+                       "Email": email,
+                       "ReportTo": reportTo,
+                       "CreatedBy": createdBy,
+                       "UserName": userName
+                   }
+               }
+            ));
         $.ajax({
-            url: SERVER_END_POINT_API + "/api/Account/Register",
+            url: SERVER_URL + "/api/Account/Register",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(
@@ -96,11 +113,16 @@ var masterUserAddFunctions = {
             success: function (result) {   
                 setTimeout(function () { $("#popup_sucessfullyAddUser").popup("open"); }, 1000);
             },
-            error: function (jqXHR, exception) {
+            error: function (jqXHR, exception, err) {
                 setTimeout(function () { $("#popup_ErrMsg_MasterUserAdd").popup("open"); }, 1000);
                 if (jqXHR.status === 0) {
-                    $('#ErroMessage_MasterUserAdd').html('Not connect.\n Verify Network.');
-                } else if (jqXHR.status == 404) {
+                    $('#ErroMessage_MasterUserAdd').html('Not connected to the internet.\n Please verify your network connection.');
+                } else if (jqXHR.status == 400) {
+                    var str = $.parseJSON(jqXHR.responseText);
+                    var s = str.ModelState.msg.toString();
+                        $('#ErroMessage_MasterUserAdd').html(s);
+                }
+                else if (jqXHR.status == 404) {
                     $('#ErroMessage_MasterUserAdd').html('Requested page not found. [404]');
                 } else if (jqXHR.status == 401) {
                     $('#ErroMessage_MasterUserAdd').html('401 Unauthorized');
@@ -113,7 +135,7 @@ var masterUserAddFunctions = {
                 } else if (exception === 'abort') {
                     $('#ErroMessage_MasterUserAdd').html('Ajax request aborted.');
                 } else {
-                    $('#ErroMessage_MasterUserAdd').html('Error Occur.');
+                    $('#ErroMessage_MasterUserAdd').html(err);
                 }
             }
         });

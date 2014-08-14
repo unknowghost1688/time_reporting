@@ -1,4 +1,28 @@
 ﻿$(document).one("pagecontainerbeforeshow", function () {
+    $.ajaxSetup({
+        error: function (jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                error = "Unable to connect to server. Are you connected to the internet?";
+            } else if (jqXHR.status == 404) {
+                error = "Requested page not found. [404]";
+            } else if (jqXHR.status == 401) {
+                error = "401 Unauthorized";
+            } else if (jqXHR.status == 500) {
+                error = "Internal Server Error [500].";
+            } else if (exception === 'parsererror') {
+                error = "Requested JSON parse failed.";
+            } else if (exception === 'timeout') {
+                error = "Time out error.";
+            } else if (exception === 'abort') {
+                error = "Ajax request aborted.";
+            } else {
+                error = jqXHR.responseText;
+            }
+
+            $("#reusableDialog p.ui-title").text(error);
+            $("#reusableDialog").popup("reposition", "positionTo: window").popup("open");
+        }
+    });
     myFavouritesFunctions.generateListView();
     myFavouritesFunctions.addFlipSwitch();
     myFavouritesFunctions.flipSwitch();
@@ -31,15 +55,22 @@ var myFavouritesFunctions =
             $("select#flipswitch").flipswitch();
         },
         addOrRemoveFavourites: function (event) {
-            //alert(event.target.id);
             var id = event.target.id;
-            $("#" + id).toggleClass("ui-btn-active");
-            //alert(id);
-            //alert($("#" + id).hasClass("ui-btn-active"));
+            if (!id) {
+                id = $(event.target).closest("a").attr("id");
+                //alert(id);
+            }
+            // toggle the yellow star
+            if ($("#" + id).hasClass("ui-icon-star-hl")) {
+                $("#" + id).removeClass("ui-icon-star-hl");
+            } else { // if it doesn't have the class, add it
+                $("#" + id).addClass("ui-icon-star-hl");
+            }
+            //$("#" + id).toggleClass("ui-btn-active");
 
-            if ($("#" + id).hasClass("ui-btn-active")) {
+            if ($("#" + id).hasClass("ui-icon-star-hl")) {
                 // do API to add to favourites
-                var addFavAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode/addmyfavouritecode"; // needs to be changed after Carso allows for DELETE on the server
+                var addFavAPI = SERVER_URL + "/api/accountcode/addmyfavouritecode"; // needs to be changed after Carso allows for DELETE on the server
                 var userID = localStorage.getItem("UserID");
 
                 $.ajax({
@@ -47,11 +78,6 @@ var myFavouritesFunctions =
                     type: "POST", // needs to be changed after Carso allows for DELETE on the server
                     crossDomain: true,
                     async: false,
-                    statusCode: {
-                        404: function () {
-                            alert("Server not found.");
-                        }
-                    },
                     contentType: "application/json",
                     dataType: "json",
                     data: JSON.stringify({
@@ -62,12 +88,12 @@ var myFavouritesFunctions =
                     },
                     error: function (jqXHR, status, error) {
                         //alert(status + " " + error);
-                        $(this).removeClass("ui-btn-active");
+                        $(this).removeClass("ui-icon-star-hl");
                     }
                 });
             } else {
                 // do API to remove from favourites
-                var delFavAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode/deletemyfavouritecode/"; // needs to be changed after Carso allows for DELETE on the server
+                var delFavAPI = SERVER_URL + "/api/accountcode/deletemyfavouritecode/"; // needs to be changed after Carso allows for DELETE on the server
                 var userID = localStorage.getItem("UserID");
 
                 $.ajax({
@@ -75,11 +101,6 @@ var myFavouritesFunctions =
                     type: "POST", // needs to be changed after Carso allows for DELETE on the server
                     crossDomain: true,
                     async: false,
-                    statusCode: {
-                        404: function () {
-                            alert("Server not found.");
-                        }
-                    },
                     contentType: "application/json",
                     data: JSON.stringify({
                         "AccountCode": id,
@@ -95,25 +116,20 @@ var myFavouritesFunctions =
                     },
                     error: function (jqXHR, status, error) {
                         //alert(status + " " + error);
-                        $(this).addClass("ui-btn-active");
+                        $(this).addClass("ui-icon-star-hl");
                     }
                 });
             }
         },
         generateAddListView: function () {
             $(".nofavourites").remove();
-            var getAccountCodeAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode";
+            var getAccountCodeAPI = SERVER_URL + "/api/accountcode";
 
             $.ajax({
                 url: getAccountCodeAPI,
                 type: "GET",
                 crossDomain: true,
                 async: true,
-                statusCode: {
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
                 success: function (data) {
                     var appendHTML = "";
                     for (var i = 0; i < data.length; i++) {
@@ -140,13 +156,12 @@ var myFavouritesFunctions =
                         appendHTML += li;
                     };
 
-                    // Check to see if the flipswitch is in the right position when the async is done
-                    if ($("#flipswitch").val() == "all") {
-                        $("#myFavouritesList").empty().hide(); // hide it first, we will wait until the 2nd async is done before .show()-ing it again. This way, users will not feel like the app is jittery.
+                    if ($("#flipswitch").val() == "all") { // Check to see if the flipswitch is in the right position when the async is done. People might be flipping the switch really fast.
+                        $("#myFavouritesList").empty().hide(); // keep hidden until 2nd async is done and the list is ready for display.
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
-                        mainFunctions.toggleShowAllInactive();
+                        mainFunctions.toggleShowAllInactive(); // Hide all inactive accounts
                         // Do another AJAX call to get the favourite codes to highlight those that are already favourited
-                        var getFavAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode/myfavouritecode";
+                        var getFavAPI = SERVER_URL + "/api/accountcode/myfavouritecode";
                         var userID = localStorage.getItem("UserID");
 
                         $.ajax({
@@ -154,11 +169,6 @@ var myFavouritesFunctions =
                             type: "POST",
                             crossDomain: true,
                             async: true,
-                            statusCode: {
-                                404: function () {
-                                    alert("Server not found.");
-                                }
-                            },
                             contentType: "application/json",
                             dataType: "json",
                             data: JSON.stringify({
@@ -166,7 +176,7 @@ var myFavouritesFunctions =
                             }),
                             success: function (data) {
                                 for (var i = 0; i < data.length; i++) {
-                                    $("#" + data[i].AccountCode).addClass("ui-btn-active");
+                                    $("#" + data[i].AccountCode).addClass("ui-icon-star-hl");
                                 }
                                 $("#myFavouritesList").show();
                             }
@@ -176,7 +186,7 @@ var myFavouritesFunctions =
             });
         },
         generateListView: function () {
-            var getFavAPI = "http://175.139.183.94:76/TimeReportingApi/api/accountcode/myfavouritecode";
+            var getFavAPI = SERVER_URL + "/api/accountcode/myfavouritecode";
             var userID = localStorage.getItem("UserID");
 
             $.ajax({
@@ -184,11 +194,6 @@ var myFavouritesFunctions =
                 type: "POST",
                 crossDomain: true,
                 async: true,
-                statusCode: {
-                    404: function () {
-                        alert("Server not found.");
-                    }
-                },
                 contentType: "application/json",
                 dataType: "json",
                 data: JSON.stringify({
@@ -222,7 +227,7 @@ var myFavouritesFunctions =
                         $("#myFavouritesList").empty();
                         $("#myFavouritesList").append(appendHTML).listview("refresh");
                         mainFunctions.toggleShowAllInactive();
-                        $("#myFavouritesList li a").addClass("ui-btn-active");
+                        $("#myFavouritesList li a").addClass("ui-icon-star-hl");
                         if ($("ul li").length < 1) {
                             $("ul").append("<li class='nofavourites'>You have no favourites.</li>");
                             $("ul").listview("refresh");

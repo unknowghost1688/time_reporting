@@ -1,74 +1,41 @@
-﻿$(document).one('pagechange', function () {
-    $('.ui-page-active .ui-listview').listview('refresh');
-    $('.ui-page-active :jqmData(role=content)').trigger('create');
-});
+﻿//add listener when device ready
+document.addEventListener("deviceready", onDeviceReady, false);
+var db = window.openDatabase("Dummy_DB", "1.0", "Just a Dummy DB", 200000); //will create database Dummy_DB or open it
 
-getAccountCodes: function () {
-    var serverURL = "http://175.139.183.94:76/TimeReportingv2.2/account/getaccount";
-    var result;
-
-    $.ajax({
-        url: serverURL,
-        type: "GET",
-        crossDomain: true,
-        async: true,
-        success: function (data) {
-            result = data;
-        }
-    });
-
-    //var result = [ //temporary mock data
-    //    {
-    //        "AccountCode": "S0001",
-    //        "Description": "SimeDarby/Properties",
-    //        "ActiveFlag": 1
-    //    },
-    //    {
-    //        "AccountCode": "S0002",
-    //        "Description": "SimeDarby/Hardware",
-    //        "ActiveFlag": 1
-    //    },
-    //    {
-    //        "AccountCode": "S0003",
-    //        "Description": "SimeDarby/Plantation",
-    //        "ActiveFlag": 1
-    //    },
-    //    {
-    //        "AccountCode": "S0004",
-    //        "Description": "SimeDarby/Hospitality",
-    //        "ActiveFlag": 1
-    //    },
-    //    {
-    //        "AccountCode": "S0005",
-    //        "Description": "SimeDarby/Retail",
-    //        "ActiveFlag": 0
-    //    }
-    //];
-    return result; 
+//function will be called when device ready
+function onDeviceReady() {
+    db.transaction(populateDB, errorCB, successCB);
 }
 
-$(document).on("pageshow", function () {
-    var date = new Date();
+//create table and insert some record
+function populateDB(tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS SoccerPlayer (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Club TEXT NOT NULL)');
+    tx.executeSql('INSERT INTO SoccerPlayer(Name,Club) VALUES ("Alexandre Pato", "AC Milan")');
+    tx.executeSql('INSERT INTO SoccerPlayer(Name,Club) VALUES ("Van Persie", "Arsenal")');
+}
 
-    $('#myDate').trigger('datebox', {
-        'method': 'set',
-        'value': date
-    }).trigger('datebox', {
-        'method': 'doset'
+//function will be called when an error occurred
+function errorCB(err) {
+    alert("Error processing SQL: " + err.code);
+}
+
+//function will be called when process succeed
+function successCB() {
+    alert("success!");
+    db.transaction(queryDB, errorCB);
+}
+
+//select all from SoccerPlayer
+function queryDB(tx) {
+    tx.executeSql('SELECT * FROM SoccerPlayer', [], querySuccess, errorCB);
+}
+
+function querySuccess(tx, result) {
+    $('#SoccerPlayerList').empty();
+    $.each(result.rows, function (index) {
+        var row = result.rows.item(index);
+        $('#SoccerPlayerList').append('<li><a href="#"><h3 class="ui-li-heading">' + row['Name'] + '</h3><p class="ui-li-desc">Club ' + row['Club'] + '</p></a></li>');
     });
-});
 
-renderDetails: function () {
-    var data = JSON.parse(localStorage.getItem("editData"));
-    //alert(data.id);
-    //var data = {
-    //    "id": id,
-    //    "description": description,
-    //    "active": active
-    //};
-    var prependHTML = "<span>Account Code: <span>" + "<span>" + data.id + "</span>";
-    $("#master-accountcode-edit div.ui-content").prepend(prependHTML);
-    $("#accountCodeDescription").val(data.description);
-    if (data.active == true) {
-        $("#active").prop("checked", true).checkboxradio('refresh');
-    }
+    $('#SoccerPlayerList').listview();
+}
